@@ -1,0 +1,519 @@
+.view-plots-container {
+  padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+  min-height: calc(
+    100vh - 100px
+  ); /* Ensure container takes full viewport height */
+}
+
+.view-plots-header {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.view-plots-header h2 {
+  color: #333;
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+  transition: color 0.3s ease;
+}
+
+.view-plots-header p {
+  color: #666;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+}
+
+.view-plots-content {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: 30px;
+  align-items: stretch; /* Changed from 'start' to 'stretch' */
+  min-height: 600px; /* Ensure content area has minimum height */
+}
+
+/* Controls Section */
+.controls-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.control-card {
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  height: fit-content; /* Let content determine height */
+  transition: all 0.3s ease;
+}
+
+.control-card h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 1.3rem;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 10px;
+  transition: all 0.3s ease;
+}
+
+.control-group {
+  margin-bottom: 20px;
+}
+
+.control-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #333;
+  font-size: 0.95rem;
+  transition: color 0.3s ease;
+}
+
+.control-select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #fff;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  color: #333;
+}
+
+.control-select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.control-select:disabled {
+  background: #f8f9fa;
+  color: #6c757d;
+}
+
+.info-message {
+  margin: 8px 0 0 0;
+  padding: 8px 12px;
+  background: #e7f3ff;
+  border: 1px solid #b3d9ff;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  color: #0066cc;
+  transition: all 0.3s ease;
+}
+
+/* Buttons */
+.generate-btn,
+.clear-btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.generate-btn {
+  background: #007bff;
+  color: white;
+}
+
+.generate-btn:hover:not(:disabled) {
+  background: #0056b3;
+  transform: translateY(-1px);
+}
+
+.generate-btn:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.clear-btn {
+  background: #6c757d;
+  color: white;
+}
+
+.clear-btn:hover {
+  background: #545b62;
+}
+
+/* Error Message */
+.error-message {
+  background: #ffe6e6;
+  color: #d63031;
+  padding: 12px 15px;
+  border-radius: 6px;
+  border-left: 4px solid #d63031;
+  margin-top: 15px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+/* Plot Section */
+.plot-section {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.plot-card {
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  /* Removed fixed min-height to allow natural sizing */
+}
+
+.plot-card h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 1.3rem;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 10px;
+  flex-shrink: 0; /* Prevent header from shrinking */
+  transition: all 0.3s ease;
+}
+
+/* Loading State */
+.plot-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  text-align: center;
+  min-height: 400px; /* Reduced from auto-fill to reasonable minimum */
+  color: #666;
+  transition: color 0.3s ease;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #007bff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-note {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 10px;
+  transition: color 0.3s ease;
+}
+
+/* Plot Result */
+.plot-result {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0; /* Important for flex child */
+}
+
+.plot-image-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  min-height: 0; /* Important for flex child */
+  overflow: hidden; /* Prevent content overflow */
+  transition: all 0.3s ease;
+}
+
+.generated-plot {
+  max-width: 100%;
+  max-height: 100%; /* Changed from fixed 500px to percentage */
+  object-fit: contain;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.plot-info {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 6px;
+  border-left: 4px solid #007bff;
+  flex-shrink: 0; /* Prevent info section from shrinking */
+  transition: all 0.3s ease;
+}
+
+.plot-info h4 {
+  margin: 0 0 10px 0;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.plot-info p {
+  margin: 5px 0;
+  font-size: 0.9rem;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+/* Placeholder */
+.plot-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  text-align: center;
+  color: #666;
+  min-height: 400px; /* Reduced minimum height */
+  padding: 40px 20px;
+  transition: color 0.3s ease;
+}
+
+.placeholder-icon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+  opacity: 0.5;
+}
+
+.placeholder-tips {
+  margin-top: 30px;
+  text-align: left;
+  max-width: 300px;
+}
+
+.placeholder-tips h5 {
+  margin-bottom: 10px;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.placeholder-tips ol {
+  padding-left: 20px;
+  margin: 0;
+}
+
+.placeholder-tips li {
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  color: #666;
+  transition: color 0.3s ease;
+}
+
+/* Load Variables Button */
+.load-variables-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: #28a745;
+  color: white;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.load-variables-btn:hover:not(:disabled) {
+  background: #218838;
+  transform: translateY(-1px);
+}
+
+.load-variables-btn:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .view-plots-content {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    min-height: auto; /* Remove fixed height on mobile */
+  }
+
+  .controls-section {
+    order: 2;
+  }
+
+  .plot-section {
+    order: 1;
+  }
+
+  .plot-card {
+    min-height: 500px; /* Reasonable mobile height */
+  }
+}
+
+@media (max-width: 768px) {
+  .view-plots-container {
+    padding: 15px;
+  }
+
+  .control-card,
+  .plot-card {
+    padding: 20px;
+  }
+
+  .generate-btn,
+  .clear-btn {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  .plot-loading,
+  .plot-placeholder {
+    min-height: 300px; /* Smaller on mobile */
+    padding: 20px;
+  }
+}
+
+/* Dark Mode Styles */
+body.dark-mode .view-plots-container,
+.view-plots-container.dark-mode {
+  background-color: transparent;
+}
+
+body.dark-mode .view-plots-header h2,
+.view-plots-container.dark-mode .view-plots-header h2 {
+  color: #ffffff;
+}
+
+body.dark-mode .view-plots-header p,
+.view-plots-container.dark-mode .view-plots-header p {
+  color: #e0e0e0;
+}
+
+body.dark-mode .control-card,
+.view-plots-container.dark-mode .control-card {
+  background: #2d2d2d;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .control-card h3,
+.view-plots-container.dark-mode .control-card h3 {
+  color: #ffffff;
+  border-bottom-color: #444;
+}
+
+body.dark-mode .control-group label,
+.view-plots-container.dark-mode .control-group label {
+  color: #ffffff;
+}
+
+body.dark-mode .control-select,
+.view-plots-container.dark-mode .control-select {
+  background: #3d3d3d;
+  border-color: #555;
+  color: #ffffff;
+}
+
+body.dark-mode .control-select:focus,
+.view-plots-container.dark-mode .control-select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+body.dark-mode .control-select:disabled,
+.view-plots-container.dark-mode .control-select:disabled {
+  background: #4d4d4d;
+  color: #999;
+}
+
+body.dark-mode .info-message,
+.view-plots-container.dark-mode .info-message {
+  background: #2a3d5c;
+  border-color: #3a5d8c;
+  color: #b3d9ff;
+}
+
+body.dark-mode .plot-card,
+.view-plots-container.dark-mode .plot-card {
+  background: #2d2d2d;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .plot-card h3,
+.view-plots-container.dark-mode .plot-card h3 {
+  color: #ffffff;
+  border-bottom-color: #444;
+}
+
+body.dark-mode .plot-image-container,
+.view-plots-container.dark-mode .plot-image-container {
+  background: #3d3d3d;
+}
+
+body.dark-mode .plot-info,
+.view-plots-container.dark-mode .plot-info {
+  background: #3d3d3d;
+}
+
+body.dark-mode .plot-info h4,
+.view-plots-container.dark-mode .plot-info h4,
+body.dark-mode .plot-info p,
+.view-plots-container.dark-mode .plot-info p {
+  color: #ffffff;
+}
+
+body.dark-mode .plot-loading,
+.view-plots-container.dark-mode .plot-loading {
+  color: #e0e0e0;
+}
+
+body.dark-mode .loading-note,
+.view-plots-container.dark-mode .loading-note {
+  color: #cccccc;
+}
+
+body.dark-mode .plot-placeholder,
+.view-plots-container.dark-mode .plot-placeholder {
+  color: #e0e0e0;
+}
+
+body.dark-mode .placeholder-tips h5,
+.view-plots-container.dark-mode .placeholder-tips h5 {
+  color: #ffffff;
+}
+
+body.dark-mode .placeholder-tips li,
+.view-plots-container.dark-mode .placeholder-tips li {
+  color: #cccccc;
+}
+
+body.dark-mode .error-message,
+.view-plots-container.dark-mode .error-message {
+  background: #5c2a2a;
+  color: #ff6b6b;
+  border-left-color: #ff6b6b;
+}
+
+/* Dark mode spinner */
+body.dark-mode .spinner,
+.view-plots-container.dark-mode .spinner {
+  border: 4px solid #444;
+  border-top: 4px solid #007bff;
+}

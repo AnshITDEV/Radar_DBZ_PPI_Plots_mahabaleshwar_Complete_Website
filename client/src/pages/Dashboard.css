@@ -1,0 +1,287 @@
+.dashboard-container {
+  padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.dashboard-header {
+  margin-bottom: 20px;
+}
+
+.dashboard-header h2 {
+  color: #333;
+  font-size: 2rem;
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+.dashboard-content {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.controls-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.plot-section {
+  height: 100%;
+}
+
+.dashboard-card {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dashboard-card h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #333;
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+
+/* Selector Group Styles */
+.selector-group {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.selector-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.selector-item label {
+  font-weight: bold;
+  color: #555;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.selector-item select {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  font-size: 0.9rem;
+  transition: border-color 0.2s, background-color 0.3s ease, color 0.3s ease;
+  color: #333;
+}
+
+.selector-item select:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+/* Files Section Styles */
+.files-section {
+  flex: 1;
+}
+
+.files-list {
+  max-height: 300px;
+  overflow-y: auto;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 10px;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+  background-color: #fff;
+}
+
+.file-item {
+  padding: 8px 12px;
+  margin-bottom: 5px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.3s ease;
+  font-size: 0.9rem;
+  word-break: break-all;
+  color: #333;
+}
+
+.file-item:hover {
+  background-color: #f5f5f5;
+}
+
+.file-item.selected {
+  background-color: #007bff;
+  color: white;
+}
+
+.file-item.no-files {
+  cursor: default;
+  color: #666;
+  font-style: italic;
+}
+
+.file-item.no-files:hover {
+  background-color: transparent;
+}
+
+/* Plot Container Styles */
+.plot-container {
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+}
+
+.plot-container h3 {
+  margin-bottom: 15px;
+}
+
+.image-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+  min-height: 0; /* Important for flex child */
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.image-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+.image-container img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.placeholder-message {
+  text-align: center;
+  color: #666;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+}
+
+.error-message {
+  text-align: center;
+  color: #dc3545;
+  font-weight: bold;
+  padding: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .dashboard-content {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .controls-section {
+    order: 2;
+  }
+
+  .plot-section {
+    order: 1;
+  }
+
+  .plot-container {
+    height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 10px;
+  }
+
+  .dashboard-card {
+    padding: 15px;
+  }
+
+  .selector-group {
+    gap: 10px;
+  }
+}
+
+/* Dark Mode Styles */
+body.dark-mode .dashboard-header h2,
+.landing-container.dark-mode .dashboard-header h2 {
+  color: #ffffff;
+}
+
+body.dark-mode .dashboard-card,
+.landing-container.dark-mode .dashboard-card {
+  background-color: #2d2d2d;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .dashboard-card h3,
+.landing-container.dark-mode .dashboard-card h3 {
+  color: #ffffff;
+}
+
+body.dark-mode .selector-item label,
+.landing-container.dark-mode .selector-item label {
+  color: #e0e0e0;
+}
+
+body.dark-mode .selector-item select,
+.landing-container.dark-mode .selector-item select {
+  background-color: #3d3d3d;
+  border-color: #555;
+  color: #ffffff;
+}
+
+body.dark-mode .selector-item select:focus,
+.landing-container.dark-mode .selector-item select:focus {
+  border-color: #007bff;
+}
+
+body.dark-mode .files-list,
+.landing-container.dark-mode .files-list {
+  background-color: #3d3d3d;
+  border-color: #555;
+}
+
+body.dark-mode .file-item,
+.landing-container.dark-mode .file-item {
+  color: #e0e0e0;
+}
+
+body.dark-mode .file-item:hover,
+.landing-container.dark-mode .file-item:hover {
+  background-color: #4d4d4d;
+}
+
+body.dark-mode .file-item.no-files,
+.landing-container.dark-mode .file-item.no-files {
+  color: #aaa;
+}
+
+body.dark-mode .file-item.no-files:hover,
+.landing-container.dark-mode .file-item.no-files:hover {
+  background-color: transparent;
+}
+
+body.dark-mode .image-wrapper,
+.landing-container.dark-mode .image-wrapper {
+  background-color: #2d2d2d;
+  border-color: #444;
+}
+
+body.dark-mode .placeholder-message,
+.landing-container.dark-mode .placeholder-message {
+  color: #aaa;
+}

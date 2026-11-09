@@ -1,0 +1,656 @@
+.rainfall-estimation-container {
+  padding: 20px;
+  max-width: 1600px;
+  margin: 0 auto;
+  min-height: calc(100vh - 100px);
+}
+
+.rainfall-header {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.rainfall-header h2 {
+  color: #333;
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+  transition: color 0.3s ease;
+}
+
+.rainfall-header p {
+  color: #666;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+}
+
+.rainfall-content {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: 30px;
+  height: calc(100vh - 200px);
+  min-height: 600px;
+}
+
+/* Configuration Panel */
+.configuration-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 100%;
+  min-height: 0;
+}
+
+.config-card,
+.info-card {
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.config-card {
+  flex: 0 1 auto;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.config-card-content {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+.config-card h3,
+.info-card h4 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 1.3rem;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 10px;
+  flex-shrink: 0;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.info-card h4 {
+  font-size: 1.1rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.control-group {
+  margin-bottom: 20px;
+  flex-shrink: 0;
+}
+
+.control-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #333;
+  font-size: 0.95rem;
+  transition: color 0.3s ease;
+}
+
+.control-select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #fff;
+  font-size: 0.95rem;
+  transition: border-color 0.2s, background-color 0.3s ease, color 0.3s ease;
+  color: #333;
+}
+
+.control-select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+/* Coefficients Input */
+.coefficients-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 20px;
+  flex-shrink: 0;
+}
+
+.coefficient-input {
+  display: flex;
+  flex-direction: column;
+}
+
+.coefficient-input label {
+  font-weight: 600;
+  color: #333;
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+  transition: color 0.3s ease;
+}
+
+.coefficient-input input {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  transition: border-color 0.2s, background-color 0.3s ease, color 0.3s ease;
+  background-color: #fff;
+  color: #333;
+}
+
+.coefficient-input input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+/* Current Configuration */
+.current-config {
+  margin: 20px 0;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 6px;
+  border-left: 4px solid #28a745;
+  flex-shrink: 0;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.current-config h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #333;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.current-config p {
+  margin: 5px 0;
+  font-family: "Courier New", monospace;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+/* Action Button */
+.action-group {
+  margin-top: 25px;
+  flex-shrink: 0;
+}
+
+.analyze-btn {
+  width: 100%;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: #007bff;
+  color: white;
+}
+
+.analyze-btn:hover:not(:disabled) {
+  background: #0056b3;
+  transform: translateY(-1px);
+}
+
+.analyze-btn:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Error Message */
+.error-message {
+  background: #fff3cd;
+  color: #856404;
+  padding: 12px 15px;
+  border-radius: 6px;
+  border-left: 4px solid #ffc107;
+  margin-top: 15px;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Results Panel */
+.results-panel {
+  margin-top: 20px;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 6px;
+  border: 1px solid #e9ecef;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  transition: background-color 0.3s ease, border-color 0.3s ease,
+    color 0.3s ease;
+}
+
+.results-panel h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #333;
+  font-size: 1.1rem;
+  border-bottom: 1px solid #dee2e6;
+  padding-bottom: 5px;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.result-message {
+  margin-bottom: 15px;
+  padding: 10px;
+  background: #d4edda;
+  border-radius: 4px;
+  border-left: 4px solid #28a745;
+  color: #155724;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Sample Calculation Table */
+.sample-calculation {
+  margin: 15px 0;
+}
+
+.sample-calculation h5 {
+  margin-bottom: 10px;
+  color: #333;
+  font-size: 0.95rem;
+  transition: color 0.3s ease;
+}
+
+.sample-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  transition: color 0.3s ease;
+}
+
+.sample-table th,
+.sample-table td {
+  padding: 8px;
+  text-align: center;
+  border: 1px solid #dee2e6;
+  transition: background-color 0.3s ease, border-color 0.3s ease,
+    color 0.3s ease;
+}
+
+.sample-table th {
+  background: #e9ecef;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.sample-table tr:nth-child(even) {
+  background: #f8f9fa;
+  transition: background-color 0.3s ease;
+}
+
+/* Rainfall Calculation Styles */
+.rainfall-calculation {
+  margin: 15px 0;
+  padding: 12px;
+  background: #d4edda;
+  border-radius: 6px;
+  border-left: 4px solid #28a745;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.rainfall-calculation h5 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #155724;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.calculation-details p {
+  margin: 5px 0;
+  font-size: 0.9rem;
+  color: #155724;
+  transition: color 0.3s ease;
+}
+
+.calculation-details strong {
+  color: #0f5132;
+}
+
+.warning-note {
+  color: #856404;
+  background: #fff3cd;
+  padding: 8px;
+  border-radius: 4px;
+  border-left: 3px solid #ffc107;
+  margin-top: 8px;
+  font-size: 0.85rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Selected Point Info */
+.selected-point {
+  margin: 15px 0;
+  padding: 12px;
+  background: #e7f3ff;
+  border-radius: 6px;
+  border-left: 4px solid #007bff;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.selected-point h5 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  color: #333;
+  font-size: 0.95rem;
+  transition: color 0.3s ease;
+}
+
+.selected-point p {
+  margin: 4px 0;
+  font-size: 0.9rem;
+  color: #555;
+  transition: color 0.3s ease;
+}
+
+/* Map Panel */
+.map-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+.map-card {
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.map-card h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 1.3rem;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 10px;
+  flex-shrink: 0;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.map-container {
+  flex: 1;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e9ecef;
+  min-height: 0;
+  transition: border-color 0.3s ease;
+}
+
+.map-instructions {
+  margin-top: 15px;
+  padding: 12px;
+  background: #e7f3ff;
+  border-radius: 6px;
+  border-left: 4px solid #007bff;
+  font-size: 0.9rem;
+  color: #0066cc;
+  flex-shrink: 0;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Scrollbar styling for all scrollable areas */
+.config-card-content::-webkit-scrollbar,
+.results-panel::-webkit-scrollbar,
+.info-card-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.config-card-content::-webkit-scrollbar-track,
+.results-panel::-webkit-scrollbar-track,
+.info-card-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+  transition: background-color 0.3s ease;
+}
+
+.config-card-content::-webkit-scrollbar-thumb,
+.results-panel::-webkit-scrollbar-thumb,
+.info-card-content::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+  transition: background-color 0.3s ease;
+}
+
+.config-card-content::-webkit-scrollbar-thumb:hover,
+.results-panel::-webkit-scrollbar-thumb:hover,
+.info-card-content::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .rainfall-content {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    height: auto;
+    min-height: auto;
+  }
+
+  .configuration-panel {
+    order: 2;
+    height: auto;
+  }
+
+  .map-panel {
+    order: 1;
+    height: 500px;
+  }
+
+  .info-card {
+    max-height: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .rainfall-estimation-container {
+    padding: 15px;
+  }
+
+  .config-card,
+  .map-card,
+  .info-card {
+    padding: 20px;
+  }
+
+  .coefficients-group {
+    grid-template-columns: 1fr;
+  }
+
+  .map-panel {
+    height: 400px;
+  }
+}
+
+/* Ensure Leaflet map container works properly */
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+  min-height: 300px;
+}
+
+/* Dark Mode Styles */
+body.dark-mode .rainfall-header h2,
+.landing-container.dark-mode .rainfall-header h2 {
+  color: #ffffff;
+}
+
+body.dark-mode .rainfall-header p,
+.landing-container.dark-mode .rainfall-header p {
+  color: #e0e0e0;
+}
+
+body.dark-mode .config-card,
+body.dark-mode .map-card,
+body.dark-mode .info-card,
+.landing-container.dark-mode .config-card,
+.landing-container.dark-mode .map-card,
+.landing-container.dark-mode .info-card {
+  background-color: #2d2d2d;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .config-card h3,
+body.dark-mode .map-card h3,
+body.dark-mode .info-card h4,
+.landing-container.dark-mode .config-card h3,
+.landing-container.dark-mode .map-card h3,
+.landing-container.dark-mode .info-card h4 {
+  color: #ffffff;
+  border-color: #444;
+}
+
+body.dark-mode .control-group label,
+.landing-container.dark-mode .control-group label {
+  color: #e0e0e0;
+}
+
+body.dark-mode .control-select,
+.landing-container.dark-mode .control-select {
+  background-color: #3d3d3d;
+  border-color: #555;
+  color: #ffffff;
+}
+
+body.dark-mode .coefficient-input label,
+.landing-container.dark-mode .coefficient-input label {
+  color: #e0e0e0;
+}
+
+body.dark-mode .coefficient-input input,
+.landing-container.dark-mode .coefficient-input input {
+  background-color: #3d3d3d;
+  border-color: #555;
+  color: #ffffff;
+}
+
+body.dark-mode .current-config,
+.landing-container.dark-mode .current-config {
+  background-color: #3d3d3d;
+}
+
+body.dark-mode .current-config h4,
+body.dark-mode .current-config p,
+.landing-container.dark-mode .current-config h4,
+.landing-container.dark-mode .current-config p {
+  color: #e0e0e0;
+}
+
+body.dark-mode .results-panel,
+.landing-container.dark-mode .results-panel {
+  background-color: #3d3d3d;
+  border-color: #555;
+}
+
+body.dark-mode .results-panel h4,
+.landing-container.dark-mode .results-panel h4 {
+  color: #ffffff;
+  border-color: #555;
+}
+
+body.dark-mode .sample-calculation h5,
+.landing-container.dark-mode .sample-calculation h5 {
+  color: #ffffff;
+}
+
+body.dark-mode .sample-table th,
+body.dark-mode .sample-table td,
+.landing-container.dark-mode .sample-table th,
+.landing-container.dark-mode .sample-table td {
+  border-color: #555;
+  color: #e0e0e0;
+}
+
+body.dark-mode .sample-table th,
+.landing-container.dark-mode .sample-table th {
+  background-color: #4d4d4d;
+}
+
+body.dark-mode .sample-table tr:nth-child(even),
+.landing-container.dark-mode .sample-table tr:nth-child(even) {
+  background-color: #3d3d3d;
+}
+
+body.dark-mode .map-container,
+.landing-container.dark-mode .map-container {
+  border-color: #444;
+}
+
+body.dark-mode .map-instructions,
+.landing-container.dark-mode .map-instructions {
+  background-color: #3d3d3d;
+  color: #e0e0e0;
+}
+
+/* Scrollbar dark mode */
+body.dark-mode .config-card-content::-webkit-scrollbar-track,
+body.dark-mode .results-panel::-webkit-scrollbar-track,
+body.dark-mode .info-card-content::-webkit-scrollbar-track,
+.landing-container.dark-mode .config-card-content::-webkit-scrollbar-track,
+.landing-container.dark-mode .results-panel::-webkit-scrollbar-track,
+.landing-container.dark-mode .info-card-content::-webkit-scrollbar-track {
+  background: #3d3d3d;
+}
+
+body.dark-mode .config-card-content::-webkit-scrollbar-thumb,
+body.dark-mode .results-panel::-webkit-scrollbar-thumb,
+body.dark-mode .info-card-content::-webkit-scrollbar-thumb,
+.landing-container.dark-mode .config-card-content::-webkit-scrollbar-thumb,
+.landing-container.dark-mode .results-panel::-webkit-scrollbar-thumb,
+.landing-container.dark-mode .info-card-content::-webkit-scrollbar-thumb {
+  background: #666;
+}
+
+body.dark-mode .config-card-content::-webkit-scrollbar-thumb:hover,
+body.dark-mode .results-panel::-webkit-scrollbar-thumb:hover,
+body.dark-mode .info-card-content::-webkit-scrollbar-thumb:hover,
+.landing-container.dark-mode
+  .config-card-content::-webkit-scrollbar-thumb:hover,
+.landing-container.dark-mode .results-panel::-webkit-scrollbar-thumb:hover,
+.landing-container.dark-mode .info-card-content::-webkit-scrollbar-thumb:hover {
+  background: #888;
+}
+
+/* dBZ Overlay Styles */
+.dbz-overlay {
+  mix-blend-mode: multiply;
+  pointer-events: none; /* This is crucial - allows clicks to pass through to the map */
+}
+
+.overlay-loading {
+  background: #e7f3ff;
+  color: #0066cc;
+  padding: 8px 12px;
+  border-radius: 4px;
+  margin-top: 10px;
+  font-size: 0.9rem;
+  border-left: 3px solid #007bff;
+}
+
+/* Dark mode adjustments for overlay */
+body.dark-mode .dbz-overlay,
+.landing-container.dark-mode .dbz-overlay {
+  mix-blend-mode: screen;
+  opacity: 0.5 !important; /* Slightly more visible in dark mode */
+}
