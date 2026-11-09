@@ -20,6 +20,7 @@ import ComparePlots from "./ComparePlots";
 import RainfallEstimation from "./RainfallEstimation";
 import ValidateData from "./ValidateData";
 import SoundControl from "../components/SoundControl";
+import { rainAudio } from "../utils/audioEngine";
 import AtmosphericBackground from "../components/AtmosphericBackground";
 import AeroBadge from "../components/ui/AeroBadge";
 import logo from "../assets/kjsieit-logo.svg";
@@ -198,7 +199,10 @@ export default function Landing() {
           >
             <button
               className="hamburger"
-              onClick={() => setCollapsed(!collapsed)}
+              onClick={() => {
+                rainAudio.playChirp(700, "sine", 0.04);
+                setCollapsed(!collapsed);
+              }}
               title={collapsed ? "Expand Operations Rail" : "Collapse Rail"}
             >
               <FaBars />
@@ -256,7 +260,12 @@ export default function Landing() {
               <div
                 key={item.name}
                 className={`menu-item ${isActive ? "active" : ""}`}
-                onClick={() => setActivePage(item.name)}
+                onClick={() => {
+                  if (activePage !== item.name) {
+                    rainAudio.playChirp(840, "sine", 0.05);
+                    setActivePage(item.name);
+                  }
+                }}
                 title={collapsed ? `${item.name}: ${item.desc}` : item.desc}
                 style={{ position: "relative" }}
               >

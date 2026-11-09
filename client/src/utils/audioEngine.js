@@ -169,6 +169,33 @@ class RainAudioEngine {
       volume: this.volume,
     };
   }
+
+  // Futuristic radar UI tactile chirp on clicks/tab switches
+  playChirp(freq = 880, type = "sine", duration = 0.05) {
+    if (this.isMuted) return;
+    try {
+      this.init();
+      if (!this.audioCtx) return;
+      if (this.audioCtx.state === "suspended") {
+        this.audioCtx.resume();
+      }
+      const osc = this.audioCtx.createOscillator();
+      const gain = this.audioCtx.createGain();
+      osc.type = type;
+      osc.frequency.setValueAtTime(freq, this.audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(freq * 1.5, this.audioCtx.currentTime + duration);
+
+      gain.gain.setValueAtTime(0.04 * this.volume, this.audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, this.audioCtx.currentTime + duration);
+
+      osc.connect(gain);
+      gain.connect(this.audioCtx.destination);
+      osc.start();
+      osc.stop(this.audioCtx.currentTime + duration);
+    } catch {
+      // Audio autoplay policy or inactive
+    }
+  }
 }
 
 export const rainAudio = new RainAudioEngine();

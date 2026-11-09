@@ -1,656 +1,250 @@
-.rainfall-estimation-container {
-  padding: 20px;
-  max-width: 1600px;
-  margin: 0 auto;
-  min-height: calc(100vh - 100px);
-}
+/* ==========================================================================
+   AEROSCOPE RAINFALL ESTIMATION & GEOSPATIAL INTELLIGENCE STYLES
+   Interactive GIS Radar Reflectivity & Z-R Precipitation Engine
+   ========================================================================== */
 
-.rainfall-header {
-  margin-bottom: 30px;
-  text-align: center;
-}
-
-.rainfall-header h2 {
-  color: #333;
-  font-size: 2.2rem;
-  margin-bottom: 10px;
-  transition: color 0.3s ease;
-}
-
-.rainfall-header p {
-  color: #666;
-  font-size: 1.1rem;
-  transition: color 0.3s ease;
-}
-
-.rainfall-content {
-  display: grid;
-  grid-template-columns: 400px 1fr;
-  gap: 30px;
-  height: calc(100vh - 200px);
-  min-height: 600px;
-}
-
-/* Configuration Panel */
-.configuration-panel {
+.aero-rainfall-console {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  height: 100%;
-  min-height: 0;
+  width: 100%;
+  animation: fadeIn 0.3s ease-out;
 }
 
-.config-card,
-.info-card {
-  background: #ffffff;
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+/* Header Ribbon */
+.rainfall-header-ribbon {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 14px 20px;
+  background: var(--aero-bg-glass);
+  border: 1px solid var(--aero-border-subtle);
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
-.config-card {
-  flex: 0 1 auto;
-  min-height: 0;
-  overflow: hidden;
+/* Main Split Cockpit Grid */
+.rainfall-cockpit-grid {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+/* Left Configuration & Results Rail */
+.rainfall-config-rail {
   display: flex;
   flex-direction: column;
+  gap: 18px;
 }
 
-.config-card-content {
-  flex: 1;
-  min-height: 0;
-  overflow-y: auto;
-  padding-right: 5px;
-}
-
-.config-card h3,
-.info-card h4 {
-  margin-top: 0;
-  margin-bottom: 20px;
-  color: #333;
-  font-size: 1.3rem;
-  border-bottom: 2px solid #f0f0f0;
-  padding-bottom: 10px;
-  flex-shrink: 0;
-  transition: color 0.3s ease, border-color 0.3s ease;
-}
-
-.info-card h4 {
-  font-size: 1.1rem;
-  border-bottom: 1px solid #e0e0e0;
-}
-
-.control-group {
-  margin-bottom: 20px;
-  flex-shrink: 0;
-}
-
-.control-group label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: 600;
-  color: #333;
-  font-size: 0.95rem;
-  transition: color 0.3s ease;
-}
-
-.control-select {
-  width: 100%;
-  padding: 10px 12px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  background: #fff;
-  font-size: 0.95rem;
-  transition: border-color 0.2s, background-color 0.3s ease, color 0.3s ease;
-  color: #333;
-}
-
-.control-select:focus {
-  outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
-}
-
-/* Coefficients Input */
-.coefficients-group {
+/* Preset Cards Grid */
+.zr-preset-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 15px;
-  margin-bottom: 20px;
-  flex-shrink: 0;
+  gap: 8px;
+  margin-top: 6px;
 }
 
-.coefficient-input {
-  display: flex;
-  flex-direction: column;
-}
-
-.coefficient-input label {
-  font-weight: 600;
-  color: #333;
-  font-size: 0.9rem;
-  margin-bottom: 5px;
-  transition: color 0.3s ease;
-}
-
-.coefficient-input input {
-  padding: 8px 12px;
-  border: 1px solid #ddd;
+.zr-preset-btn {
+  padding: 8px 10px;
+  background: rgba(6, 12, 26, 0.75);
+  border: 1px solid rgba(0, 240, 255, 0.2);
   border-radius: 6px;
-  font-size: 0.9rem;
-  transition: border-color 0.2s, background-color 0.3s ease, color 0.3s ease;
-  background-color: #fff;
-  color: #333;
-}
-
-.coefficient-input input:focus {
-  outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
-}
-
-/* Current Configuration */
-.current-config {
-  margin: 20px 0;
-  padding: 15px;
-  background: #f8f9fa;
-  border-radius: 6px;
-  border-left: 4px solid #28a745;
-  flex-shrink: 0;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.current-config h4 {
-  margin-top: 0;
-  margin-bottom: 10px;
-  color: #333;
-  font-size: 1rem;
-  transition: color 0.3s ease;
-}
-
-.current-config p {
-  margin: 5px 0;
-  font-family: "Courier New", monospace;
-  font-size: 0.9rem;
-  transition: color 0.3s ease;
-}
-
-/* Action Button */
-.action-group {
-  margin-top: 25px;
-  flex-shrink: 0;
-}
-
-.analyze-btn {
-  width: 100%;
-  padding: 12px 24px;
-  border: none;
-  border-radius: 6px;
-  font-size: 1rem;
+  color: var(--aero-text-secondary);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
   font-weight: 600;
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
   transition: all 0.2s;
-  background: #007bff;
-  color: white;
+  text-align: left;
 }
 
-.analyze-btn:hover:not(:disabled) {
-  background: #0056b3;
-  transform: translateY(-1px);
+.zr-preset-btn:hover {
+  background: rgba(0, 240, 255, 0.1);
+  border-color: var(--aero-cyan);
+  color: #ffffff;
 }
 
-.analyze-btn:disabled {
-  background: #6c757d;
-  cursor: not-allowed;
-  transform: none;
+.zr-preset-btn.active {
+  background: linear-gradient(135deg, rgba(0, 240, 255, 0.22) 0%, rgba(37, 99, 235, 0.25) 100%);
+  border-color: var(--aero-cyan);
+  color: #ffffff;
+  box-shadow: 0 0 14px rgba(0, 240, 255, 0.3);
 }
 
-/* Error Message */
-.error-message {
-  background: #fff3cd;
-  color: #856404;
-  padding: 12px 15px;
-  border-radius: 6px;
-  border-left: 4px solid #ffc107;
-  margin-top: 15px;
-  font-size: 0.9rem;
-  flex-shrink: 0;
-  transition: background-color 0.3s ease, color 0.3s ease;
+.zr-preset-btn .preset-formula {
+  font-size: 0.65rem;
+  color: var(--aero-cyan);
+  opacity: 0.85;
 }
 
-/* Results Panel */
-.results-panel {
-  margin-top: 20px;
-  padding: 15px;
-  background: #f8f9fa;
-  border-radius: 6px;
-  border: 1px solid #e9ecef;
-  flex: 1;
-  min-height: 0;
-  overflow-y: auto;
-  transition: background-color 0.3s ease, border-color 0.3s ease,
-    color 0.3s ease;
-}
-
-.results-panel h4 {
-  margin-top: 0;
-  margin-bottom: 10px;
-  color: #333;
-  font-size: 1.1rem;
-  border-bottom: 1px solid #dee2e6;
-  padding-bottom: 5px;
-  transition: color 0.3s ease, border-color 0.3s ease;
-}
-
-.result-message {
-  margin-bottom: 15px;
+/* Custom Coefficients Row */
+.zr-custom-inputs-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 10px;
   padding: 10px;
-  background: #d4edda;
+  background: rgba(6, 12, 26, 0.6);
+  border: 1px solid rgba(0, 240, 255, 0.15);
+  border-radius: 6px;
+}
+
+.zr-number-input {
+  width: 100%;
+  padding: 6px 10px;
+  background: rgba(10, 18, 38, 0.9);
+  border: 1px solid var(--aero-border-subtle);
   border-radius: 4px;
-  border-left: 4px solid #28a745;
-  color: #155724;
-  font-size: 0.9rem;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  color: var(--aero-text-primary);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  outline: none;
 }
 
-/* Sample Calculation Table */
-.sample-calculation {
-  margin: 15px 0;
+.zr-number-input:focus {
+  border-color: var(--aero-cyan);
 }
 
-.sample-calculation h5 {
-  margin-bottom: 10px;
-  color: #333;
-  font-size: 0.95rem;
-  transition: color 0.3s ease;
+/* Active Z-R Formula Display Box */
+.active-formula-box {
+  padding: 10px 14px;
+  background: rgba(6, 12, 26, 0.8);
+  border: 1px solid rgba(0, 240, 255, 0.18);
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--aero-cyan);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
-.sample-table {
+/* Right GIS Map Viewport */
+.rainfall-map-viewport {
+  position: relative;
+  background: #02050e;
+  border: 1px solid var(--aero-border-subtle);
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  min-height: 620px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+  overflow: hidden;
+}
+
+.map-hud-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(0, 240, 255, 0.12);
+  z-index: 10;
+}
+
+.leaflet-map-wrapper {
+  flex: 1;
+  width: 100%;
+  min-height: 520px;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  position: relative;
+}
+
+/* Dark Map Tile Layer Filters */
+.dark-map-tiles {
+  filter: brightness(0.9) contrast(1.1);
+}
+
+/* Point Calculation Result Card */
+.point-result-card {
+  background: rgba(6, 12, 26, 0.85);
+  border: 1px solid var(--aero-border-subtle);
+  border-radius: 6px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: fadeIn 0.25s ease-out;
+}
+
+.rainfall-rate-hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, rgba(0, 240, 255, 0.1) 0%, rgba(37, 99, 235, 0.15) 100%);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  border-radius: 6px;
+}
+
+.rate-number-display {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--aero-cyan);
+}
+
+.rate-category-badge {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  text-transform: uppercase;
+}
+
+.sample-zr-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.85rem;
-  transition: color 0.3s ease;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  margin-top: 6px;
 }
 
-.sample-table th,
-.sample-table td {
-  padding: 8px;
-  text-align: center;
-  border: 1px solid #dee2e6;
-  transition: background-color 0.3s ease, border-color 0.3s ease,
-    color 0.3s ease;
+.sample-zr-table th {
+  padding: 6px 10px;
+  background: rgba(10, 18, 38, 0.9);
+  color: var(--aero-cyan);
+  border: 1px solid rgba(0, 240, 255, 0.15);
+  text-align: left;
 }
 
-.sample-table th {
-  background: #e9ecef;
-  font-weight: 600;
-  transition: background-color 0.3s ease;
+.sample-zr-table td {
+  padding: 5px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  color: var(--aero-text-secondary);
 }
 
-.sample-table tr:nth-child(even) {
-  background: #f8f9fa;
-  transition: background-color 0.3s ease;
+.sample-zr-table tr:hover td {
+  background: rgba(0, 240, 255, 0.08);
+  color: #ffffff;
 }
 
-/* Rainfall Calculation Styles */
-.rainfall-calculation {
-  margin: 15px 0;
-  padding: 12px;
-  background: #d4edda;
-  border-radius: 6px;
-  border-left: 4px solid #28a745;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.rainfall-calculation h5 {
-  margin-top: 0;
-  margin-bottom: 10px;
-  color: #155724;
-  font-size: 1rem;
-  transition: color 0.3s ease;
-}
-
-.calculation-details p {
-  margin: 5px 0;
-  font-size: 0.9rem;
-  color: #155724;
-  transition: color 0.3s ease;
-}
-
-.calculation-details strong {
-  color: #0f5132;
-}
-
-.warning-note {
-  color: #856404;
-  background: #fff3cd;
-  padding: 8px;
-  border-radius: 4px;
-  border-left: 3px solid #ffc107;
-  margin-top: 8px;
-  font-size: 0.85rem;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-/* Selected Point Info */
-.selected-point {
-  margin: 15px 0;
-  padding: 12px;
-  background: #e7f3ff;
-  border-radius: 6px;
-  border-left: 4px solid #007bff;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.selected-point h5 {
-  margin-top: 0;
-  margin-bottom: 8px;
-  color: #333;
-  font-size: 0.95rem;
-  transition: color 0.3s ease;
-}
-
-.selected-point p {
-  margin: 4px 0;
-  font-size: 0.9rem;
-  color: #555;
-  transition: color 0.3s ease;
-}
-
-/* Map Panel */
-.map-panel {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  min-height: 0;
-}
-
-.map-card {
-  background: #ffffff;
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  min-height: 0;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.map-card h3 {
-  margin-top: 0;
-  margin-bottom: 20px;
-  color: #333;
-  font-size: 1.3rem;
-  border-bottom: 2px solid #f0f0f0;
-  padding-bottom: 10px;
-  flex-shrink: 0;
-  transition: color 0.3s ease, border-color 0.3s ease;
-}
-
-.map-container {
-  flex: 1;
-  border-radius: 8px;
-  overflow: hidden;
-  border: 1px solid #e9ecef;
-  min-height: 0;
-  transition: border-color 0.3s ease;
-}
-
-.map-instructions {
-  margin-top: 15px;
-  padding: 12px;
-  background: #e7f3ff;
-  border-radius: 6px;
-  border-left: 4px solid #007bff;
-  font-size: 0.9rem;
-  color: #0066cc;
-  flex-shrink: 0;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-/* Scrollbar styling for all scrollable areas */
-.config-card-content::-webkit-scrollbar,
-.results-panel::-webkit-scrollbar,
-.info-card-content::-webkit-scrollbar {
-  width: 6px;
-}
-
-.config-card-content::-webkit-scrollbar-track,
-.results-panel::-webkit-scrollbar-track,
-.info-card-content::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 3px;
-  transition: background-color 0.3s ease;
-}
-
-.config-card-content::-webkit-scrollbar-thumb,
-.results-panel::-webkit-scrollbar-thumb,
-.info-card-content::-webkit-scrollbar-thumb {
-  background: #c1c1c1;
-  border-radius: 3px;
-  transition: background-color 0.3s ease;
-}
-
-.config-card-content::-webkit-scrollbar-thumb:hover,
-.results-panel::-webkit-scrollbar-thumb:hover,
-.info-card-content::-webkit-scrollbar-thumb:hover {
-  background: #a8a8a8;
-}
-
-/* Responsive Design */
-@media (max-width: 1024px) {
-  .rainfall-content {
+@media (max-width: 1100px) {
+  .rainfall-cockpit-grid {
     grid-template-columns: 1fr;
-    gap: 20px;
-    height: auto;
-    min-height: auto;
   }
-
-  .configuration-panel {
+  .rainfall-config-rail {
     order: 2;
-    height: auto;
   }
-
-  .map-panel {
+  .rainfall-map-viewport {
     order: 1;
-    height: 500px;
+    min-height: 480px;
   }
-
-  .info-card {
-    max-height: 300px;
+  .leaflet-map-wrapper {
+    min-height: 420px;
   }
-}
-
-@media (max-width: 768px) {
-  .rainfall-estimation-container {
-    padding: 15px;
-  }
-
-  .config-card,
-  .map-card,
-  .info-card {
-    padding: 20px;
-  }
-
-  .coefficients-group {
-    grid-template-columns: 1fr;
-  }
-
-  .map-panel {
-    height: 400px;
-  }
-}
-
-/* Ensure Leaflet map container works properly */
-.leaflet-container {
-  height: 100%;
-  width: 100%;
-  min-height: 300px;
-}
-
-/* Dark Mode Styles */
-body.dark-mode .rainfall-header h2,
-.landing-container.dark-mode .rainfall-header h2 {
-  color: #ffffff;
-}
-
-body.dark-mode .rainfall-header p,
-.landing-container.dark-mode .rainfall-header p {
-  color: #e0e0e0;
-}
-
-body.dark-mode .config-card,
-body.dark-mode .map-card,
-body.dark-mode .info-card,
-.landing-container.dark-mode .config-card,
-.landing-container.dark-mode .map-card,
-.landing-container.dark-mode .info-card {
-  background-color: #2d2d2d;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-}
-
-body.dark-mode .config-card h3,
-body.dark-mode .map-card h3,
-body.dark-mode .info-card h4,
-.landing-container.dark-mode .config-card h3,
-.landing-container.dark-mode .map-card h3,
-.landing-container.dark-mode .info-card h4 {
-  color: #ffffff;
-  border-color: #444;
-}
-
-body.dark-mode .control-group label,
-.landing-container.dark-mode .control-group label {
-  color: #e0e0e0;
-}
-
-body.dark-mode .control-select,
-.landing-container.dark-mode .control-select {
-  background-color: #3d3d3d;
-  border-color: #555;
-  color: #ffffff;
-}
-
-body.dark-mode .coefficient-input label,
-.landing-container.dark-mode .coefficient-input label {
-  color: #e0e0e0;
-}
-
-body.dark-mode .coefficient-input input,
-.landing-container.dark-mode .coefficient-input input {
-  background-color: #3d3d3d;
-  border-color: #555;
-  color: #ffffff;
-}
-
-body.dark-mode .current-config,
-.landing-container.dark-mode .current-config {
-  background-color: #3d3d3d;
-}
-
-body.dark-mode .current-config h4,
-body.dark-mode .current-config p,
-.landing-container.dark-mode .current-config h4,
-.landing-container.dark-mode .current-config p {
-  color: #e0e0e0;
-}
-
-body.dark-mode .results-panel,
-.landing-container.dark-mode .results-panel {
-  background-color: #3d3d3d;
-  border-color: #555;
-}
-
-body.dark-mode .results-panel h4,
-.landing-container.dark-mode .results-panel h4 {
-  color: #ffffff;
-  border-color: #555;
-}
-
-body.dark-mode .sample-calculation h5,
-.landing-container.dark-mode .sample-calculation h5 {
-  color: #ffffff;
-}
-
-body.dark-mode .sample-table th,
-body.dark-mode .sample-table td,
-.landing-container.dark-mode .sample-table th,
-.landing-container.dark-mode .sample-table td {
-  border-color: #555;
-  color: #e0e0e0;
-}
-
-body.dark-mode .sample-table th,
-.landing-container.dark-mode .sample-table th {
-  background-color: #4d4d4d;
-}
-
-body.dark-mode .sample-table tr:nth-child(even),
-.landing-container.dark-mode .sample-table tr:nth-child(even) {
-  background-color: #3d3d3d;
-}
-
-body.dark-mode .map-container,
-.landing-container.dark-mode .map-container {
-  border-color: #444;
-}
-
-body.dark-mode .map-instructions,
-.landing-container.dark-mode .map-instructions {
-  background-color: #3d3d3d;
-  color: #e0e0e0;
-}
-
-/* Scrollbar dark mode */
-body.dark-mode .config-card-content::-webkit-scrollbar-track,
-body.dark-mode .results-panel::-webkit-scrollbar-track,
-body.dark-mode .info-card-content::-webkit-scrollbar-track,
-.landing-container.dark-mode .config-card-content::-webkit-scrollbar-track,
-.landing-container.dark-mode .results-panel::-webkit-scrollbar-track,
-.landing-container.dark-mode .info-card-content::-webkit-scrollbar-track {
-  background: #3d3d3d;
-}
-
-body.dark-mode .config-card-content::-webkit-scrollbar-thumb,
-body.dark-mode .results-panel::-webkit-scrollbar-thumb,
-body.dark-mode .info-card-content::-webkit-scrollbar-thumb,
-.landing-container.dark-mode .config-card-content::-webkit-scrollbar-thumb,
-.landing-container.dark-mode .results-panel::-webkit-scrollbar-thumb,
-.landing-container.dark-mode .info-card-content::-webkit-scrollbar-thumb {
-  background: #666;
-}
-
-body.dark-mode .config-card-content::-webkit-scrollbar-thumb:hover,
-body.dark-mode .results-panel::-webkit-scrollbar-thumb:hover,
-body.dark-mode .info-card-content::-webkit-scrollbar-thumb:hover,
-.landing-container.dark-mode
-  .config-card-content::-webkit-scrollbar-thumb:hover,
-.landing-container.dark-mode .results-panel::-webkit-scrollbar-thumb:hover,
-.landing-container.dark-mode .info-card-content::-webkit-scrollbar-thumb:hover {
-  background: #888;
-}
-
-/* dBZ Overlay Styles */
-.dbz-overlay {
-  mix-blend-mode: multiply;
-  pointer-events: none; /* This is crucial - allows clicks to pass through to the map */
-}
-
-.overlay-loading {
-  background: #e7f3ff;
-  color: #0066cc;
-  padding: 8px 12px;
-  border-radius: 4px;
-  margin-top: 10px;
-  font-size: 0.9rem;
-  border-left: 3px solid #007bff;
-}
-
-/* Dark mode adjustments for overlay */
-body.dark-mode .dbz-overlay,
-.landing-container.dark-mode .dbz-overlay {
-  mix-blend-mode: screen;
-  opacity: 0.5 !important; /* Slightly more visible in dark mode */
 }
