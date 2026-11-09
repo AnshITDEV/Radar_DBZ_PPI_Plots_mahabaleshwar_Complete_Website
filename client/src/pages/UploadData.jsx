@@ -1,5 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./UploadData.css";
+import AeroButton from "../components/ui/AeroButton";
+import AeroBadge from "../components/ui/AeroBadge";
+import {
+  FaSatelliteDish,
+  FaCloudRain,
+  FaTrashAlt,
+  FaFileAlt,
+  FaCheckCircle,
+  FaExclamationTriangle,
+  FaDatabase,
+  FaNetworkWired,
+  FaInfoCircle,
+} from "react-icons/fa";
 
 export default function UploadData({
   uploadedFiles,
@@ -10,31 +23,10 @@ export default function UploadData({
     radar: "",
     rainGauge: "",
   });
-  const [darkMode, setDarkMode] = useState(false);
+  const [isDraggingRadar, setIsDraggingRadar] = useState(false);
+  const [isDraggingGauge, setIsDraggingGauge] = useState(false);
 
   const { radarFiles, rainGaugeFiles, scanType } = uploadedFiles;
-
-  // Check for dark mode on component mount and listen for changes
-  useEffect(() => {
-    const checkDarkMode = () => {
-      const savedTheme = localStorage.getItem("theme");
-      setDarkMode(savedTheme === "dark");
-    };
-
-    checkDarkMode();
-
-    const handleStorageChange = () => {
-      checkDarkMode();
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-    window.addEventListener("focus", checkDarkMode);
-
-    return () => {
-      window.removeEventListener("storage", handleStorageChange);
-      window.removeEventListener("focus", checkDarkMode);
-    };
-  }, []);
 
   // Convert File object to storable metadata
   const fileToMetadata = (file) => {
@@ -49,9 +41,9 @@ export default function UploadData({
     };
   };
 
-  // Handle radar file upload
-  const handleRadarUpload = (e) => {
-    const files = Array.from(e.target.files);
+  // Process and ingest radar files (.nc)
+  const processRadarFiles = (fileList) => {
+    const files = Array.from(fileList);
     const validFiles = files.filter(
       (file) =>
         file.name.endsWith(".nc") ||
@@ -64,10 +56,8 @@ export default function UploadData({
       return;
     }
 
-    // Store files in memory and create metadata
     const newRadarFiles = validFiles.map((file) => {
       const metadata = fileToMetadata(file);
-      // Store the actual file in memory at App level
       fileStore.set(metadata.id, file);
       return metadata;
     });
@@ -78,12 +68,11 @@ export default function UploadData({
     }));
 
     setUploadStatus((prev) => ({ ...prev, radar: "success" }));
-    e.target.value = "";
   };
 
-  // Handle rain gauge file upload
-  const handleRainGaugeUpload = (e) => {
-    const files = Array.from(e.target.files);
+  // Process and ingest rain gauge files (.csv, .xlsx)
+  const processRainGaugeFiles = (fileList) => {
+    const files = Array.from(fileList);
     const validFiles = files.filter(
       (file) =>
         file.name.endsWith(".csv") ||
@@ -110,10 +99,36 @@ export default function UploadData({
     }));
 
     setUploadStatus((prev) => ({ ...prev, rainGauge: "success" }));
+  };
+
+  const handleRadarUpload = (e) => {
+    processRadarFiles(e.target.files);
     e.target.value = "";
   };
 
-  // Remove radar file
+  const handleRainGaugeUpload = (e) => {
+    processRainGaugeFiles(e.target.files);
+    e.target.value = "";
+  };
+
+  // Drag and drop handlers
+  const handleRadarDrop = (e) => {
+    e.preventDefault();
+    setIsDraggingRadar(false);
+    if (e.dataTransfer.files) {
+      processRadarFiles(e.dataTransfer.files);
+    }
+  };
+
+  const handleGaugeDrop = (e) => {
+    e.preventDefault();
+    setIsDraggingGauge(false);
+    if (e.dataTransfer.files) {
+      processRainGaugeFiles(e.dataTransfer.files);
+    }
+  };
+
+  // Remove individual radar file
   const removeRadarFile = (index) => {
     const fileToRemove = radarFiles[index];
     fileStore.delete(fileToRemove.id);
@@ -128,7 +143,7 @@ export default function UploadData({
     }
   };
 
-  // Remove rain gauge file
+  // Remove individual rain gauge file
   const removeRainGaugeFile = (index) => {
     const fileToRemove = rainGaugeFiles[index];
     fileStore.delete(fileToRemove.id);
@@ -153,7 +168,6 @@ export default function UploadData({
 
   // Clear all files
   const clearAllFiles = () => {
-    // Clear memory store
     radarFiles.forEach((file) => fileStore.delete(file.id));
     rainGaugeFiles.forEach((file) => fileStore.delete(file.id));
 
@@ -166,15 +180,8 @@ export default function UploadData({
     setUploadStatus({ radar: "", rainGauge: "" });
   };
 
-  const getFileIcon = (fileName) => {
-    if (fileName.endsWith(".nc")) return "📊";
-    if (fileName.endsWith(".csv")) return "📈";
-    if (fileName.endsWith(".xlsx")) return "📋";
-    return "📄";
-  };
-
   const formatFileSize = (bytes) => {
-    if (bytes === 0) return "0 Bytes";
+    if (!bytes || bytes === 0) return "0 Bytes";
     const k = 1024;
     const sizes = ["Bytes", "KB", "MB", "GB"];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
@@ -182,196 +189,431 @@ export default function UploadData({
   };
 
   const formatUploadDate = (dateString) => {
-    return (
-      new Date(dateString).toLocaleDateString() +
-      " " +
-      new Date(dateString).toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit",
-      })
-    );
+    return new Date(dateString).toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    });
   };
 
-  return (
-    <div className={`upload-container ${darkMode ? "dark-mode" : ""}`}>
-      <div className="upload-header">
-        <h2>Upload Data</h2>
-        <p>
-          Upload your radar and rain gauge data to get started with analysis
-        </p>
+  const totalFiles = radarFiles.length + rainGaugeFiles.length;
 
-        {(radarFiles.length > 0 || rainGaugeFiles.length > 0) && (
-          <button onClick={clearAllFiles} className="clear-all-btn">
-            🗑️ Clear All Files
-          </button>
-        )}
+  return (
+    <div className="aero-upload-console">
+      {/* Top Console Ribbon */}
+      <div className="upload-console-header">
+        <div className="upload-header-titles">
+          <h2>
+            <FaDatabase style={{ color: "var(--aero-cyan, #00f0ff)" }} />
+            DATA INGESTION TERMINAL
+          </h2>
+          <p>
+            Ingest raw dual-polarimetric NetCDF radar volumes and rain gauge
+            time-series for atmospheric analysis and ground validation.
+          </p>
+        </div>
+
+        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+          <AeroBadge variant="cyan" pulse={false}>
+            {totalFiles} DATASETS ACTIVE
+          </AeroBadge>
+
+          {totalFiles > 0 && (
+            <button
+              onClick={clearAllFiles}
+              className="aero-btn aero-btn-outline"
+              style={{
+                borderColor: "rgba(239, 68, 68, 0.4)",
+                color: "#ef4444",
+                padding: "8px 14px",
+                fontSize: "0.75rem",
+              }}
+              title="Clear all in-memory datasets"
+            >
+              <FaTrashAlt style={{ marginRight: "6px" }} />
+              CLEAR ALL
+            </button>
+          )}
+        </div>
       </div>
 
-      <div className="upload-sections">
-        {/* Radar Data Upload Section */}
-        <div className="upload-section">
-          <div className="section-header">
-            <h3>📡 Radar Data (.nc files)</h3>
-            <span className="file-count">{radarFiles.length} files</span>
+      {/* Dual Upload Grid */}
+      <div className="upload-dual-grid">
+        {/* PANEL 1: Radar NetCDF Data Ingestion */}
+        <div className="ingestion-panel radar-panel">
+          <span className="hud-corner-bracket top-left" />
+          <span className="hud-corner-bracket top-right" />
+          <span className="hud-corner-bracket bottom-left" />
+          <span className="hud-corner-bracket bottom-right" />
+
+          <div className="panel-header-line">
+            <div className="panel-header-title">
+              <FaSatelliteDish style={{ color: "var(--aero-cyan, #00f0ff)" }} />
+              <span>RADAR VOLUME SCANS (.NC)</span>
+            </div>
+            <AeroBadge variant="cyan" pulse={false} style={{ fontSize: "0.68rem" }}>
+              {radarFiles.length} Ingested
+            </AeroBadge>
           </div>
 
-          {/* Scan Type Selection */}
-          <div className="scan-type-selector">
-            <label htmlFor="scan-type">Type of Scan:</label>
-            <select
-              id="scan-type"
-              value={scanType}
-              onChange={(e) => handleScanTypeChange(e.target.value)}
-              className="scan-type-select"
+          {/* Scan Geometry Selector */}
+          <div className="scan-type-row">
+            <span
+              style={{
+                fontFamily: "var(--font-mono, monospace)",
+                fontSize: "0.74rem",
+                color: "var(--aero-text-secondary, #94a3b8)",
+              }}
             >
-              <option value="RHI">RHI (Range Height Indicator)</option>
-              <option value="SUR">SUR (Surveillance)</option>
-            </select>
+              Scan Mode Association:
+            </span>
+            <div className="scan-pills">
+              <button
+                type="button"
+                className={`scan-pill-btn ${scanType === "RHI" ? "active" : ""}`}
+                onClick={() => handleScanTypeChange("RHI")}
+              >
+                RHI (Vertical)
+              </button>
+              <button
+                type="button"
+                className={`scan-pill-btn ${scanType === "SUR" ? "active" : ""}`}
+                onClick={() => handleScanTypeChange("SUR")}
+              >
+                SUR (Surveillance)
+              </button>
+            </div>
           </div>
 
-          <div className="upload-area">
+          {/* Radar Drop Zone */}
+          <div
+            className={`aero-dropzone ${isDraggingRadar ? "dragging" : ""}`}
+            onDragOver={(e) => {
+              e.preventDefault();
+              setIsDraggingRadar(true);
+            }}
+            onDragLeave={() => setIsDraggingRadar(false)}
+            onDrop={handleRadarDrop}
+            onClick={() => document.getElementById("radar-file-input").click()}
+          >
             <input
               type="file"
-              id="radar-upload"
+              id="radar-file-input"
               multiple
-              accept=".nc,application/x-netcdf"
+              accept=".nc,application/x-netcdf,application/octet-stream"
               onChange={handleRadarUpload}
-              className="file-input"
+              style={{ display: "none" }}
             />
-            <label htmlFor="radar-upload" className="upload-label">
-              <div className="upload-icon">📁</div>
-              <div className="upload-text">
-                <strong>Click to upload radar files</strong>
-                <span>NetCDF (.nc) format only</span>
-                <small>Current scan type: {scanType}</small>
-              </div>
-            </label>
+            <FaSatelliteDish className="dropzone-icon" />
+            <div className="dropzone-title">DRAG & DROP NETCDF (.NC) FILES</div>
+            <div className="dropzone-sub">
+              or click to browse local radar volume scans
+            </div>
+            <div className="dropzone-badge">
+              ASSOCIATED SCAN: {scanType} • MULTI-FILE SUPPORTED
+            </div>
           </div>
 
+          {/* Upload Status Alert */}
           {uploadStatus.radar === "error" && (
-            <div className="error-message">
-              ❌ Please select valid .nc files only
+            <div
+              style={{
+                padding: "8px 12px",
+                borderRadius: "4px",
+                background: "rgba(239, 68, 68, 0.15)",
+                border: "1px solid rgba(239, 68, 68, 0.4)",
+                color: "#ef4444",
+                fontSize: "0.78rem",
+                fontFamily: "var(--font-mono)",
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+              }}
+            >
+              <FaExclamationTriangle />
+              <span>Invalid file format. Please select .nc NetCDF files only.</span>
             </div>
           )}
 
+          {/* Ingested Radar Files Collection */}
           {radarFiles.length > 0 && (
-            <div className="files-list">
-              <h4>Uploaded Radar Files:</h4>
-              {radarFiles.map((file, index) => (
-                <div key={file.id} className="file-item">
-                  <span className="file-icon">{getFileIcon(file.name)}</span>
-                  <div className="file-info">
-                    <div className="file-name">{file.name}</div>
-                    <div className="file-details">
-                      <span className="file-size">
-                        {formatFileSize(file.size)}
-                      </span>
-                      <span className="file-scan-type">
-                        Scan: {file.scanType}
-                      </span>
-                      <span className="file-date">
-                        Uploaded: {formatUploadDate(file.uploadDate)}
-                      </span>
+            <div>
+              <div
+                style={{
+                  fontFamily: "var(--font-mono, monospace)",
+                  fontSize: "0.72rem",
+                  color: "#64748b",
+                  marginBottom: "8px",
+                  textTransform: "uppercase",
+                }}
+              >
+                Ingested NetCDF Binaries:
+              </div>
+              <div className="ingested-files-container">
+                {radarFiles.map((file, idx) => {
+                  const inMemory = fileStore.has(file.id);
+                  return (
+                    <div key={file.id} className="ingested-file-card">
+                      <div className="file-card-details">
+                        <div className="file-card-name">{file.name}</div>
+                        <div className="file-card-meta">
+                          <span style={{ color: "var(--aero-cyan, #00f0ff)" }}>
+                            {formatFileSize(file.size)}
+                          </span>
+                          <span>•</span>
+                          <span>SCAN: {file.scanType}</span>
+                          <span>•</span>
+                          <span>{formatUploadDate(file.uploadDate)}</span>
+                          {!inMemory && (
+                            <span
+                              style={{
+                                color: "#f59e0b",
+                                fontWeight: 600,
+                              }}
+                              title="Binary missing from browser memory (page was refreshed). Re-upload to generate plots."
+                            >
+                              [RE-UPLOAD REQ]
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                      <button
+                        onClick={() => removeRadarFile(idx)}
+                        className="file-card-delete-btn"
+                        title="Remove dataset"
+                      >
+                        <FaTrashAlt />
+                      </button>
                     </div>
-                  </div>
-                  <button
-                    onClick={() => removeRadarFile(index)}
-                    className="remove-btn"
-                    title="Remove file"
-                  >
-                    ×
-                  </button>
-                </div>
-              ))}
+                  );
+                })}
+              </div>
             </div>
           )}
         </div>
 
-        {/* Rain Gauge Data Upload Section */}
-        <div className="upload-section">
-          <div className="section-header">
-            <h3>🌧️ Rain Gauge Data (.csv, .xlsx)</h3>
-            <span className="file-count">{rainGaugeFiles.length} files</span>
+        {/* PANEL 2: Rain Gauge Data Ingestion */}
+        <div className="ingestion-panel gauge-panel">
+          <span className="hud-corner-bracket top-left" />
+          <span className="hud-corner-bracket top-right" />
+          <span className="hud-corner-bracket bottom-left" />
+          <span className="hud-corner-bracket bottom-right" />
+
+          <div className="panel-header-line">
+            <div className="panel-header-title">
+              <FaCloudRain style={{ color: "var(--aero-violet, #8b5cf6)" }} />
+              <span>RAIN GAUGE TELEMETRY (.CSV, .XLSX)</span>
+            </div>
+            <AeroBadge variant="violet" pulse={false} style={{ fontSize: "0.68rem" }}>
+              {rainGaugeFiles.length} Ingested
+            </AeroBadge>
           </div>
 
-          <div className="upload-area">
+          {/* Rain Gauge Format Notice */}
+          <div
+            style={{
+              padding: "8px 12px",
+              background: "rgba(6, 12, 26, 0.75)",
+              border: "1px solid rgba(139, 92, 246, 0.2)",
+              borderRadius: "6px",
+              fontFamily: "var(--font-mono, monospace)",
+              fontSize: "0.74rem",
+              color: "var(--aero-text-secondary, #94a3b8)",
+            }}
+          >
+            Ground Truth Sensor: Auto Weather Station (AWS) Time-Series
+          </div>
+
+          {/* Rain Gauge Drop Zone */}
+          <div
+            className={`aero-dropzone gauge-dropzone ${
+              isDraggingGauge ? "dragging" : ""
+            }`}
+            onDragOver={(e) => {
+              e.preventDefault();
+              setIsDraggingGauge(true);
+            }}
+            onDragLeave={() => setIsDraggingGauge(false)}
+            onDrop={handleGaugeDrop}
+            onClick={() => document.getElementById("gauge-file-input").click()}
+          >
             <input
               type="file"
-              id="rain-gauge-upload"
+              id="gauge-file-input"
               multiple
               accept=".csv,.xlsx,text/csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
               onChange={handleRainGaugeUpload}
-              className="file-input"
+              style={{ display: "none" }}
             />
-            <label htmlFor="rain-gauge-upload" className="upload-label">
-              <div className="upload-icon">📁</div>
-              <div className="upload-text">
-                <strong>Click to upload rain gauge files</strong>
-                <span>CSV or Excel (.xlsx) format</span>
-              </div>
-            </label>
+            <FaCloudRain className="dropzone-icon" />
+            <div className="dropzone-title">DRAG & DROP GAUGE DATA</div>
+            <div className="dropzone-sub">
+              supports CSV (.csv) and Excel spreadsheets (.xlsx)
+            </div>
+            <div
+              className="dropzone-badge"
+              style={{
+                color: "var(--aero-violet, #8b5cf6)",
+                borderColor: "rgba(139, 92, 246, 0.3)",
+                background: "rgba(139, 92, 246, 0.1)",
+              }}
+            >
+              MULTI-SENSOR LOGGERS ACCEPTED
+            </div>
           </div>
 
+          {/* Rain Gauge Error Alert */}
           {uploadStatus.rainGauge === "error" && (
-            <div className="error-message">
-              ❌ Please select valid .csv or .xlsx files only
+            <div
+              style={{
+                padding: "8px 12px",
+                borderRadius: "4px",
+                background: "rgba(239, 68, 68, 0.15)",
+                border: "1px solid rgba(239, 68, 68, 0.4)",
+                color: "#ef4444",
+                fontSize: "0.78rem",
+                fontFamily: "var(--font-mono)",
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+              }}
+            >
+              <FaExclamationTriangle />
+              <span>Invalid file format. Please upload .csv or .xlsx spreadsheets.</span>
             </div>
           )}
 
+          {/* Ingested Rain Gauge Files Collection */}
           {rainGaugeFiles.length > 0 && (
-            <div className="files-list">
-              <h4>Uploaded Rain Gauge Files:</h4>
-              {rainGaugeFiles.map((file, index) => (
-                <div key={file.id} className="file-item">
-                  <span className="file-icon">{getFileIcon(file.name)}</span>
-                  <div className="file-info">
-                    <div className="file-name">{file.name}</div>
-                    <div className="file-details">
-                      <span className="file-size">
-                        {formatFileSize(file.size)}
-                      </span>
-                      <span className="file-date">
-                        Uploaded: {formatUploadDate(file.uploadDate)}
-                      </span>
+            <div>
+              <div
+                style={{
+                  fontFamily: "var(--font-mono, monospace)",
+                  fontSize: "0.72rem",
+                  color: "#64748b",
+                  marginBottom: "8px",
+                  textTransform: "uppercase",
+                }}
+              >
+                Ingested Rain Gauge Datasets:
+              </div>
+              <div className="ingested-files-container">
+                {rainGaugeFiles.map((file, idx) => (
+                  <div key={file.id} className="ingested-file-card">
+                    <div className="file-card-details">
+                      <div className="file-card-name">{file.name}</div>
+                      <div className="file-card-meta">
+                        <span style={{ color: "var(--aero-violet, #a78bfa)" }}>
+                          {formatFileSize(file.size)}
+                        </span>
+                        <span>•</span>
+                        <span>{formatUploadDate(file.uploadDate)}</span>
+                      </div>
                     </div>
+                    <button
+                      onClick={() => removeRainGaugeFile(idx)}
+                      className="file-card-delete-btn"
+                      title="Remove dataset"
+                    >
+                      <FaTrashAlt />
+                    </button>
                   </div>
-                  <button
-                    onClick={() => removeRainGaugeFile(index)}
-                    className="remove-btn"
-                    title="Remove file"
-                  >
-                    ×
-                  </button>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           )}
         </div>
       </div>
 
-      {/* Upload Summary */}
-      {(radarFiles.length > 0 || rainGaugeFiles.length > 0) && (
-        <div className="upload-summary">
-          <h3>Ready for Analysis</h3>
-          <div className="summary-stats">
-            <div className="stat">
-              <span className="stat-number">{radarFiles.length}</span>
-              <span className="stat-label">Radar Files</span>
+      {/* Ingestion Pipeline Visualization & Summary */}
+      {totalFiles > 0 && (
+        <div className="ingestion-pipeline-summary">
+          <span className="hud-corner-bracket top-left" />
+          <span className="hud-corner-bracket top-right" />
+          <span className="hud-corner-bracket bottom-left" />
+          <span className="hud-corner-bracket bottom-right" />
+
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              borderBottom: "1px solid rgba(0, 240, 255, 0.12)",
+              paddingBottom: "12px",
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+              <FaNetworkWired style={{ color: "var(--aero-cyan, #00f0ff)" }} />
+              <span
+                className="display-font"
+                style={{
+                  fontSize: "1.05rem",
+                  fontWeight: 700,
+                  letterSpacing: "0.08em",
+                  color: "#ffffff",
+                }}
+              >
+                DATA PIPELINE STATUS: READY FOR ANALYSIS
+              </span>
             </div>
-            <div className="stat">
-              <span className="stat-number">{rainGaugeFiles.length}</span>
-              <span className="stat-label">Rain Gauge Files</span>
+            <AeroBadge variant="online">PIPELINE VERIFIED</AeroBadge>
+          </div>
+
+          <div className="pipeline-stats-row">
+            <div className="pipeline-stat-box">
+              <span className="pipeline-stat-label">RADAR VOLUMES</span>
+              <span className="pipeline-stat-num">{radarFiles.length}</span>
+              <span className="pipeline-stat-sub">NetCDF-4 datasets</span>
             </div>
-            <div className="stat">
-              <span className="stat-number">{scanType}</span>
-              <span className="stat-label">Scan Type</span>
+
+            <div className="pipeline-stat-box">
+              <span className="pipeline-stat-label">RAIN GAUGES</span>
+              <span className="pipeline-stat-num" style={{ color: "var(--aero-violet, #8b5cf6)" }}>
+                {rainGaugeFiles.length}
+              </span>
+              <span className="pipeline-stat-sub">Ground truth time-series</span>
+            </div>
+
+            <div className="pipeline-stat-box">
+              <span className="pipeline-stat-label">ACTIVE SCAN MODE</span>
+              <span className="pipeline-stat-num" style={{ fontSize: "1.3rem", color: "#ffffff" }}>
+                {scanType}
+              </span>
+              <span className="pipeline-stat-sub">Range Height Indicator</span>
+            </div>
+
+            <div className="pipeline-stat-box">
+              <span className="pipeline-stat-label">MEMORY PIPELINE</span>
+              <span className="pipeline-stat-num" style={{ color: "#00ff9d" }}>
+                ACTIVE
+              </span>
+              <span className="pipeline-stat-sub">Ready for Py-ART Plotting</span>
             </div>
           </div>
-          <p className="summary-note">
-            Your files are now persisted across component navigation! You can
-            now navigate to other tabs to view plots, compare data, or validate
-            your uploads.
-          </p>
+
+          {/* In-Memory Caching Information Note */}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "flex-start",
+              gap: "10px",
+              padding: "10px 14px",
+              background: "rgba(6, 12, 26, 0.6)",
+              border: "1px solid rgba(0, 240, 255, 0.1)",
+              borderRadius: "6px",
+              fontFamily: "var(--font-mono, monospace)",
+              fontSize: "0.74rem",
+              color: "var(--aero-text-secondary, #94a3b8)",
+              lineHeight: 1.5,
+            }}
+          >
+            <FaInfoCircle style={{ color: "var(--aero-cyan, #00f0ff)", marginTop: "2px", flexShrink: 0 }} />
+            <span>
+              Datasets are cached in browser memory and metadata is synchronized across all modules.
+              You can now proceed to <strong>View Plots</strong> to generate reflectivity plots,
+              <strong> Compare Plots</strong> for multi-channel analysis, or <strong>Rainfall Estimation</strong> to execute AI models.
+            </span>
+          </div>
         </div>
       )}
     </div>

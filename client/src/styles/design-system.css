@@ -1,0 +1,468 @@
+/* ==========================================================================
+   AEROSCOPE DESIGN SYSTEM
+   Mahabaleshwar Radar Intelligence Platform
+   Futuristic scientific research machine visual identity
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&display=swap');
+
+:root {
+  /* Color Palette - Deep Space & Atmospheric Cockpit */
+  --aero-bg-void: #020409;
+  --aero-bg-base: #060a17;
+  --aero-bg-cockpit: #0a1124;
+  --aero-bg-surface: #0e1832;
+  --aero-bg-surface-elevated: #142244;
+  --aero-bg-glass: rgba(10, 18, 38, 0.78);
+  --aero-bg-glass-heavy: rgba(6, 12, 26, 0.92);
+
+  /* Primary Accent: Electric Cyan */
+  --aero-cyan: #00f0ff;
+  --aero-cyan-hover: #38f4ff;
+  --aero-cyan-dim: rgba(0, 240, 255, 0.15);
+  --aero-cyan-faint: rgba(0, 240, 255, 0.06);
+  --aero-cyan-glow: 0 0 20px rgba(0, 240, 255, 0.45);
+  --aero-cyan-glow-lg: 0 0 35px rgba(0, 240, 255, 0.65);
+
+  /* Secondary Accent: Electric Blue */
+  --aero-blue: #2563eb;
+  --aero-blue-bright: #3b82f6;
+  --aero-blue-glow: 0 0 20px rgba(37, 99, 235, 0.45);
+
+  /* Analysis Accent: Ultraviolet / Deep Violet */
+  --aero-violet: #8b5cf6;
+  --aero-violet-light: #a78bfa;
+  --aero-violet-glow: 0 0 20px rgba(139, 92, 246, 0.45);
+  --aero-magenta: #d946ef;
+
+  /* Telemetry Status Colors */
+  --aero-neon-green: #00ff9d;
+  --aero-neon-green-glow: 0 0 16px rgba(0, 255, 157, 0.5);
+  --aero-amber: #f59e0b;
+  --aero-amber-glow: 0 0 16px rgba(245, 158, 11, 0.5);
+  --aero-red: #ef4444;
+  --aero-red-glow: 0 0 16px rgba(239, 68, 68, 0.5);
+
+  /* Radar Reflectivity Ramp (dBZ scale) */
+  --dbz-0: #10b981;
+  --dbz-15: #06b6d4;
+  --dbz-30: #eab308;
+  --dbz-45: #f97316;
+  --dbz-60: #ef4444;
+  --dbz-75: #ec4899;
+
+  /* Text & Foreground */
+  --aero-text-primary: #f0f6fc;
+  --aero-text-secondary: #94a3b8;
+  --aero-text-muted: #64748b;
+  --aero-text-cyan: #38f4ff;
+
+  /* Borders & Grids */
+  --aero-border-subtle: rgba(0, 240, 255, 0.14);
+  --aero-border-medium: rgba(0, 240, 255, 0.3);
+  --aero-border-bright: rgba(0, 240, 255, 0.65);
+  --aero-border-violet: rgba(139, 92, 246, 0.35);
+
+  /* Typography */
+  --font-display: 'Chakra Petch', system-ui, -apple-system, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace;
+
+  /* Cut Corners & Shapes */
+  --cut-sm: 8px;
+  --cut-md: 14px;
+  --cut-lg: 22px;
+  --clip-cut-corner: polygon(0 0, calc(100% - var(--cut-md)) 0, 100% var(--cut-md), 100% 100%, var(--cut-md) 100%, 0 calc(100% - var(--cut-md)));
+  --clip-cut-top-right: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%);
+  --clip-capsule: 9999px;
+
+  /* Shadows & Depth */
+  --shadow-subtle: 0 4px 20px rgba(0, 0, 0, 0.4);
+  --shadow-elevated: 0 10px 35px rgba(0, 0, 0, 0.6);
+  --shadow-cockpit: 0 20px 50px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(0, 240, 255, 0.15);
+}
+
+/* ==========================================================================
+   GLOBAL RESET & TYPOGRAPHY
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--aero-bg-void);
+  color: var(--aero-text-primary);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(0, 240, 255, 0.05) 0%, transparent 60%),
+    radial-gradient(circle at 100% 100%, rgba(139, 92, 246, 0.04) 0%, transparent 50%),
+    linear-gradient(rgba(0, 240, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.02) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 48px 48px, 48px 48px;
+  min-height: 100vh;
+}
+
+/* Atmospheric scanlines overlay effect */
+.aero-scanlines {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.25) 50%
+  );
+  background-size: 100% 4px;
+  z-index: 9999;
+  opacity: 0.22;
+}
+
+/* Monospace Readout Font Helper */
+.telemetry-font, .font-mono {
+  font-family: var(--font-mono);
+  letter-spacing: 0.04em;
+}
+
+.display-font {
+  font-family: var(--font-display);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   FUTURISTIC UI COMPONENTS
+   ========================================================================== */
+
+/* Cyber Cut-Corner Panel */
+.aero-panel {
+  background: var(--aero-bg-glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--aero-border-subtle);
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.aero-panel::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 2px;
+  background: var(--aero-cyan);
+  box-shadow: var(--aero-cyan-glow);
+}
+
+.aero-panel::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 24px;
+  height: 2px;
+  background: var(--aero-violet);
+  box-shadow: var(--aero-violet-glow);
+}
+
+.aero-panel-cut {
+  clip-path: var(--clip-cut-corner);
+}
+
+/* Cyber Button Styles */
+.aero-btn {
+  font-family: var(--font-display);
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.25s ease;
+  outline: none;
+  overflow: hidden;
+}
+
+/* Primary Cyan Button */
+.aero-btn-primary {
+  background: linear-gradient(135deg, rgba(0, 240, 255, 0.9) 0%, rgba(37, 99, 235, 0.95) 100%);
+  color: #030712;
+  font-weight: 700;
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+}
+
+.aero-btn-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, #00f0ff 0%, #3b82f6 100%);
+  box-shadow: 0 0 30px rgba(0, 240, 255, 0.7);
+  transform: translateY(-1px);
+}
+
+.aero-btn-primary:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.aero-btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  filter: grayscale(0.6);
+}
+
+/* Outline Cyber Button */
+.aero-btn-outline {
+  background: rgba(0, 240, 255, 0.05);
+  color: var(--aero-cyan);
+  border: 1px solid var(--aero-border-medium);
+  box-shadow: inset 0 0 12px rgba(0, 240, 255, 0.05);
+}
+
+.aero-btn-outline:hover:not(:disabled) {
+  background: rgba(0, 240, 255, 0.15);
+  border-color: var(--aero-cyan);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.35);
+  color: #ffffff;
+}
+
+/* Capsule Button */
+.aero-btn-capsule {
+  border-radius: var(--clip-capsule);
+  padding: 8px 18px;
+  font-size: 0.8rem;
+}
+
+/* Cyber Form Inputs */
+.aero-input-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 18px;
+  width: 100%;
+}
+
+.aero-label {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--aero-text-secondary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.aero-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.aero-input {
+  width: 100%;
+  padding: 12px 16px;
+  background: rgba(10, 17, 36, 0.7);
+  border: 1px solid var(--aero-border-subtle);
+  border-radius: 6px;
+  color: var(--aero-text-primary);
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  transition: all 0.25s ease;
+  outline: none;
+}
+
+.aero-input:focus {
+  border-color: var(--aero-cyan);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.3), inset 0 0 10px rgba(0, 240, 255, 0.1);
+  background: rgba(10, 17, 36, 0.9);
+}
+
+.aero-input::placeholder {
+  color: var(--aero-text-muted);
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+}
+
+.aero-input-icon {
+  position: absolute;
+  right: 14px;
+  color: var(--aero-text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+
+.aero-input-icon:hover {
+  color: var(--aero-cyan);
+}
+
+/* Status Badges */
+.aero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+}
+
+.aero-badge-online {
+  background: rgba(0, 255, 157, 0.1);
+  color: var(--aero-neon-green);
+  border-color: rgba(0, 255, 157, 0.3);
+}
+
+.aero-badge-online .pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--aero-neon-green);
+  box-shadow: var(--aero-neon-green-glow);
+  animation: pulse-green 1.8s infinite;
+}
+
+.aero-badge-cyan {
+  background: rgba(0, 240, 255, 0.1);
+  color: var(--aero-cyan);
+  border-color: rgba(0, 240, 255, 0.3);
+}
+
+.aero-badge-cyan .pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--aero-cyan);
+  box-shadow: var(--aero-cyan-glow);
+  animation: pulse-cyan 1.8s infinite;
+}
+
+.aero-badge-amber {
+  background: rgba(245, 158, 11, 0.1);
+  color: var(--aero-amber);
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
+/* Glowing Corner Brackets for HUD feel */
+.hud-corner-bracket {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  pointer-events: none;
+}
+.hud-corner-bracket.top-left {
+  top: 6px;
+  left: 6px;
+  border-top: 2px solid var(--aero-cyan);
+  border-left: 2px solid var(--aero-cyan);
+}
+.hud-corner-bracket.top-right {
+  top: 6px;
+  right: 6px;
+  border-top: 2px solid var(--aero-cyan);
+  border-right: 2px solid var(--aero-cyan);
+}
+.hud-corner-bracket.bottom-left {
+  bottom: 6px;
+  left: 6px;
+  border-bottom: 2px solid var(--aero-cyan);
+  border-left: 2px solid var(--aero-cyan);
+}
+.hud-corner-bracket.bottom-right {
+  bottom: 6px;
+  right: 6px;
+  border-bottom: 2px solid var(--aero-cyan);
+  border-right: 2px solid var(--aero-cyan);
+}
+
+/* Keyframe Animations */
+@keyframes pulse-green {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+    box-shadow: 0 0 10px rgba(0, 255, 157, 0.6);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.85);
+    box-shadow: 0 0 2px rgba(0, 255, 157, 0.2);
+  }
+}
+
+@keyframes pulse-cyan {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+    box-shadow: 0 0 12px rgba(0, 240, 255, 0.7);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.85);
+    box-shadow: 0 0 2px rgba(0, 240, 255, 0.2);
+  }
+}
+
+@keyframes radar-sweep {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes radar-pulse-out {
+  0% {
+    transform: scale(0.2);
+    opacity: 0.9;
+  }
+  70% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+@keyframes scan-horizontal {
+  0% {
+    top: 0%;
+  }
+  100% {
+    top: 100%;
+  }
+}
+
+@keyframes glitch-fade {
+  0% { opacity: 0.9; }
+  50% { opacity: 0.98; }
+  100% { opacity: 0.9; }
+}
+
+/* Reduced Motion Compliance */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
