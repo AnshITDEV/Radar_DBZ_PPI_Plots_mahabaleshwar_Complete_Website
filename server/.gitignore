@@ -26,3 +26,6 @@ dist-ssr
 # Unused plotting files
 plot_radar.py
 generate_plots.py
+
+# Environment secrets
+.env
