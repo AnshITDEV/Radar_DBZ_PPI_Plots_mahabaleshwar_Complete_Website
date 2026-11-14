@@ -105,8 +105,8 @@ export default function Login() {
         position: "relative",
         minHeight: "100vh",
         width: "100vw",
-        backgroundColor: "var(--aero-bg-void, #020409)",
-        color: "var(--aero-text-primary, #f0f6fc)",
+        backgroundColor: "#000000",
+        color: "#ffffff",
         overflow: "hidden",
         display: "flex",
         flexDirection: "column",
@@ -133,8 +133,8 @@ export default function Login() {
           justifyContent: "space-between",
           alignItems: "center",
           padding: "16px 36px",
-          borderBottom: "1px solid rgba(0, 240, 255, 0.12)",
-          background: "rgba(6, 10, 23, 0.8)",
+          borderBottom: "1px solid rgba(255, 214, 0, 0.16)",
+          background: "rgba(10, 10, 10, 0.85)",
           backdropFilter: "blur(12px)",
           zIndex: 100,
         }}
@@ -154,12 +154,12 @@ export default function Login() {
             style={{
               height: "22px",
               width: "1px",
-              background: "rgba(0, 240, 255, 0.2)",
+              background: "rgba(255, 214, 0, 0.25)",
             }}
           />
           {/* Aeroscope Brand Insignia */}
           <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-            <FaSatelliteDish style={{ color: "var(--aero-cyan, #00f0ff)", fontSize: "1.1rem" }} />
+            <FaSatelliteDish style={{ color: "var(--aero-yellow, #ffd600)", fontSize: "1.1rem" }} />
             <span
               className="display-font"
               style={{
@@ -171,7 +171,7 @@ export default function Login() {
             >
               AEROSCOPE
             </span>
-            <AeroBadge variant="cyan" pulse={false} style={{ fontSize: "0.65rem", padding: "2px 8px" }}>
+            <AeroBadge variant="yellow" pulse={false} style={{ fontSize: "0.65rem", padding: "2px 8px" }}>
               v2.4 DUAL-POL
             </AeroBadge>
           </div>
@@ -232,7 +232,7 @@ export default function Login() {
               style={{
                 fontFamily: "var(--font-mono, monospace)",
                 fontSize: "0.72rem",
-                color: "#64748b",
+                color: "#d6d6d0",
               }}
             >
               ELEVATION: 0.5° • S-BAND 2.8 GHZ
@@ -245,8 +245,8 @@ export default function Login() {
               position: "relative",
               padding: "12px",
               borderRadius: "50%",
-              background: "radial-gradient(circle, rgba(0, 240, 255, 0.05) 0%, rgba(10, 18, 38, 0.6) 70%, transparent 100%)",
-              boxShadow: "0 0 50px rgba(0, 240, 255, 0.12)",
+              background: "radial-gradient(circle, rgba(255, 214, 0, 0.08) 0%, rgba(10, 10, 10, 0.7) 70%, transparent 100%)",
+              boxShadow: "0 0 50px rgba(255, 214, 0, 0.16)",
             }}
           >
             <RadarCockpitCanvas width={440} height={440} />
@@ -261,7 +261,7 @@ export default function Login() {
                 fontWeight: 700,
                 letterSpacing: "0.12em",
                 margin: "0 0 6px 0",
-                background: "linear-gradient(90deg, #ffffff 0%, #38f4ff 60%, #a78bfa 100%)",
+                background: "linear-gradient(90deg, #ffffff 0%, #ffd600 65%, #ffc400 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
               }}
@@ -270,7 +270,7 @@ export default function Login() {
             </h1>
             <p
               style={{
-                color: "var(--aero-text-secondary, #94a3b8)",
+                color: "#d6d6d0",
                 fontSize: "0.92rem",
                 lineHeight: 1.5,
                 margin: "0 0 16px 0",
@@ -294,40 +294,40 @@ export default function Login() {
             >
               <div
                 style={{
-                  background: "rgba(10, 18, 38, 0.6)",
-                  border: "1px solid rgba(0, 240, 255, 0.15)",
+                  background: "#0a0a0a",
+                  border: "1px solid rgba(255, 214, 0, 0.2)",
                   padding: "8px 12px",
                   borderRadius: "4px",
                 }}
               >
-                <div style={{ color: "#64748b" }}>STATION COORD</div>
-                <div style={{ color: "var(--aero-cyan, #00f0ff)", fontWeight: 600 }}>
+                <div style={{ color: "#888888" }}>STATION COORD</div>
+                <div style={{ color: "var(--aero-yellow, #ffd600)", fontWeight: 700 }}>
                   17.9237°N 73.6586°E
                 </div>
               </div>
 
               <div
                 style={{
-                  background: "rgba(10, 18, 38, 0.6)",
-                  border: "1px solid rgba(0, 240, 255, 0.15)",
+                  background: "#0a0a0a",
+                  border: "1px solid rgba(255, 214, 0, 0.2)",
                   padding: "8px 12px",
                   borderRadius: "4px",
                 }}
               >
-                <div style={{ color: "#64748b" }}>STATION ALTITUDE</div>
-                <div style={{ color: "#ffffff", fontWeight: 600 }}>1,353 M MSL</div>
+                <div style={{ color: "#888888" }}>STATION ALTITUDE</div>
+                <div style={{ color: "#ffffff", fontWeight: 700 }}>1,353 M MSL</div>
               </div>
 
               <div
                 style={{
-                  background: "rgba(10, 18, 38, 0.6)",
-                  border: "1px solid rgba(0, 240, 255, 0.15)",
+                  background: "#0a0a0a",
+                  border: "1px solid rgba(255, 214, 0, 0.2)",
                   padding: "8px 12px",
                   borderRadius: "4px",
                 }}
               >
-                <div style={{ color: "#64748b" }}>SCAN RANGE</div>
-                <div style={{ color: "#00ff9d", fontWeight: 600 }}>250 KM RADIUS</div>
+                <div style={{ color: "#888888" }}>SCAN RANGE</div>
+                <div style={{ color: "#ffd600", fontWeight: 700 }}>250 KM RADIUS</div>
               </div>
             </div>
           </div>
@@ -345,8 +345,9 @@ export default function Login() {
             className="aero-panel aero-panel-cut"
             style={{
               padding: "36px 32px",
-              boxShadow: "0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(0, 240, 255, 0.12)",
-              border: "1px solid rgba(0, 240, 255, 0.25)",
+              boxShadow: "0 20px 50px rgba(0, 0, 0, 0.85), 0 0 30px rgba(255, 214, 0, 0.15)",
+              border: "1px solid rgba(255, 214, 0, 0.3)",
+              background: "#0a0a0a",
             }}
           >
             {/* HUD Corner Brackets */}
@@ -366,13 +367,14 @@ export default function Login() {
                 }}
               >
                 <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                  <FaTerminal style={{ color: "var(--aero-cyan, #00f0ff)" }} />
+                  <FaTerminal style={{ color: "var(--aero-yellow, #ffd600)" }} />
                   <span
                     className="telemetry-font"
                     style={{
                       fontSize: "0.78rem",
-                      color: "var(--aero-cyan, #00f0ff)",
+                      color: "var(--aero-yellow, #ffd600)",
                       letterSpacing: "0.1em",
+                      fontWeight: 700,
                     }}
                   >
                     ACCESS_TERMINAL://AUTH_NODE
@@ -390,6 +392,7 @@ export default function Login() {
                   fontWeight: 700,
                   margin: "0 0 4px 0",
                   letterSpacing: "0.06em",
+                  color: "#ffffff",
                 }}
               >
                 {isLogin ? "Operator Authentication" : "Register Operator"}
@@ -398,7 +401,7 @@ export default function Login() {
                 style={{
                   margin: 0,
                   fontSize: "0.82rem",
-                  color: "var(--aero-text-secondary, #94a3b8)",
+                  color: "#d6d6d0",
                 }}
               >
                 {isLogin
@@ -414,8 +417,8 @@ export default function Login() {
                 gridTemplateColumns: "1fr 1fr",
                 gap: "6px",
                 padding: "4px",
-                background: "rgba(6, 12, 26, 0.8)",
-                border: "1px solid rgba(0, 240, 255, 0.15)",
+                background: "#050505",
+                border: "1px solid rgba(255, 214, 0, 0.25)",
                 borderRadius: "6px",
                 marginBottom: "24px",
               }}
@@ -429,15 +432,15 @@ export default function Login() {
                 style={{
                   padding: "9px 0",
                   background: isLogin
-                    ? "linear-gradient(135deg, rgba(0, 240, 255, 0.25) 0%, rgba(37, 99, 235, 0.3) 100%)"
+                    ? "linear-gradient(135deg, #ffd600 0%, #ffc400 100%)"
                     : "transparent",
-                  color: isLogin ? "#ffffff" : "#94a3b8",
-                  border: isLogin ? "1px solid rgba(0, 240, 255, 0.5)" : "none",
+                  color: isLogin ? "#000000" : "#d6d6d0",
+                  border: "none",
                   borderRadius: "4px",
                   cursor: "pointer",
                   fontFamily: "var(--font-display, sans-serif)",
                   fontSize: "0.82rem",
-                  fontWeight: 600,
+                  fontWeight: 800,
                   letterSpacing: "0.08em",
                   textTransform: "uppercase",
                   transition: "all 0.25s",
@@ -455,15 +458,15 @@ export default function Login() {
                 style={{
                   padding: "9px 0",
                   background: !isLogin
-                    ? "linear-gradient(135deg, rgba(0, 240, 255, 0.25) 0%, rgba(37, 99, 235, 0.3) 100%)"
+                    ? "linear-gradient(135deg, #ffd600 0%, #ffc400 100%)"
                     : "transparent",
-                  color: !isLogin ? "#ffffff" : "#94a3b8",
-                  border: !isLogin ? "1px solid rgba(0, 240, 255, 0.5)" : "none",
+                  color: !isLogin ? "#000000" : "#d6d6d0",
+                  border: "none",
                   borderRadius: "4px",
                   cursor: "pointer",
                   fontFamily: "var(--font-display, sans-serif)",
                   fontSize: "0.82rem",
-                  fontWeight: 600,
+                  fontWeight: 800,
                   letterSpacing: "0.08em",
                   textTransform: "uppercase",
                   transition: "all 0.25s",
@@ -486,14 +489,14 @@ export default function Login() {
                   fontSize: "0.82rem",
                   fontFamily: "var(--font-mono, monospace)",
                   background: isSuccess
-                    ? "rgba(0, 255, 157, 0.12)"
-                    : "rgba(239, 68, 68, 0.12)",
+                    ? "rgba(255, 214, 0, 0.15)"
+                    : "rgba(255, 59, 48, 0.15)",
                   border: `1px solid ${
                     isSuccess
-                      ? "rgba(0, 255, 157, 0.4)"
-                      : "rgba(239, 68, 68, 0.4)"
+                      ? "rgba(255, 214, 0, 0.5)"
+                      : "rgba(255, 59, 48, 0.5)"
                   }`,
-                  color: isSuccess ? "#00ff9d" : "#ef4444",
+                  color: isSuccess ? "#ffd600" : "#ff3b30",
                   animation: "fadeIn 0.2s ease",
                 }}
               >
@@ -586,7 +589,7 @@ export default function Login() {
                   marginTop: "18px",
                   textAlign: "center",
                   fontSize: "0.82rem",
-                  color: "var(--aero-text-secondary, #94a3b8)",
+                  color: "#d6d6d0",
                 }}
               >
                 {isLogin ? "Unregistered researcher or operator? " : "Already registered as an operator? "}
@@ -596,10 +599,10 @@ export default function Login() {
                     setMessage("");
                   }}
                   style={{
-                    color: "var(--aero-cyan, #00f0ff)",
+                    color: "var(--aero-yellow, #ffd600)",
                     cursor: "pointer",
                     textDecoration: "underline",
-                    fontWeight: 600,
+                    fontWeight: 700,
                   }}
                 >
                   {isLogin ? "Request Access" : "Sign In Here"}
@@ -614,20 +617,20 @@ export default function Login() {
       <footer
         style={{
           padding: "12px 36px",
-          borderTop: "1px solid rgba(0, 240, 255, 0.1)",
-          background: "rgba(6, 10, 23, 0.7)",
+          borderTop: "1px solid rgba(255, 214, 0, 0.16)",
+          background: "#0a0a0a",
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
           fontFamily: "var(--font-mono, monospace)",
           fontSize: "0.72rem",
-          color: "#64748b",
+          color: "#d6d6d0",
           zIndex: 100,
         }}
       >
         <div>
           RADAR NODE: <span style={{ color: "#ffffff" }}>MAHABALESHWAR DWR</span> | FREQ:{" "}
-          <span style={{ color: "var(--aero-cyan, #00f0ff)" }}>2.8 GHz</span>
+          <span style={{ color: "var(--aero-yellow, #ffd600)", fontWeight: 700 }}>2.8 GHz</span>
         </div>
         <div>AEROSCOPE INTELLIGENCE SYSTEM • ALL PROTOCOLS ENCRYPTED</div>
       </footer>

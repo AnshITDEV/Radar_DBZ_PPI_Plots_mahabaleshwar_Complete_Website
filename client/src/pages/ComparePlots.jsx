@@ -289,7 +289,7 @@ export default function ComparePlots({ uploadedFiles, fileStore }) {
       {/* Top Header Ribbon */}
       <div className="compare-header-ribbon">
         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-          <FaBalanceScale style={{ color: "var(--aero-cyan, #00f0ff)", fontSize: "1.25rem" }} />
+          <FaBalanceScale style={{ color: "var(--aero-yellow, #ffd600)", fontSize: "1.25rem" }} />
           <div>
             <h2
               className="display-font"
@@ -316,7 +316,7 @@ export default function ComparePlots({ uploadedFiles, fileStore }) {
         </div>
 
         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-          <AeroBadge variant="cyan" pulse={false}>
+          <AeroBadge variant="yellow" pulse={false}>
             PARALLEL PY-ART ENGINE
           </AeroBadge>
         </div>
@@ -328,7 +328,7 @@ export default function ComparePlots({ uploadedFiles, fileStore }) {
           className="aero-label"
           style={{ marginBottom: "8px", display: "flex", alignItems: "center", gap: "8px" }}
         >
-          <FaSlidersH style={{ color: "var(--aero-cyan, #00f0ff)" }} />
+          <FaSlidersH style={{ color: "var(--aero-yellow, #ffd600)" }} />
           <span>Select Comparative Analysis Architecture:</span>
         </label>
 
@@ -342,7 +342,7 @@ export default function ComparePlots({ uploadedFiles, fileStore }) {
           >
             <div className="mode-card-header">
               <span className="mode-card-title">
-                <FaLayerGroup style={{ color: "var(--aero-cyan, #00f0ff)" }} />
+                <FaLayerGroup style={{ color: "var(--aero-yellow, #ffd600)" }} />
                 SAME FILE • DUAL VARIABLES
               </span>
               <span
@@ -352,9 +352,9 @@ export default function ComparePlots({ uploadedFiles, fileStore }) {
                   borderRadius: "50%",
                   background:
                     comparisonMode === "same-file-different-vars"
-                      ? "var(--aero-cyan, #00f0ff)"
+                      ? "var(--aero-yellow, #ffd600)"
                       : "transparent",
-                  border: "1px solid var(--aero-cyan, #00f0ff)",
+                  border: "1px solid var(--aero-yellow, #ffd600)",
                 }}
               />
             </div>
@@ -372,7 +372,7 @@ export default function ComparePlots({ uploadedFiles, fileStore }) {
           >
             <div className="mode-card-header">
               <span className="mode-card-title">
-                <FaHistory style={{ color: "var(--aero-violet, #8b5cf6)" }} />
+                <FaHistory style={{ color: "#ffc400" }} />
                 DIFFERENT FILES • SAME VARIABLE
               </span>
               <span
@@ -382,9 +382,9 @@ export default function ComparePlots({ uploadedFiles, fileStore }) {
                   borderRadius: "50%",
                   background:
                     comparisonMode === "different-files-same-var"
-                      ? "var(--aero-violet, #8b5cf6)"
+                      ? "#ffc400"
                       : "transparent",
-                  border: "1px solid var(--aero-violet, #8b5cf6)",
+                  border: "1px solid #ffc400",
                 }}
               />
             </div>
@@ -402,7 +402,7 @@ export default function ComparePlots({ uploadedFiles, fileStore }) {
           >
             <div className="mode-card-header">
               <span className="mode-card-title">
-                <FaRandom style={{ color: "#00ff9d" }} />
+                <FaRandom style={{ color: "#ffffff" }} />
                 INDEPENDENT DUAL MATRIX
               </span>
               <span
@@ -412,9 +412,9 @@ export default function ComparePlots({ uploadedFiles, fileStore }) {
                   borderRadius: "50%",
                   background:
                     comparisonMode === "different-files-different-vars"
-                      ? "#00ff9d"
+                      ? "#ffffff"
                       : "transparent",
-                  border: "1px solid #00ff9d",
+                  border: "1px solid #ffffff",
                 }}
               />
             </div>
@@ -436,14 +436,14 @@ export default function ComparePlots({ uploadedFiles, fileStore }) {
 
           <div className="config-col-header">
             <span className="config-col-title">
-              <FaCrosshairs style={{ color: "var(--aero-cyan, #00f0ff)" }} />
+              <FaCrosshairs style={{ color: "var(--aero-yellow, #ffd600)" }} />
               PLOT 1 CONFIGURATION
             </span>
             <span
               style={{
                 fontFamily: "var(--font-mono)",
                 fontSize: "0.68rem",
-                color: "var(--aero-cyan, #00f0ff)",
+                color: "var(--aero-yellow, #ffd600)",
               }}
             >
               CHANNEL A
@@ -496,8 +496,8 @@ export default function ComparePlots({ uploadedFiles, fileStore }) {
                 gridTemplateColumns: "1fr 1fr",
                 gap: "4px",
                 padding: "3px",
-                background: "rgba(6, 12, 26, 0.8)",
-                border: "1px solid rgba(0, 240, 255, 0.15)",
+                background: "rgba(10, 10, 10, 0.8)",
+                border: "1px solid rgba(255, 214, 0, 0.15)",
                 borderRadius: "6px",
               }}
             >
@@ -551,14 +551,14 @@ export default function ComparePlots({ uploadedFiles, fileStore }) {
 
           <div className="config-col-header">
             <span className="config-col-title">
-              <FaCrosshairs style={{ color: "var(--aero-violet, #8b5cf6)" }} />
+              <FaCrosshairs style={{ color: "#ffc400" }} />
               PLOT 2 CONFIGURATION
             </span>
             <span
               style={{
                 fontFamily: "var(--font-mono)",
                 fontSize: "0.68rem",
-                color: "var(--aero-violet, #8b5cf6)",
+                color: "#ffc400",
               }}
             >
               CHANNEL B
@@ -615,8 +615,8 @@ export default function ComparePlots({ uploadedFiles, fileStore }) {
                 gridTemplateColumns: "1fr 1fr",
                 gap: "4px",
                 padding: "3px",
-                background: "rgba(6, 12, 26, 0.8)",
-                border: "1px solid rgba(0, 240, 255, 0.15)",
+                background: "rgba(10, 10, 10, 0.8)",
+                border: "1px solid rgba(255, 214, 0, 0.15)",
                 borderRadius: "6px",
               }}
             >
@@ -742,7 +742,7 @@ export default function ComparePlots({ uploadedFiles, fileStore }) {
             justifyContent: "space-between",
             alignItems: "center",
             paddingBottom: "12px",
-            borderBottom: "1px solid rgba(0, 240, 255, 0.12)",
+            borderBottom: "1px solid rgba(255, 214, 0, 0.12)",
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
@@ -759,7 +759,7 @@ export default function ComparePlots({ uploadedFiles, fileStore }) {
             </span>
           </div>
 
-          <AeroBadge variant="cyan" pulse={false} style={{ fontSize: "0.68rem" }}>
+          <AeroBadge variant="yellow" pulse={false} style={{ fontSize: "0.68rem" }}>
             SIDE-BY-SIDE PY-ART ALIGNMENT
           </AeroBadge>
         </div>
@@ -772,7 +772,7 @@ export default function ComparePlots({ uploadedFiles, fileStore }) {
               style={{
                 fontFamily: "var(--font-mono, monospace)",
                 fontSize: "0.88rem",
-                color: "var(--aero-cyan, #00f0ff)",
+                color: "var(--aero-yellow, #ffd600)",
                 letterSpacing: "0.08em",
               }}
             >
@@ -798,7 +798,7 @@ export default function ComparePlots({ uploadedFiles, fileStore }) {
                   justifyContent: "space-between",
                   alignItems: "center",
                   paddingBottom: "8px",
-                  borderBottom: "1px solid rgba(0, 240, 255, 0.15)",
+                  borderBottom: "1px solid rgba(255, 214, 0, 0.15)",
                 }}
               >
                 <div>
@@ -807,7 +807,7 @@ export default function ComparePlots({ uploadedFiles, fileStore }) {
                       fontFamily: "var(--font-display)",
                       fontSize: "0.88rem",
                       fontWeight: 700,
-                      color: "var(--aero-cyan, #00f0ff)",
+                      color: "var(--aero-yellow, #ffd600)",
                     }}
                   >
                     CHANNEL A // PLOT 1
@@ -828,7 +828,7 @@ export default function ComparePlots({ uploadedFiles, fileStore }) {
                 </div>
 
                 <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-                  <AeroBadge variant="cyan" pulse={false} style={{ fontSize: "0.65rem" }}>
+                  <AeroBadge variant="yellow" pulse={false} style={{ fontSize: "0.65rem" }}>
                     {plot1Config.plotType} • {plot1Config.variable}
                   </AeroBadge>
                   {generatedPlots.plot1.url && (
@@ -901,7 +901,7 @@ export default function ComparePlots({ uploadedFiles, fileStore }) {
                   justifyContent: "space-between",
                   alignItems: "center",
                   paddingBottom: "8px",
-                  borderBottom: "1px solid rgba(139, 92, 246, 0.2)",
+                  borderBottom: "1px solid rgba(255, 196, 0, 0.2)",
                 }}
               >
                 <div>
@@ -910,7 +910,7 @@ export default function ComparePlots({ uploadedFiles, fileStore }) {
                       fontFamily: "var(--font-display)",
                       fontSize: "0.88rem",
                       fontWeight: 700,
-                      color: "var(--aero-violet, #8b5cf6)",
+                      color: "#ffc400",
                     }}
                   >
                     CHANNEL B // PLOT 2
@@ -931,7 +931,7 @@ export default function ComparePlots({ uploadedFiles, fileStore }) {
                 </div>
 
                 <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-                  <AeroBadge variant="violet" pulse={false} style={{ fontSize: "0.65rem" }}>
+                  <AeroBadge variant="amber" pulse={false} style={{ fontSize: "0.65rem" }}>
                     {plot2Config.plotType} • {plot2Config.variable}
                   </AeroBadge>
                   {generatedPlots.plot2.url && (
@@ -1003,7 +1003,7 @@ export default function ComparePlots({ uploadedFiles, fileStore }) {
               padding: "50px 20px",
             }}
           >
-            <FaBalanceScale style={{ fontSize: "3.2rem", color: "rgba(0, 240, 255, 0.22)" }} />
+            <FaBalanceScale style={{ fontSize: "3.2rem", color: "rgba(255, 214, 0, 0.25)" }} />
             <div style={{ fontSize: "0.95rem", color: "var(--aero-text-secondary, #94a3b8)" }}>
               No dual comparison generated yet
             </div>

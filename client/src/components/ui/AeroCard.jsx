@@ -32,7 +32,7 @@ export default function AeroCard({
             justifyContent: "space-between",
             alignItems: "flex-start",
             marginBottom: "18px",
-            borderBottom: "1px solid var(--aero-border-subtle, rgba(0, 240, 255, 0.12))",
+            borderBottom: "1px solid var(--aero-border-subtle, rgba(255, 214, 0, 0.16))",
             paddingBottom: "12px",
           }}
         >

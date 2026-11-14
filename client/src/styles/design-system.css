@@ -1,67 +1,90 @@
 /* ==========================================================================
-   AEROSCOPE DESIGN SYSTEM
+   AEROSCOPE DESIGN SYSTEM — YELLOW, BLACK & WHITE
    Mahabaleshwar Radar Intelligence Platform
-   Futuristic scientific research machine visual identity
+   Futuristic aerospace radar control & scientific instrumentation identity
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&display=swap');
 
 :root {
-  /* Color Palette - Deep Space & Atmospheric Cockpit */
-  --aero-bg-void: #020409;
-  --aero-bg-base: #060a17;
-  --aero-bg-cockpit: #0a1124;
-  --aero-bg-surface: #0e1832;
-  --aero-bg-surface-elevated: #142244;
-  --aero-bg-glass: rgba(10, 18, 38, 0.78);
-  --aero-bg-glass-heavy: rgba(6, 12, 26, 0.92);
+  /* ==========================================================================
+     PRIMARY BLACK & DARK SURFACES
+     ========================================================================== */
+  --aero-black: #000000;
+  --aero-obsidian: #050505;
+  --aero-surface: #0a0a0a;
+  --aero-charcoal: #111111;
+  --aero-elevated: #181818;
+  --aero-graphite: #222222;
 
-  /* Primary Accent: Electric Cyan */
-  --aero-cyan: #00f0ff;
-  --aero-cyan-hover: #38f4ff;
-  --aero-cyan-dim: rgba(0, 240, 255, 0.15);
-  --aero-cyan-faint: rgba(0, 240, 255, 0.06);
-  --aero-cyan-glow: 0 0 20px rgba(0, 240, 255, 0.45);
-  --aero-cyan-glow-lg: 0 0 35px rgba(0, 240, 255, 0.65);
+  --aero-bg-void: #000000;
+  --aero-bg-base: #050505;
+  --aero-bg-cockpit: #0a0a0a;
+  --aero-bg-surface: #111111;
+  --aero-bg-surface-elevated: #181818;
+  --aero-bg-glass: rgba(10, 10, 10, 0.85);
+  --aero-bg-glass-heavy: rgba(5, 5, 5, 0.95);
 
-  /* Secondary Accent: Electric Blue */
-  --aero-blue: #2563eb;
-  --aero-blue-bright: #3b82f6;
-  --aero-blue-glow: 0 0 20px rgba(37, 99, 235, 0.45);
+  /* ==========================================================================
+     ELECTRIC YELLOW COLOUR FAMILY (DOMINANT ACCENT)
+     ========================================================================== */
+  --aero-yellow: #ffd600;
+  --aero-yellow-bright: #ffe600;
+  --aero-yellow-gold: #ffc400;
+  --aero-yellow-warm: #f5c400;
+  --aero-yellow-soft: #fff2a6;
+  --aero-yellow-amber: #d9a900;
 
-  /* Analysis Accent: Ultraviolet / Deep Violet */
-  --aero-violet: #8b5cf6;
-  --aero-violet-light: #a78bfa;
-  --aero-violet-glow: 0 0 20px rgba(139, 92, 246, 0.45);
-  --aero-magenta: #d946ef;
+  --aero-yellow-dim: rgba(255, 214, 0, 0.15);
+  --aero-yellow-faint: rgba(255, 214, 0, 0.06);
+  --aero-yellow-glow: 0 0 20px rgba(255, 214, 0, 0.45);
+  --aero-yellow-glow-lg: 0 0 35px rgba(255, 214, 0, 0.7);
 
-  /* Telemetry Status Colors */
-  --aero-neon-green: #00ff9d;
-  --aero-neon-green-glow: 0 0 16px rgba(0, 255, 157, 0.5);
-  --aero-amber: #f59e0b;
-  --aero-amber-glow: 0 0 16px rgba(245, 158, 11, 0.5);
-  --aero-red: #ef4444;
-  --aero-red-glow: 0 0 16px rgba(239, 68, 68, 0.5);
+  /* Backward Compatibility Aliases for components referencing legacy tokens */
+  --aero-cyan: var(--aero-yellow);
+  --aero-cyan-hover: var(--aero-yellow-bright);
+  --aero-cyan-dim: var(--aero-yellow-dim);
+  --aero-cyan-faint: var(--aero-yellow-faint);
+  --aero-cyan-glow: var(--aero-yellow-glow);
+  --aero-cyan-glow-lg: var(--aero-yellow-glow-lg);
 
-  /* Radar Reflectivity Ramp (dBZ scale) */
-  --dbz-0: #10b981;
-  --dbz-15: #06b6d4;
-  --dbz-30: #eab308;
-  --dbz-45: #f97316;
-  --dbz-60: #ef4444;
-  --dbz-75: #ec4899;
+  --aero-blue: var(--aero-yellow-gold);
+  --aero-blue-bright: var(--aero-yellow-bright);
+  --aero-blue-glow: 0 0 20px rgba(255, 196, 0, 0.45);
 
-  /* Text & Foreground */
-  --aero-text-primary: #f0f6fc;
-  --aero-text-secondary: #94a3b8;
-  --aero-text-muted: #64748b;
-  --aero-text-cyan: #38f4ff;
+  --aero-violet: var(--aero-yellow-gold);
+  --aero-violet-light: var(--aero-yellow-soft);
+  --aero-violet-glow: 0 0 20px rgba(255, 214, 0, 0.45);
+  --aero-magenta: var(--aero-yellow-amber);
 
-  /* Borders & Grids */
-  --aero-border-subtle: rgba(0, 240, 255, 0.14);
-  --aero-border-medium: rgba(0, 240, 255, 0.3);
-  --aero-border-bright: rgba(0, 240, 255, 0.65);
-  --aero-border-violet: rgba(139, 92, 246, 0.35);
+  /* Telemetry Status Colors (Yellow & Amber spectrum) */
+  --aero-neon-green: var(--aero-yellow-bright);
+  --aero-neon-green-glow: 0 0 16px rgba(255, 230, 0, 0.55);
+  --aero-amber: var(--aero-yellow-gold);
+  --aero-amber-glow: 0 0 16px rgba(255, 196, 0, 0.55);
+  --aero-red: #ff3b30;
+  --aero-red-glow: 0 0 16px rgba(255, 59, 48, 0.5);
+
+  /* ==========================================================================
+     WHITE & NEUTRAL TEXT SYSTEM
+     ========================================================================== */
+  --aero-white: #ffffff;
+  --aero-white-soft: #f5f5f0;
+  --aero-white-muted: #d6d6d0;
+
+  --aero-text-primary: #ffffff;
+  --aero-text-secondary: #d6d6d0;
+  --aero-text-muted: #888888;
+  --aero-text-cyan: var(--aero-yellow);
+
+  /* ==========================================================================
+     BORDERS & RETICLES
+     ========================================================================== */
+  --aero-border-subtle: rgba(255, 214, 0, 0.16);
+  --aero-border-medium: rgba(255, 214, 0, 0.35);
+  --aero-border-bright: rgba(255, 214, 0, 0.75);
+  --aero-border-violet: rgba(255, 196, 0, 0.35);
+  --aero-border-dark: rgba(255, 255, 255, 0.1);
 
   /* Typography */
   --font-display: 'Chakra Petch', system-ui, -apple-system, sans-serif;
@@ -77,9 +100,9 @@
   --clip-capsule: 9999px;
 
   /* Shadows & Depth */
-  --shadow-subtle: 0 4px 20px rgba(0, 0, 0, 0.4);
-  --shadow-elevated: 0 10px 35px rgba(0, 0, 0, 0.6);
-  --shadow-cockpit: 0 20px 50px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(0, 240, 255, 0.15);
+  --shadow-subtle: 0 4px 20px rgba(0, 0, 0, 0.7);
+  --shadow-elevated: 0 10px 35px rgba(0, 0, 0, 0.9);
+  --shadow-cockpit: 0 20px 50px rgba(0, 0, 0, 0.95), inset 0 1px 0 rgba(255, 214, 0, 0.2);
 }
 
 /* ==========================================================================
@@ -101,10 +124,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   background-image: 
-    radial-gradient(circle at 50% 0%, rgba(0, 240, 255, 0.05) 0%, transparent 60%),
-    radial-gradient(circle at 100% 100%, rgba(139, 92, 246, 0.04) 0%, transparent 50%),
-    linear-gradient(rgba(0, 240, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 240, 255, 0.02) 1px, transparent 1px);
+    radial-gradient(circle at 50% 0%, rgba(255, 214, 0, 0.05) 0%, transparent 60%),
+    radial-gradient(circle at 100% 100%, rgba(255, 196, 0, 0.03) 0%, transparent 50%),
+    linear-gradient(rgba(255, 214, 0, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 214, 0, 0.02) 1px, transparent 1px);
   background-size: 100% 100%, 100% 100%, 48px 48px, 48px 48px;
   min-height: 100vh;
 }
@@ -115,12 +138,32 @@ body {
   inset: 0;
   pointer-events: none;
   background: linear-gradient(
-    rgba(18, 16, 16, 0) 50%, 
-    rgba(0, 0, 0, 0.25) 50%
+    rgba(10, 10, 10, 0) 50%, 
+    rgba(0, 0, 0, 0.45) 50%
   );
   background-size: 100% 4px;
   z-index: 9999;
-  opacity: 0.22;
+  opacity: 0.25;
+}
+
+/* Custom Yellow & Black Scrollbars */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 214, 0, 0.35);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--aero-yellow);
+  box-shadow: 0 0 10px rgba(255, 214, 0, 0.6);
 }
 
 /* Monospace Readout Font Helper */
@@ -136,7 +179,7 @@ body {
 }
 
 /* ==========================================================================
-   FUTURISTIC UI COMPONENTS
+   FUTURISTIC UI COMPONENTS (YELLOW + BLACK + WHITE)
    ========================================================================== */
 
 /* Cyber Cut-Corner Panel */
@@ -156,8 +199,8 @@ body {
   left: 0;
   width: 24px;
   height: 2px;
-  background: var(--aero-cyan);
-  box-shadow: var(--aero-cyan-glow);
+  background: var(--aero-yellow);
+  box-shadow: var(--aero-yellow-glow);
 }
 
 .aero-panel::after {
@@ -167,8 +210,8 @@ body {
   right: 0;
   width: 24px;
   height: 2px;
-  background: var(--aero-violet);
-  box-shadow: var(--aero-violet-glow);
+  background: var(--aero-yellow-gold);
+  box-shadow: var(--aero-yellow-glow);
 }
 
 .aero-panel-cut {
@@ -179,7 +222,7 @@ body {
 .aero-btn {
   font-family: var(--font-display);
   font-size: 0.88rem;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   padding: 12px 24px;
@@ -196,42 +239,43 @@ body {
   overflow: hidden;
 }
 
-/* Primary Cyan Button */
+/* Primary Electric Yellow Button with Bold Black Typography */
 .aero-btn-primary {
-  background: linear-gradient(135deg, rgba(0, 240, 255, 0.9) 0%, rgba(37, 99, 235, 0.95) 100%);
-  color: #030712;
-  font-weight: 700;
-  box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+  background: linear-gradient(135deg, #ffd600 0%, #ffc400 100%);
+  color: #000000 !important;
+  font-weight: 800;
+  box-shadow: 0 0 20px rgba(255, 214, 0, 0.45);
 }
 
 .aero-btn-primary:hover:not(:disabled) {
-  background: linear-gradient(135deg, #00f0ff 0%, #3b82f6 100%);
-  box-shadow: 0 0 30px rgba(0, 240, 255, 0.7);
+  background: linear-gradient(135deg, #ffe600 0%, #ffd600 100%);
+  box-shadow: 0 0 32px rgba(255, 214, 0, 0.75);
   transform: translateY(-1px);
 }
 
 .aero-btn-primary:active:not(:disabled) {
   transform: translateY(1px);
+  background: #ffc400;
 }
 
 .aero-btn-primary:disabled {
-  opacity: 0.5;
+  opacity: 0.4;
   cursor: not-allowed;
-  filter: grayscale(0.6);
+  filter: grayscale(0.8);
 }
 
-/* Outline Cyber Button */
+/* Outline Yellow Button */
 .aero-btn-outline {
-  background: rgba(0, 240, 255, 0.05);
-  color: var(--aero-cyan);
+  background: rgba(255, 214, 0, 0.05);
+  color: var(--aero-yellow);
   border: 1px solid var(--aero-border-medium);
-  box-shadow: inset 0 0 12px rgba(0, 240, 255, 0.05);
+  box-shadow: inset 0 0 12px rgba(255, 214, 0, 0.05);
 }
 
 .aero-btn-outline:hover:not(:disabled) {
-  background: rgba(0, 240, 255, 0.15);
-  border-color: var(--aero-cyan);
-  box-shadow: 0 0 20px rgba(0, 240, 255, 0.35);
+  background: rgba(255, 214, 0, 0.16);
+  border-color: var(--aero-yellow);
+  box-shadow: 0 0 20px rgba(255, 214, 0, 0.4);
   color: #ffffff;
 }
 
@@ -272,10 +316,10 @@ body {
 .aero-input {
   width: 100%;
   padding: 12px 16px;
-  background: rgba(10, 17, 36, 0.7);
-  border: 1px solid var(--aero-border-subtle);
+  background: #0a0a0a;
+  border: 1px solid rgba(255, 214, 0, 0.22);
   border-radius: 6px;
-  color: var(--aero-text-primary);
+  color: #ffffff;
   font-family: var(--font-mono);
   font-size: 0.95rem;
   transition: all 0.25s ease;
@@ -283,13 +327,13 @@ body {
 }
 
 .aero-input:focus {
-  border-color: var(--aero-cyan);
-  box-shadow: 0 0 15px rgba(0, 240, 255, 0.3), inset 0 0 10px rgba(0, 240, 255, 0.1);
-  background: rgba(10, 17, 36, 0.9);
+  border-color: var(--aero-yellow);
+  box-shadow: 0 0 18px rgba(255, 214, 0, 0.35), inset 0 0 10px rgba(255, 214, 0, 0.08);
+  background: #111111;
 }
 
 .aero-input::placeholder {
-  color: var(--aero-text-muted);
+  color: #777777;
   font-family: var(--font-body);
   font-size: 0.88rem;
 }
@@ -306,7 +350,7 @@ body {
 }
 
 .aero-input-icon:hover {
-  color: var(--aero-cyan);
+  color: var(--aero-yellow);
 }
 
 /* Status Badges */
@@ -318,46 +362,52 @@ body {
   border-radius: 9999px;
   font-family: var(--font-mono);
   font-size: 0.72rem;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   border: 1px solid transparent;
 }
 
 .aero-badge-online {
-  background: rgba(0, 255, 157, 0.1);
-  color: var(--aero-neon-green);
-  border-color: rgba(0, 255, 157, 0.3);
+  background: rgba(255, 214, 0, 0.12);
+  color: var(--aero-yellow);
+  border-color: rgba(255, 214, 0, 0.35);
 }
 
 .aero-badge-online .pulse-dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--aero-neon-green);
-  box-shadow: var(--aero-neon-green-glow);
-  animation: pulse-green 1.8s infinite;
+  background: var(--aero-yellow-bright);
+  box-shadow: 0 0 12px rgba(255, 230, 0, 0.7);
+  animation: pulse-yellow 1.8s infinite;
 }
 
 .aero-badge-cyan {
-  background: rgba(0, 240, 255, 0.1);
-  color: var(--aero-cyan);
-  border-color: rgba(0, 240, 255, 0.3);
+  background: rgba(255, 214, 0, 0.1);
+  color: var(--aero-yellow);
+  border-color: rgba(255, 214, 0, 0.3);
 }
 
 .aero-badge-cyan .pulse-dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--aero-cyan);
-  box-shadow: var(--aero-cyan-glow);
-  animation: pulse-cyan 1.8s infinite;
+  background: var(--aero-yellow);
+  box-shadow: var(--aero-yellow-glow);
+  animation: pulse-yellow 1.8s infinite;
 }
 
 .aero-badge-amber {
-  background: rgba(245, 158, 11, 0.1);
-  color: var(--aero-amber);
-  border-color: rgba(245, 158, 11, 0.3);
+  background: rgba(255, 196, 0, 0.12);
+  color: var(--aero-yellow-gold);
+  border-color: rgba(255, 196, 0, 0.35);
+}
+
+.aero-badge-violet {
+  background: rgba(255, 242, 166, 0.12);
+  color: var(--aero-yellow-soft);
+  border-color: rgba(255, 242, 166, 0.35);
 }
 
 /* Glowing Corner Brackets for HUD feel */
@@ -370,39 +420,52 @@ body {
 .hud-corner-bracket.top-left {
   top: 6px;
   left: 6px;
-  border-top: 2px solid var(--aero-cyan);
-  border-left: 2px solid var(--aero-cyan);
+  border-top: 2px solid var(--aero-yellow);
+  border-left: 2px solid var(--aero-yellow);
 }
 .hud-corner-bracket.top-right {
   top: 6px;
   right: 6px;
-  border-top: 2px solid var(--aero-cyan);
-  border-right: 2px solid var(--aero-cyan);
+  border-top: 2px solid var(--aero-yellow);
+  border-right: 2px solid var(--aero-yellow);
 }
 .hud-corner-bracket.bottom-left {
   bottom: 6px;
   left: 6px;
-  border-bottom: 2px solid var(--aero-cyan);
-  border-left: 2px solid var(--aero-cyan);
+  border-bottom: 2px solid var(--aero-yellow);
+  border-left: 2px solid var(--aero-yellow);
 }
 .hud-corner-bracket.bottom-right {
   bottom: 6px;
   right: 6px;
-  border-bottom: 2px solid var(--aero-cyan);
-  border-right: 2px solid var(--aero-cyan);
+  border-bottom: 2px solid var(--aero-yellow);
+  border-right: 2px solid var(--aero-yellow);
 }
 
 /* Keyframe Animations */
+@keyframes pulse-yellow {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+    box-shadow: 0 0 12px rgba(255, 214, 0, 0.8);
+  }
+  50% {
+    opacity: 0.35;
+    transform: scale(0.85);
+    box-shadow: 0 0 2px rgba(255, 214, 0, 0.2);
+  }
+}
+
 @keyframes pulse-green {
   0%, 100% {
     opacity: 1;
     transform: scale(1);
-    box-shadow: 0 0 10px rgba(0, 255, 157, 0.6);
+    box-shadow: 0 0 12px rgba(255, 214, 0, 0.8);
   }
   50% {
-    opacity: 0.4;
+    opacity: 0.35;
     transform: scale(0.85);
-    box-shadow: 0 0 2px rgba(0, 255, 157, 0.2);
+    box-shadow: 0 0 2px rgba(255, 214, 0, 0.2);
   }
 }
 
@@ -410,12 +473,12 @@ body {
   0%, 100% {
     opacity: 1;
     transform: scale(1);
-    box-shadow: 0 0 12px rgba(0, 240, 255, 0.7);
+    box-shadow: 0 0 12px rgba(255, 214, 0, 0.8);
   }
   50% {
-    opacity: 0.4;
+    opacity: 0.35;
     transform: scale(0.85);
-    box-shadow: 0 0 2px rgba(0, 240, 255, 0.2);
+    box-shadow: 0 0 2px rgba(255, 214, 0, 0.2);
   }
 }
 
@@ -465,4 +528,3 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
-

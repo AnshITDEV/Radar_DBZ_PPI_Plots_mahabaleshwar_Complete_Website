@@ -15,16 +15,16 @@ export default function RadarCockpitCanvas({
     const ctx = canvas.getContext("2d");
     let angle = 0;
 
-    // Simulated storm/reflectivity cells near Mahabaleshwar
+    // Simulated storm/reflectivity cells near Mahabaleshwar in golden/yellow spectrum
     const cells = [
-      { r: 70, theta: 0.8, size: 28, dbz: 48 }, // Red/Orange heavy core
-      { r: 90, theta: 0.85, size: 45, dbz: 38 }, // Yellow
-      { r: 120, theta: 1.1, size: 55, dbz: 28 }, // Green
-      { r: 145, theta: 2.3, size: 36, dbz: 32 }, // Yellow
-      { r: 180, theta: 2.4, size: 60, dbz: 22 }, // Light green
-      { r: 110, theta: 3.9, size: 40, dbz: 42 }, // Amber/Orange
-      { r: 160, theta: 4.8, size: 50, dbz: 25 }, // Green
-      { r: 80, theta: 5.6, size: 32, dbz: 35 }, // Yellow
+      { r: 70, theta: 0.8, size: 28, dbz: 48 }, // Bright neon yellow core
+      { r: 90, theta: 0.85, size: 45, dbz: 38 }, // Electric yellow
+      { r: 120, theta: 1.1, size: 55, dbz: 28 }, // Golden yellow
+      { r: 145, theta: 2.3, size: 36, dbz: 32 }, // Warm amber yellow
+      { r: 180, theta: 2.4, size: 60, dbz: 22 }, // Pale yellow
+      { r: 110, theta: 3.9, size: 40, dbz: 42 }, // Electric yellow
+      { r: 160, theta: 4.8, size: 50, dbz: 25 }, // Golden yellow
+      { r: 80, theta: 5.6, size: 32, dbz: 35 }, // Bright yellow
     ];
 
     // Atmospheric floating blips/particles
@@ -36,13 +36,13 @@ export default function RadarCockpitCanvas({
       opacity: 0.2 + Math.random() * 0.5,
     }));
 
-    // Color mapper for dBZ values
+    // Color mapper for yellow/black/white radar scope cells
     const getDbzColor = (dbz, alpha = 1) => {
-      if (dbz >= 45) return `rgba(239, 68, 68, ${alpha})`; // Red
-      if (dbz >= 35) return `rgba(249, 115, 22, ${alpha})`; // Orange
-      if (dbz >= 25) return `rgba(234, 179, 8, ${alpha})`; // Yellow
-      if (dbz >= 15) return `rgba(34, 197, 94, ${alpha})`; // Green
-      return `rgba(6, 182, 212, ${alpha})`; // Cyan
+      if (dbz >= 45) return `rgba(255, 230, 0, ${alpha})`; // Bright neon yellow
+      if (dbz >= 35) return `rgba(255, 214, 0, ${alpha})`; // Primary electric yellow
+      if (dbz >= 25) return `rgba(255, 196, 0, ${alpha})`; // Golden yellow
+      if (dbz >= 15) return `rgba(255, 242, 166, ${alpha})`; // Soft pale yellow
+      return `rgba(255, 255, 255, ${alpha * 0.9})`; // White outer mist
     };
 
     const render = () => {
@@ -52,28 +52,28 @@ export default function RadarCockpitCanvas({
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Radar Scope Background
+      // Radar Scope Background: Pure Deep Obsidian Black
       const bgGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, maxR);
-      bgGrad.addColorStop(0, "rgba(8, 16, 36, 0.95)");
-      bgGrad.addColorStop(0.7, "rgba(5, 10, 24, 0.95)");
-      bgGrad.addColorStop(1, "rgba(2, 5, 14, 0.98)");
+      bgGrad.addColorStop(0, "rgba(10, 10, 10, 0.98)");
+      bgGrad.addColorStop(0.7, "rgba(5, 5, 5, 0.99)");
+      bgGrad.addColorStop(1, "rgba(0, 0, 0, 1)");
       ctx.fillStyle = bgGrad;
       ctx.beginPath();
       ctx.arc(cx, cy, maxR, 0, Math.PI * 2);
       ctx.fill();
 
-      // Range Rings (50, 100, 150, 200, 250 km)
+      // Range Rings (50, 100, 150, 200, 250 km) - Electric Yellow
       const ringCount = 5;
       for (let i = 1; i <= ringCount; i++) {
         const r = (maxR / ringCount) * i;
-        ctx.strokeStyle = i === ringCount ? "rgba(0, 240, 255, 0.35)" : "rgba(0, 240, 255, 0.12)";
+        ctx.strokeStyle = i === ringCount ? "rgba(255, 214, 0, 0.4)" : "rgba(255, 214, 0, 0.14)";
         ctx.lineWidth = i === ringCount ? 1.5 : 1;
         ctx.beginPath();
         ctx.arc(cx, cy, r, 0, Math.PI * 2);
         ctx.stroke();
 
         // Distance markings on 0° axis
-        ctx.fillStyle = "rgba(0, 240, 255, 0.5)";
+        ctx.fillStyle = "rgba(255, 214, 0, 0.7)";
         ctx.font = "9px 'JetBrains Mono', monospace";
         ctx.fillText(`${i * 50}km`, cx + 4, cy - r + 11);
       }
@@ -84,19 +84,19 @@ export default function RadarCockpitCanvas({
         const x2 = cx + Math.cos(rad) * maxR;
         const y2 = cy + Math.sin(rad) * maxR;
 
-        ctx.strokeStyle = deg % 90 === 0 ? "rgba(0, 240, 255, 0.28)" : "rgba(0, 240, 255, 0.08)";
+        ctx.strokeStyle = deg % 90 === 0 ? "rgba(255, 214, 0, 0.3)" : "rgba(255, 214, 0, 0.08)";
         ctx.lineWidth = deg % 90 === 0 ? 1.2 : 0.8;
         ctx.beginPath();
         ctx.moveTo(cx, cy);
         ctx.lineTo(x2, y2);
         ctx.stroke();
 
-        // Degree Labels at boundary
+        // Degree Labels at boundary in Crisp White / Yellow
         if (deg % 45 === 0) {
           const labelRad = ((deg - 90) * Math.PI) / 180;
           const lx = cx + Math.cos(labelRad) * (maxR + 12);
           const ly = cy + Math.sin(labelRad) * (maxR + 12);
-          ctx.fillStyle = "rgba(0, 240, 255, 0.75)";
+          ctx.fillStyle = "rgba(255, 214, 0, 0.85)";
           ctx.font = "9px 'JetBrains Mono', monospace";
           ctx.textAlign = "center";
           ctx.textBaseline = "middle";
@@ -107,15 +107,12 @@ export default function RadarCockpitCanvas({
 
       // Simulated Reflectivity Precipitation Cells
       cells.forEach((cell) => {
-        // Calculate cell center
         const cellX = cx + Math.cos(cell.theta) * ((cell.r / 250) * maxR);
         const cellY = cy + Math.sin(cell.theta) * ((cell.r / 250) * maxR);
 
-        // Calculate angular difference to sweep beam
         let diff = (angle - cell.theta) % (Math.PI * 2);
         if (diff < 0) diff += Math.PI * 2;
 
-        // Phosphor decay: bright when beam just passed, fades as beam sweeps away
         const phosphor = Math.max(0.12, 1 - diff / (Math.PI * 1.5));
 
         const cellGrad = ctx.createRadialGradient(
@@ -126,9 +123,9 @@ export default function RadarCockpitCanvas({
           cellY,
           cell.size
         );
-        cellGrad.addColorStop(0, getDbzColor(cell.dbz, 0.85 * phosphor));
+        cellGrad.addColorStop(0, getDbzColor(cell.dbz, 0.88 * phosphor));
         cellGrad.addColorStop(0.6, getDbzColor(cell.dbz - 10, 0.45 * phosphor));
-        cellGrad.addColorStop(1, "rgba(0, 240, 255, 0)");
+        cellGrad.addColorStop(1, "rgba(255, 214, 0, 0)");
 
         ctx.fillStyle = cellGrad;
         ctx.beginPath();
@@ -136,7 +133,7 @@ export default function RadarCockpitCanvas({
         ctx.fill();
       });
 
-      // Atmospheric particles / droplet echoes
+      // Atmospheric particles / golden droplet echoes
       particles.forEach((p) => {
         p.theta += p.speed;
         const px = cx + Math.cos(p.theta) * ((p.r / 250) * maxR);
@@ -146,19 +143,19 @@ export default function RadarCockpitCanvas({
         if (diff < 0) diff += Math.PI * 2;
         const pGlow = Math.max(0.15, 1 - diff / (Math.PI * 1.2));
 
-        ctx.fillStyle = `rgba(0, 255, 157, ${p.opacity * pGlow})`;
+        ctx.fillStyle = `rgba(255, 214, 0, ${p.opacity * pGlow})`;
         ctx.beginPath();
         ctx.arc(px, py, p.size, 0, Math.PI * 2);
         ctx.fill();
       });
 
-      // Radar Sweep Wedge (fading trailing beam)
+      // Radar Sweep Wedge (fading trailing beam in electric yellow)
       const wedgeAngle = Math.PI / 4; // 45 degree fade trail
       const sweepGrad = ctx.createConicGradient(angle - wedgeAngle, cx, cy);
-      sweepGrad.addColorStop(0, "rgba(0, 240, 255, 0)");
-      sweepGrad.addColorStop(0.85, "rgba(0, 240, 255, 0.08)");
-      sweepGrad.addColorStop(0.98, "rgba(0, 240, 255, 0.28)");
-      sweepGrad.addColorStop(1, "rgba(0, 240, 255, 0.75)");
+      sweepGrad.addColorStop(0, "rgba(255, 214, 0, 0)");
+      sweepGrad.addColorStop(0.85, "rgba(255, 214, 0, 0.08)");
+      sweepGrad.addColorStop(0.98, "rgba(255, 214, 0, 0.3)");
+      sweepGrad.addColorStop(1, "rgba(255, 230, 0, 0.8)");
 
       ctx.save();
       ctx.beginPath();
@@ -172,9 +169,9 @@ export default function RadarCockpitCanvas({
       // Sharp Leading Beam Line
       const beamX = cx + Math.cos(angle) * maxR;
       const beamY = cy + Math.sin(angle) * maxR;
-      ctx.strokeStyle = "#00f0ff";
+      ctx.strokeStyle = "#ffd600";
       ctx.lineWidth = 1.8;
-      ctx.shadowColor = "#00f0ff";
+      ctx.shadowColor = "#ffd600";
       ctx.shadowBlur = 12;
       ctx.beginPath();
       ctx.moveTo(cx, cy);
@@ -183,7 +180,7 @@ export default function RadarCockpitCanvas({
       ctx.shadowBlur = 0; // reset shadow
 
       // Center Origin Crosshairs & Radar Station Marker
-      ctx.strokeStyle = "rgba(0, 240, 255, 0.85)";
+      ctx.strokeStyle = "rgba(255, 214, 0, 0.9)";
       ctx.lineWidth = 1.5;
       ctx.beginPath();
       ctx.arc(cx, cy, 6, 0, Math.PI * 2);
@@ -197,13 +194,13 @@ export default function RadarCockpitCanvas({
       ctx.stroke();
 
       // Center glowing core dot
-      ctx.fillStyle = "#00f0ff";
+      ctx.fillStyle = "#ffffff";
       ctx.beginPath();
       ctx.arc(cx, cy, 2.5, 0, Math.PI * 2);
       ctx.fill();
 
-      // Outer bezel ring with glowing cyan border
-      ctx.strokeStyle = "rgba(0, 240, 255, 0.65)";
+      // Outer bezel ring with glowing yellow border
+      ctx.strokeStyle = "rgba(255, 214, 0, 0.75)";
       ctx.lineWidth = 2;
       ctx.beginPath();
       ctx.arc(cx, cy, maxR, 0, Math.PI * 2);
@@ -245,10 +242,9 @@ export default function RadarCockpitCanvas({
           width: "100%",
           height: "100%",
           display: "block",
-          filter: "drop-shadow(0 0 25px rgba(0, 240, 255, 0.22))",
+          filter: "drop-shadow(0 0 25px rgba(255, 214, 0, 0.3))",
         }}
       />
     </div>
   );
 }
-

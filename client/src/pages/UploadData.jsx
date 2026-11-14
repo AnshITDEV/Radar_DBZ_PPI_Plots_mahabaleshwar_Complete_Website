@@ -357,7 +357,7 @@ export default function UploadData({
                       <div className="file-card-details">
                         <div className="file-card-name">{file.name}</div>
                         <div className="file-card-meta">
-                          <span style={{ color: "var(--aero-cyan, #00f0ff)" }}>
+                          <span style={{ color: "var(--aero-yellow, #ffd600)", fontWeight: 700 }}>
                             {formatFileSize(file.size)}
                           </span>
                           <span>•</span>
@@ -367,8 +367,8 @@ export default function UploadData({
                           {!inMemory && (
                             <span
                               style={{
-                                color: "#f59e0b",
-                                fontWeight: 600,
+                                color: "#ffd600",
+                                fontWeight: 700,
                               }}
                               title="Binary missing from browser memory (page was refreshed). Re-upload to generate plots."
                             >
@@ -401,10 +401,10 @@ export default function UploadData({
 
           <div className="panel-header-line">
             <div className="panel-header-title">
-              <FaCloudRain style={{ color: "var(--aero-violet, #8b5cf6)" }} />
+              <FaCloudRain style={{ color: "var(--aero-yellow-gold, #ffc400)" }} />
               <span>RAIN GAUGE TELEMETRY (.CSV, .XLSX)</span>
             </div>
-            <AeroBadge variant="violet" pulse={false} style={{ fontSize: "0.68rem" }}>
+            <AeroBadge variant="amber" pulse={false} style={{ fontSize: "0.68rem" }}>
               {rainGaugeFiles.length} Ingested
             </AeroBadge>
           </div>
@@ -413,12 +413,12 @@ export default function UploadData({
           <div
             style={{
               padding: "8px 12px",
-              background: "rgba(6, 12, 26, 0.75)",
-              border: "1px solid rgba(139, 92, 246, 0.2)",
+              background: "#0a0a0a",
+              border: "1px solid rgba(255, 196, 0, 0.25)",
               borderRadius: "6px",
               fontFamily: "var(--font-mono, monospace)",
               fontSize: "0.74rem",
-              color: "var(--aero-text-secondary, #94a3b8)",
+              color: "#d6d6d0",
             }}
           >
             Ground Truth Sensor: Auto Weather Station (AWS) Time-Series
@@ -453,9 +453,9 @@ export default function UploadData({
             <div
               className="dropzone-badge"
               style={{
-                color: "var(--aero-violet, #8b5cf6)",
-                borderColor: "rgba(139, 92, 246, 0.3)",
-                background: "rgba(139, 92, 246, 0.1)",
+                color: "#ffd600",
+                borderColor: "rgba(255, 214, 0, 0.35)",
+                background: "rgba(255, 214, 0, 0.1)",
               }}
             >
               MULTI-SENSOR LOGGERS ACCEPTED
@@ -468,9 +468,9 @@ export default function UploadData({
               style={{
                 padding: "8px 12px",
                 borderRadius: "4px",
-                background: "rgba(239, 68, 68, 0.15)",
-                border: "1px solid rgba(239, 68, 68, 0.4)",
-                color: "#ef4444",
+                background: "rgba(255, 59, 48, 0.15)",
+                border: "1px solid rgba(255, 59, 48, 0.4)",
+                color: "#ff3b30",
                 fontSize: "0.78rem",
                 fontFamily: "var(--font-mono)",
                 display: "flex",
@@ -490,7 +490,7 @@ export default function UploadData({
                 style={{
                   fontFamily: "var(--font-mono, monospace)",
                   fontSize: "0.72rem",
-                  color: "#64748b",
+                  color: "#d6d6d0",
                   marginBottom: "8px",
                   textTransform: "uppercase",
                 }}
@@ -503,7 +503,7 @@ export default function UploadData({
                     <div className="file-card-details">
                       <div className="file-card-name">{file.name}</div>
                       <div className="file-card-meta">
-                        <span style={{ color: "var(--aero-violet, #a78bfa)" }}>
+                        <span style={{ color: "var(--aero-yellow-gold, #ffc400)", fontWeight: 700 }}>
                           {formatFileSize(file.size)}
                         </span>
                         <span>•</span>
@@ -538,12 +538,12 @@ export default function UploadData({
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
-              borderBottom: "1px solid rgba(0, 240, 255, 0.12)",
+              borderBottom: "1px solid rgba(255, 214, 0, 0.2)",
               paddingBottom: "12px",
             }}
           >
             <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-              <FaNetworkWired style={{ color: "var(--aero-cyan, #00f0ff)" }} />
+              <FaNetworkWired style={{ color: "var(--aero-yellow, #ffd600)" }} />
               <span
                 className="display-font"
                 style={{
@@ -568,7 +568,7 @@ export default function UploadData({
 
             <div className="pipeline-stat-box">
               <span className="pipeline-stat-label">RAIN GAUGES</span>
-              <span className="pipeline-stat-num" style={{ color: "var(--aero-violet, #8b5cf6)" }}>
+              <span className="pipeline-stat-num" style={{ color: "var(--aero-yellow-gold, #ffc400)" }}>
                 {rainGaugeFiles.length}
               </span>
               <span className="pipeline-stat-sub">Ground truth time-series</span>
@@ -584,7 +584,7 @@ export default function UploadData({
 
             <div className="pipeline-stat-box">
               <span className="pipeline-stat-label">MEMORY PIPELINE</span>
-              <span className="pipeline-stat-num" style={{ color: "#00ff9d" }}>
+              <span className="pipeline-stat-num" style={{ color: "#ffd600" }}>
                 ACTIVE
               </span>
               <span className="pipeline-stat-sub">Ready for Py-ART Plotting</span>
@@ -598,16 +598,16 @@ export default function UploadData({
               alignItems: "flex-start",
               gap: "10px",
               padding: "10px 14px",
-              background: "rgba(6, 12, 26, 0.6)",
-              border: "1px solid rgba(0, 240, 255, 0.1)",
+              background: "#0a0a0a",
+              border: "1px solid rgba(255, 214, 0, 0.2)",
               borderRadius: "6px",
               fontFamily: "var(--font-mono, monospace)",
               fontSize: "0.74rem",
-              color: "var(--aero-text-secondary, #94a3b8)",
+              color: "#d6d6d0",
               lineHeight: 1.5,
             }}
           >
-            <FaInfoCircle style={{ color: "var(--aero-cyan, #00f0ff)", marginTop: "2px", flexShrink: 0 }} />
+            <FaInfoCircle style={{ color: "var(--aero-yellow, #ffd600)", marginTop: "2px", flexShrink: 0 }} />
             <span>
               Datasets are cached in browser memory and metadata is synchronized across all modules.
               You can now proceed to <strong>View Plots</strong> to generate reflectivity plots,

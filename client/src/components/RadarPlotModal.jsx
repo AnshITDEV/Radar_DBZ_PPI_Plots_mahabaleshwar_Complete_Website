@@ -51,7 +51,7 @@ export default function RadarPlotModal({
         position: "fixed",
         inset: 0,
         zIndex: 999999,
-        backgroundColor: "rgba(2, 4, 9, 0.94)",
+        backgroundColor: "rgba(0, 0, 0, 0.96)",
         backdropFilter: "blur(20px)",
         display: "flex",
         flexDirection: "column",
@@ -71,10 +71,10 @@ export default function RadarPlotModal({
           justifyContent: "space-between",
           alignItems: "center",
           padding: "12px 20px",
-          background: "rgba(10, 18, 38, 0.8)",
-          border: "1px solid rgba(0, 240, 255, 0.25)",
+          background: "#0a0a0a",
+          border: "1px solid rgba(255, 214, 0, 0.3)",
           borderRadius: "8px",
-          color: "#f0f6fc",
+          color: "#ffffff",
         }}
         onClick={(e) => e.stopPropagation()}
       >
@@ -82,7 +82,7 @@ export default function RadarPlotModal({
           <span
             className="telemetry-font"
             style={{
-              color: "var(--aero-cyan, #00f0ff)",
+              color: "var(--aero-yellow, #ffd600)",
               fontWeight: 700,
               fontSize: "0.9rem",
               letterSpacing: "0.1em",
@@ -93,12 +93,13 @@ export default function RadarPlotModal({
           <span
             style={{
               padding: "3px 10px",
-              background: "rgba(0, 240, 255, 0.1)",
-              border: "1px solid rgba(0, 240, 255, 0.3)",
+              background: "rgba(255, 214, 0, 0.1)",
+              border: "1px solid rgba(255, 214, 0, 0.35)",
               borderRadius: "4px",
               fontSize: "0.75rem",
               fontFamily: "var(--font-mono, monospace)",
-              color: "#38f4ff",
+              color: "#ffd600",
+              fontWeight: 700,
             }}
           >
             {plotType} • {variable}
@@ -106,7 +107,7 @@ export default function RadarPlotModal({
           <span
             style={{
               fontSize: "0.78rem",
-              color: "#94a3b8",
+              color: "#d6d6d0",
               fontFamily: "var(--font-mono, monospace)",
             }}
           >
@@ -157,8 +158,8 @@ export default function RadarPlotModal({
             className="aero-btn aero-btn-outline"
             style={{
               padding: "6px 12px",
-              borderColor: "rgba(239, 68, 68, 0.4)",
-              color: "#ef4444",
+              borderColor: "rgba(255, 214, 0, 0.4)",
+              color: "#ffd600",
             }}
             title="Close Viewer (ESC)"
           >
@@ -181,33 +182,65 @@ export default function RadarPlotModal({
         }}
         onClick={(e) => e.stopPropagation()}
       >
-        <img
-          src={imageUrl}
-          alt={`Radar ${plotType} ${variable}`}
+        <div
           style={{
-            maxWidth: zoom === 1 ? "95%" : "none",
-            maxHeight: zoom === 1 ? "85vh" : "none",
-            transform: zoom !== 1 ? `scale(${zoom})` : "none",
-            transition: "transform 0.2s ease-out",
-            borderRadius: "8px",
-            boxShadow: "0 0 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(0, 240, 255, 0.25)",
-            border: "1px solid rgba(0, 240, 255, 0.3)",
-            backgroundColor: "#000000",
-            imageRendering: "auto",
+            position: "relative",
+            transform: `scale(${zoom})`,
+            transition: "transform 0.15s ease-out",
+            transformOrigin: "center center",
+            maxWidth: "100%",
+            maxHeight: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
           }}
-        />
+        >
+          {/* Corner HUD Reticles */}
+          <span className="hud-corner-bracket top-left" style={{ width: "16px", height: "16px" }} />
+          <span className="hud-corner-bracket top-right" style={{ width: "16px", height: "16px" }} />
+          <span className="hud-corner-bracket bottom-left" style={{ width: "16px", height: "16px" }} />
+          <span className="hud-corner-bracket bottom-right" style={{ width: "16px", height: "16px" }} />
+
+          <img
+            src={imageUrl}
+            alt="High Resolution Radar Plot"
+            style={{
+              maxWidth: "88vw",
+              maxHeight: "75vh",
+              objectFit: "contain",
+              borderRadius: "4px",
+              border: "1px solid rgba(255, 214, 0, 0.25)",
+              boxShadow: "0 20px 50px rgba(0, 0, 0, 0.95)",
+              backgroundColor: "#050505",
+            }}
+          />
+        </div>
       </div>
 
-      {/* Footer Navigation Hint */}
+      {/* Bottom Telemetry Footer */}
       <div
         style={{
+          width: "100%",
+          maxWidth: "1400px",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          padding: "8px 16px",
+          background: "#0a0a0a",
+          border: "1px solid rgba(255, 214, 0, 0.2)",
+          borderRadius: "6px",
           fontFamily: "var(--font-mono, monospace)",
-          fontSize: "0.75rem",
-          color: "#64748b",
-          textAlign: "center",
+          fontSize: "0.72rem",
+          color: "#d6d6d0",
         }}
+        onClick={(e) => e.stopPropagation()}
       >
-        MAHABALESHWAR RADAR OBSERVATORY • PRESS [ESC] OR CLICK OUTSIDE TO CLOSE
+        <div>
+          STATUS: <span style={{ color: "#ffd600" }}>IMAGE BUFFER LOADED (SCIENTIFIC OUTPUT)</span>
+        </div>
+        <div>
+          MAHABALESHWAR OBSERVATORY (17.9237°N, 73.6586°E) • PRESS [ESC] TO CLOSE
+        </div>
       </div>
 
       <style>{`
@@ -219,4 +252,3 @@ export default function RadarPlotModal({
     </div>
   );
 }
-

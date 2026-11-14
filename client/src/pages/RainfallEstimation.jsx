@@ -45,13 +45,13 @@ const radarStationIcon = new L.DivIcon({
     width: 22px;
     height: 22px;
     border-radius: 50%;
-    background: rgba(0, 240, 255, 0.9);
+    background: rgba(255, 214, 0, 0.95);
     border: 2px solid #ffffff;
-    box-shadow: 0 0 15px #00f0ff;
+    box-shadow: 0 0 15px #ffd600;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #020409;
+    color: #000000;
     font-size: 10px;
     font-weight: bold;
   ">📡</div>`,
@@ -66,13 +66,13 @@ const targetPointIcon = new L.DivIcon({
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background: rgba(0, 255, 157, 0.9);
+    background: rgba(255, 230, 0, 0.95);
     border: 2px solid #ffffff;
-    box-shadow: 0 0 16px #00ff9d;
+    box-shadow: 0 0 16px #ffd600;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #020409;
+    color: #000000;
     font-size: 10px;
     font-weight: bold;
   ">🎯</div>`,
@@ -364,9 +364,9 @@ export default function RainfallEstimation({ uploadedFiles, fileStore }) {
   // Precipitation Intensity Color and Category helper
   const getPrecipitationCategory = (rate) => {
     if (isNaN(rate) || rate <= 0) return { label: "No Detectable Rain", color: "#64748b" };
-    if (rate < 0.5) return { label: "Very Light Drizzle", color: "#00f0ff" };
-    if (rate < 4.0) return { label: "Moderate Rain", color: "#00ff9d" };
-    if (rate < 16.0) return { label: "Heavy Rain", color: "#fbbf24" };
+    if (rate < 0.5) return { label: "Very Light Drizzle", color: "#ffd600" };
+    if (rate < 4.0) return { label: "Moderate Rain", color: "#ffe600" };
+    if (rate < 16.0) return { label: "Heavy Rain", color: "#ffc400" };
     return { label: "Torrential Downpour", color: "#ef4444" };
   };
 
@@ -378,7 +378,7 @@ export default function RainfallEstimation({ uploadedFiles, fileStore }) {
       {/* Top Header Ribbon */}
       <div className="rainfall-header-ribbon">
         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-          <FaCloudRain style={{ color: "var(--aero-cyan, #00f0ff)", fontSize: "1.25rem" }} />
+          <FaCloudRain style={{ color: "var(--aero-yellow, #ffd600)", fontSize: "1.25rem" }} />
           <div>
             <h2
               className="display-font"
@@ -407,11 +407,11 @@ export default function RainfallEstimation({ uploadedFiles, fileStore }) {
 
         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
           {generatingOverlay && (
-            <AeroBadge variant="cyan" pulse={true} style={{ fontSize: "0.68rem" }}>
+            <AeroBadge variant="yellow" pulse={true} style={{ fontSize: "0.68rem" }}>
               GENERATING DBZ OVERLAY...
             </AeroBadge>
           )}
-          <AeroBadge variant="online" pulse={false}>
+          <AeroBadge variant="yellow" pulse={false}>
             GIS ENGINE READY
           </AeroBadge>
         </div>
@@ -435,7 +435,7 @@ export default function RainfallEstimation({ uploadedFiles, fileStore }) {
                 justifyContent: "space-between",
                 marginBottom: "14px",
                 paddingBottom: "8px",
-                borderBottom: "1px solid rgba(0, 240, 255, 0.15)",
+                borderBottom: "1px solid rgba(255, 214, 0, 0.15)",
               }}
             >
               <span
@@ -449,7 +449,7 @@ export default function RainfallEstimation({ uploadedFiles, fileStore }) {
                   gap: "8px",
                 }}
               >
-                <FaSlidersH style={{ color: "var(--aero-cyan, #00f0ff)" }} />
+                <FaSlidersH style={{ color: "var(--aero-yellow, #ffd600)" }} />
                 ANALYSIS PARAMETERS
               </span>
               <span
@@ -616,7 +616,7 @@ export default function RainfallEstimation({ uploadedFiles, fileStore }) {
                   alignItems: "center",
                   justifyContent: "space-between",
                   paddingBottom: "8px",
-                  borderBottom: "1px solid rgba(0, 240, 255, 0.15)",
+                  borderBottom: "1px solid rgba(255, 214, 0, 0.15)",
                 }}
               >
                 <span
@@ -630,10 +630,10 @@ export default function RainfallEstimation({ uploadedFiles, fileStore }) {
                     gap: "8px",
                   }}
                 >
-                  <FaCrosshairs style={{ color: "#00ff9d" }} />
+                  <FaCrosshairs style={{ color: "#ffd600" }} />
                   PRECIPITATION RESULTS
                 </span>
-                <AeroBadge variant="online" pulse={false} style={{ fontSize: "0.65rem" }}>
+                <AeroBadge variant="yellow" pulse={false} style={{ fontSize: "0.65rem" }}>
                   POINT LOCKED
                 </AeroBadge>
               </div>
@@ -685,16 +685,16 @@ export default function RainfallEstimation({ uploadedFiles, fileStore }) {
                             fontSize: "0.72rem",
                           }}
                         >
-                          <div style={{ background: "rgba(10, 18, 38, 0.6)", padding: "8px", borderRadius: "4px" }}>
+                          <div style={{ background: "rgba(16, 16, 16, 0.6)", padding: "8px", borderRadius: "4px" }}>
                             <div style={{ color: "#64748b" }}>REFLECTIVITY</div>
                             <div style={{ color: "#ffffff", fontWeight: 600 }}>
                               {typeof dbzVal === "number" ? dbzVal.toFixed(1) : "N/A"} dBZ
                             </div>
                           </div>
 
-                          <div style={{ background: "rgba(10, 18, 38, 0.6)", padding: "8px", borderRadius: "4px" }}>
+                          <div style={{ background: "rgba(16, 16, 16, 0.6)", padding: "8px", borderRadius: "4px" }}>
                             <div style={{ color: "#64748b" }}>CLOSEST GATE DIST</div>
-                            <div style={{ color: "var(--aero-cyan, #00f0ff)", fontWeight: 600 }}>
+                            <div style={{ color: "var(--aero-yellow, #ffd600)", fontWeight: 600 }}>
                               {rainfallResult.calculation.closest_gate?.distance_km?.toFixed(2) || "0.00"} km
                             </div>
                           </div>
@@ -706,7 +706,7 @@ export default function RainfallEstimation({ uploadedFiles, fileStore }) {
                             fontSize: "0.68rem",
                             color: "#64748b",
                             padding: "6px 8px",
-                            background: "rgba(6, 12, 26, 0.5)",
+                            background: "rgba(10, 10, 10, 0.5)",
                             borderRadius: "4px",
                           }}
                         >
@@ -740,7 +740,7 @@ export default function RainfallEstimation({ uploadedFiles, fileStore }) {
                     <tbody>
                       {rainfallResult.sampleCalculation.dbz_values.slice(0, 5).map((dbz, idx) => (
                         <tr key={dbz}>
-                          <td style={{ color: "#00ff9d" }}>{dbz} dBZ</td>
+                          <td style={{ color: "#ffd600" }}>{dbz} dBZ</td>
                           <td style={{ color: "#ffffff" }}>
                             {rainfallResult.sampleCalculation.rainfall_rates[idx]?.toFixed(3)} mm/hr
                           </td>
@@ -776,7 +776,7 @@ export default function RainfallEstimation({ uploadedFiles, fileStore }) {
                 RADAR GIS COVERAGE & REFLECTIVITY MAP
               </span>
               {coverage && (
-                <AeroBadge variant="online" pulse={true} style={{ fontSize: "0.68rem" }}>
+                <AeroBadge variant="yellow" pulse={true} style={{ fontSize: "0.68rem" }}>
                   COVERAGE ACTIVE
                 </AeroBadge>
               )}
@@ -790,16 +790,16 @@ export default function RainfallEstimation({ uploadedFiles, fileStore }) {
                   alignItems: "center",
                   gap: "8px",
                   padding: "4px 12px",
-                  background: "rgba(6, 12, 26, 0.8)",
-                  border: "1px solid rgba(0, 240, 255, 0.2)",
+                  background: "rgba(10, 10, 10, 0.8)",
+                  border: "1px solid rgba(255, 214, 0, 0.2)",
                   borderRadius: "6px",
                   fontFamily: "var(--font-mono)",
                   fontSize: "0.72rem",
                 }}
               >
-                <FaEye style={{ color: "var(--aero-cyan, #00f0ff)" }} />
+                <FaEye style={{ color: "var(--aero-yellow, #ffd600)" }} />
                 <span style={{ color: "#94a3b8" }}>OVERLAY OPACITY:</span>
-                <span style={{ color: "var(--aero-cyan, #00f0ff)", fontWeight: 600 }}>
+                <span style={{ color: "var(--aero-yellow, #ffd600)", fontWeight: 600 }}>
                   {Math.round(overlayOpacity * 100)}%
                 </span>
                 <input
@@ -811,7 +811,7 @@ export default function RainfallEstimation({ uploadedFiles, fileStore }) {
                   onChange={(e) => setOverlayOpacity(parseFloat(e.target.value))}
                   style={{
                     width: "70px",
-                    accentColor: "var(--aero-cyan, #00f0ff)",
+                    accentColor: "var(--aero-yellow, #ffd600)",
                     cursor: "pointer",
                   }}
                 />
@@ -824,7 +824,7 @@ export default function RainfallEstimation({ uploadedFiles, fileStore }) {
             <MapContainer
               center={mapCenter}
               zoom={mapZoom}
-              style={{ height: "100%", width: "100%", backgroundColor: "#020409" }}
+              style={{ height: "100%", width: "100%", backgroundColor: "#000000" }}
             >
               {/* Dark CartoDB Matter Tile Layer */}
               <TileLayer
@@ -875,8 +875,8 @@ export default function RainfallEstimation({ uploadedFiles, fileStore }) {
                     [coverage.lat_max, coverage.lon_max],
                   ]}
                   pathOptions={{
-                    color: "#00f0ff",
-                    fillColor: "#00f0ff",
+                    color: "#ffd600",
+                    fillColor: "#ffd600",
                     fillOpacity: 0.05,
                     weight: 1.5,
                     dashArray: "4, 6",
@@ -909,7 +909,7 @@ export default function RainfallEstimation({ uploadedFiles, fileStore }) {
             style={{
               marginTop: "12px",
               paddingTop: "8px",
-              borderTop: "1px solid rgba(0, 240, 255, 0.1)",
+              borderTop: "1px solid rgba(255, 214, 0, 0.12)",
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
@@ -922,7 +922,7 @@ export default function RainfallEstimation({ uploadedFiles, fileStore }) {
           >
             <div>
               {coverage ? (
-                <span style={{ color: "var(--aero-cyan, #00f0ff)" }}>
+                <span style={{ color: "var(--aero-yellow, #ffd600)" }}>
                   📍 CLICK ANYWHERE ON MAP TO ESTIMATE INSTANTANEOUS PRECIPITATION RATE
                 </span>
               ) : (

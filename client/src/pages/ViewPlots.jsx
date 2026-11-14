@@ -202,7 +202,7 @@ export default function ViewPlots({ uploadedFiles, fileStore }) {
       {/* Top Telemetry Header Ribbon */}
       <div className="view-plots-top-ribbon">
         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-          <FaChartBar style={{ color: "var(--aero-cyan, #00f0ff)", fontSize: "1.2rem" }} />
+          <FaChartBar style={{ color: "var(--aero-yellow, #ffd600)", fontSize: "1.2rem" }} />
           <div>
             <h2
               className="display-font"
@@ -230,7 +230,7 @@ export default function ViewPlots({ uploadedFiles, fileStore }) {
         </div>
 
         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-          <AeroBadge variant="cyan" pulse={false}>
+          <AeroBadge variant="yellow" pulse={false}>
             {radarFiles.length} VOLUMES AVAILABLE
           </AeroBadge>
         </div>
@@ -253,7 +253,7 @@ export default function ViewPlots({ uploadedFiles, fileStore }) {
                 justifyContent: "space-between",
                 marginBottom: "16px",
                 paddingBottom: "10px",
-                borderBottom: "1px solid rgba(0, 240, 255, 0.15)",
+                borderBottom: "1px solid rgba(255, 214, 0, 0.15)",
               }}
             >
               <span
@@ -267,7 +267,7 @@ export default function ViewPlots({ uploadedFiles, fileStore }) {
                   gap: "8px",
                 }}
               >
-                <FaSlidersH style={{ color: "var(--aero-cyan, #00f0ff)" }} />
+                <FaSlidersH style={{ color: "var(--aero-yellow, #ffd600)" }} />
                 PLOT CONFIGURATION
               </span>
               <span
@@ -356,8 +356,8 @@ export default function ViewPlots({ uploadedFiles, fileStore }) {
                   gridTemplateColumns: "1fr 1fr",
                   gap: "6px",
                   padding: "4px",
-                  background: "rgba(6, 12, 26, 0.8)",
-                  border: "1px solid rgba(0, 240, 255, 0.15)",
+                  background: "rgba(10, 10, 10, 0.8)",
+                  border: "1px solid rgba(255, 214, 0, 0.15)",
                   borderRadius: "6px",
                 }}
               >
@@ -391,7 +391,7 @@ export default function ViewPlots({ uploadedFiles, fileStore }) {
               >
                 <span>3. Polarimetric Variable</span>
                 {availableVariables.length > 0 && (
-                  <span style={{ color: "var(--aero-cyan, #00f0ff)", fontFamily: "var(--font-mono)" }}>
+                  <span style={{ color: "var(--aero-yellow, #ffd600)", fontFamily: "var(--font-mono)" }}>
                     {availableVariables.length} AVAILABLE
                   </span>
                 )}
@@ -414,7 +414,7 @@ export default function ViewPlots({ uploadedFiles, fileStore }) {
                 <div
                   style={{
                     padding: "10px",
-                    background: "rgba(6, 12, 26, 0.6)",
+                    background: "rgba(10, 10, 10, 0.6)",
                     border: "1px solid rgba(255, 255, 255, 0.05)",
                     borderRadius: "4px",
                     fontFamily: "var(--font-mono)",
@@ -505,7 +505,7 @@ export default function ViewPlots({ uploadedFiles, fileStore }) {
                 SCIENTIFIC PLOT CHAMBER
               </span>
               {variable && (
-                <AeroBadge variant="cyan" pulse={false} style={{ fontSize: "0.68rem" }}>
+                <AeroBadge variant="yellow" pulse={false} style={{ fontSize: "0.68rem" }}>
                   {plotType} • {variable}
                 </AeroBadge>
               )}
@@ -544,7 +544,7 @@ export default function ViewPlots({ uploadedFiles, fileStore }) {
                   style={{
                     fontFamily: "var(--font-mono, monospace)",
                     fontSize: "0.85rem",
-                    color: "var(--aero-cyan, #00f0ff)",
+                    color: "var(--aero-yellow, #ffd600)",
                     letterSpacing: "0.08em",
                   }}
                 >
@@ -581,7 +581,7 @@ export default function ViewPlots({ uploadedFiles, fileStore }) {
                   padding: "40px 20px",
                 }}
               >
-                <FaSatelliteDish style={{ fontSize: "3.2rem", color: "rgba(0, 240, 255, 0.25)" }} />
+                <FaSatelliteDish style={{ fontSize: "3.2rem", color: "rgba(255, 214, 0, 0.25)" }} />
                 <div style={{ fontSize: "0.95rem", color: "var(--aero-text-secondary, #94a3b8)" }}>
                   No plot generated yet
                 </div>
@@ -598,7 +598,7 @@ export default function ViewPlots({ uploadedFiles, fileStore }) {
               style={{
                 marginTop: "14px",
                 paddingTop: "10px",
-                borderTop: "1px solid rgba(0, 240, 255, 0.1)",
+                borderTop: "1px solid rgba(255, 214, 0, 0.12)",
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center",
@@ -613,8 +613,8 @@ export default function ViewPlots({ uploadedFiles, fileStore }) {
                 FILE: <span style={{ color: "#ffffff" }}>{selectedFileObj.name}</span>
               </div>
               <div>
-                GEOMETRY: <span style={{ color: "var(--aero-cyan, #00f0ff)" }}>{plotType}</span> | VARIABLE:{" "}
-                <span style={{ color: "#00ff9d" }}>{variable}</span>
+                GEOMETRY: <span style={{ color: "var(--aero-yellow, #ffd600)" }}>{plotType}</span> | VARIABLE:{" "}
+                <span style={{ color: "#ffd600" }}>{variable}</span>
               </div>
             </div>
           )}

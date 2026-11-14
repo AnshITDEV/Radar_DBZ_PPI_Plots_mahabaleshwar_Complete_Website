@@ -224,7 +224,7 @@ export default function Landing() {
           {!collapsed && (
             <div className="logo-container" style={{ flexDirection: "column", gap: "6px" }}>
               <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                <FaSatelliteDish style={{ color: "var(--aero-cyan, #00f0ff)", fontSize: "1.2rem" }} />
+                <FaSatelliteDish style={{ color: "var(--aero-yellow, #ffd600)", fontSize: "1.2rem" }} />
                 <span
                   className="display-font"
                   style={{
@@ -241,7 +241,7 @@ export default function Landing() {
                 style={{
                   fontFamily: "var(--font-mono, monospace)",
                   fontSize: "0.65rem",
-                  color: "var(--aero-text-secondary, #94a3b8)",
+                  color: "#d6d6d0",
                   letterSpacing: "0.08em",
                   textAlign: "center",
                 }}
@@ -278,8 +278,8 @@ export default function Landing() {
                       top: "15%",
                       bottom: "15%",
                       width: "3px",
-                      background: "var(--aero-cyan, #00f0ff)",
-                      boxShadow: "0 0 10px var(--aero-cyan, #00f0ff)",
+                      background: "var(--aero-yellow, #ffd600)",
+                      boxShadow: "0 0 10px var(--aero-yellow, #ffd600)",
                       borderRadius: "0 2px 2px 0",
                     }}
                   />
@@ -288,8 +288,8 @@ export default function Landing() {
                 <span
                   className="icon"
                   style={{
-                    color: isActive ? "var(--aero-cyan, #00f0ff)" : undefined,
-                    filter: isActive ? "drop-shadow(0 0 6px rgba(0, 240, 255, 0.6))" : "none",
+                    color: isActive ? "var(--aero-yellow, #ffd600)" : undefined,
+                    filter: isActive ? "drop-shadow(0 0 6px rgba(255, 214, 0, 0.6))" : "none",
                   }}
                 >
                   {item.icon}
@@ -303,7 +303,7 @@ export default function Landing() {
                     <span
                       style={{
                         fontSize: "0.65rem",
-                        color: isActive ? "var(--aero-cyan, #00f0ff)" : "#64748b",
+                        color: isActive ? "var(--aero-yellow, #ffd600)" : "#888888",
                         fontFamily: "var(--font-mono, monospace)",
                         letterSpacing: "0.02em",
                         textTransform: "none",
@@ -334,15 +334,15 @@ export default function Landing() {
             <div
               style={{
                 padding: "8px 10px",
-                background: "rgba(6, 12, 26, 0.6)",
-                border: "1px solid rgba(0, 240, 255, 0.12)",
+                background: "#0a0a0a",
+                border: "1px solid rgba(255, 214, 0, 0.25)",
                 borderRadius: "6px",
                 fontFamily: "var(--font-mono, monospace)",
                 fontSize: "0.68rem",
-                color: "#64748b",
+                color: "#d6d6d0",
               }}
             >
-              <div style={{ color: "var(--aero-cyan, #00f0ff)", fontWeight: 600 }}>
+              <div style={{ color: "var(--aero-yellow, #ffd600)", fontWeight: 700 }}>
                 17.9237°N • 73.6586°E
               </div>
               <div style={{ marginTop: "2px" }}>ALT: 1,353M MSL • S-BAND</div>
@@ -355,16 +355,16 @@ export default function Landing() {
             onClick={handleLogout}
             title="Terminate operator session"
             style={{
-              color: "#ef4444",
-              border: "1px solid rgba(239, 68, 68, 0.2)",
-              background: "rgba(239, 68, 68, 0.05)",
+              color: "#ffd600",
+              border: "1px solid rgba(255, 214, 0, 0.35)",
+              background: "rgba(255, 214, 0, 0.08)",
             }}
           >
-            <span className="icon" style={{ color: "#ef4444" }}>
+            <span className="icon" style={{ color: "#ffd600" }}>
               <FaSignOutAlt />
             </span>
             {!collapsed && (
-              <span className="label" style={{ marginLeft: "10px", fontWeight: 600 }}>
+              <span className="label" style={{ marginLeft: "10px", fontWeight: 700 }}>
                 Disconnect
               </span>
             )}
@@ -379,14 +379,15 @@ export default function Landing() {
           <div className="header-card">
             {/* Left: Breadcrumbs & Current Module */}
             <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-              <FaCompass style={{ color: "var(--aero-cyan, #00f0ff)", fontSize: "1.1rem" }} />
+              <FaCompass style={{ color: "var(--aero-yellow, #ffd600)", fontSize: "1.1rem" }} />
               <div>
                 <div
                   style={{
                     fontFamily: "var(--font-mono, monospace)",
                     fontSize: "0.68rem",
-                    color: "var(--aero-cyan, #00f0ff)",
+                    color: "var(--aero-yellow, #ffd600)",
                     letterSpacing: "0.08em",
+                    fontWeight: 700,
                   }}
                 >
                   AEROSCOPE // ATMOSPHERIC RESEARCH CENTER
@@ -406,18 +407,18 @@ export default function Landing() {
                   alignItems: "center",
                   gap: "8px",
                   padding: "6px 12px",
-                  background: "rgba(6, 12, 26, 0.7)",
-                  border: "1px solid rgba(0, 240, 255, 0.15)",
+                  background: "#0a0a0a",
+                  border: "1px solid rgba(255, 214, 0, 0.2)",
                   borderRadius: "6px",
                   fontFamily: "var(--font-mono, monospace)",
                   fontSize: "0.74rem",
-                  color: "#94a3b8",
+                  color: "#d6d6d0",
                 }}
               >
-                <FaClock style={{ color: "var(--aero-cyan, #00f0ff)" }} />
+                <FaClock style={{ color: "var(--aero-yellow, #ffd600)" }} />
                 <span>{currentTime.utc}</span>
-                <span style={{ color: "#64748b" }}>|</span>
-                <span style={{ color: "#ffffff" }}>{currentTime.local}</span>
+                <span style={{ color: "rgba(255, 214, 0, 0.4)" }}>|</span>
+                <span style={{ color: "#ffffff", fontWeight: 700 }}>{currentTime.local}</span>
               </div>
 
               {/* Rain Ambience Audio Controller */}
@@ -430,18 +431,18 @@ export default function Landing() {
                   alignItems: "center",
                   gap: "8px",
                   padding: "5px 12px",
-                  background: "rgba(10, 18, 38, 0.8)",
-                  border: "1px solid rgba(0, 240, 255, 0.25)",
+                  background: "#0a0a0a",
+                  border: "1px solid rgba(255, 214, 0, 0.3)",
                   borderRadius: "9999px",
                 }}
               >
-                <FaUserAstronaut style={{ color: "var(--aero-cyan, #00f0ff)", fontSize: "0.85rem" }} />
+                <FaUserAstronaut style={{ color: "var(--aero-yellow, #ffd600)", fontSize: "0.85rem" }} />
                 <span
                   style={{
                     fontFamily: "var(--font-mono, monospace)",
                     fontSize: "0.8rem",
                     color: "#ffffff",
-                    fontWeight: 600,
+                    fontWeight: 700,
                   }}
                 >
                   {userName}
@@ -451,8 +452,8 @@ export default function Landing() {
                     width: "6px",
                     height: "6px",
                     borderRadius: "50%",
-                    background: "#00ff9d",
-                    boxShadow: "0 0 6px #00ff9d",
+                    background: "#ffd600",
+                    boxShadow: "0 0 8px #ffd600",
                   }}
                 />
               </div>
@@ -463,8 +464,8 @@ export default function Landing() {
                 className="aero-btn aero-btn-outline"
                 style={{
                   padding: "6px 10px",
-                  borderColor: "rgba(239, 68, 68, 0.35)",
-                  color: "#ef4444",
+                  borderColor: "rgba(255, 214, 0, 0.35)",
+                  color: "#ffd600",
                   fontSize: "0.8rem",
                 }}
                 title="Log Out"

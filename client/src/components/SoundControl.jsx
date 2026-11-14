@@ -44,21 +44,20 @@ export default function SoundControl() {
           display: "inline-flex",
           alignItems: "center",
           gap: "8px",
-          background: "rgba(10, 18, 38, 0.85)",
+          background: "rgba(10, 10, 10, 0.9)",
           backdropFilter: "blur(12px)",
           border: `1px solid ${
-            isPlaying ? "rgba(0, 240, 255, 0.45)" : "rgba(255, 255, 255, 0.12)"
+            isPlaying ? "rgba(255, 214, 0, 0.55)" : "rgba(255, 255, 255, 0.12)"
           }`,
           borderRadius: "9999px",
           padding: "6px 14px",
           boxShadow: isPlaying
-            ? "0 0 16px rgba(0, 240, 255, 0.25)"
-            : "0 2px 10px rgba(0,0,0,0.4)",
+            ? "0 0 16px rgba(255, 214, 0, 0.35)"
+            : "0 2px 10px rgba(0,0,0,0.6)",
           transition: "all 0.3s ease",
           cursor: "pointer",
         }}
         onClick={(e) => {
-          // If clicked directly on the capsule (not the slider), toggle mute/play
           if (e.target.tagName !== "INPUT") {
             handleToggle();
           }
@@ -69,7 +68,7 @@ export default function SoundControl() {
       >
         <span
           style={{
-            color: isPlaying ? "var(--aero-cyan, #00f0ff)" : "#94a3b8",
+            color: isPlaying ? "var(--aero-yellow, #ffd600)" : "#d6d6d0",
             display: "flex",
             alignItems: "center",
             fontSize: "0.9rem",
@@ -80,7 +79,7 @@ export default function SoundControl() {
           {isPlaying ? <FaVolumeUp /> : <FaVolumeMute />}
         </span>
 
-        {/* Audio Equalizer bars animation when playing */}
+        {/* Audio Equalizer bars animation when playing (Yellow) */}
         {isPlaying ? (
           <div
             style={{
@@ -101,7 +100,7 @@ export default function SoundControl() {
             style={{
               fontSize: "0.72rem",
               fontFamily: "var(--font-mono, monospace)",
-              color: "#64748b",
+              color: "#d6d6d0",
               textTransform: "uppercase",
               letterSpacing: "0.05em",
             }}
@@ -131,7 +130,7 @@ export default function SoundControl() {
               style={{
                 width: "60px",
                 height: "4px",
-                accentColor: "var(--aero-cyan, #00f0ff)",
+                accentColor: "var(--aero-yellow, #ffd600)",
                 cursor: "pointer",
               }}
             />
@@ -142,7 +141,7 @@ export default function SoundControl() {
       <style>{`
         .eq-bar {
           width: 2px;
-          background-color: var(--aero-cyan, #00f0ff);
+          background-color: var(--aero-yellow, #ffd600);
           border-radius: 1px;
           animation: eqBounce 1.2s ease-in-out infinite alternate;
         }
@@ -153,7 +152,7 @@ export default function SoundControl() {
 
         @keyframes eqBounce {
           0% { height: 3px; opacity: 0.5; }
-          100% { height: 12px; opacity: 1; box-shadow: 0 0 6px rgba(0, 240, 255, 0.8); }
+          100% { height: 12px; opacity: 1; box-shadow: 0 0 6px rgba(255, 214, 0, 0.85); }
         }
         @keyframes fadeIn {
           from { opacity: 0; transform: scaleX(0.8); }
@@ -163,4 +162,3 @@ export default function SoundControl() {
     </div>
   );
 }
-

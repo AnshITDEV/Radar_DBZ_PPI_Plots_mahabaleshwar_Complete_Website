@@ -20,11 +20,6 @@ export default function CinematicStartup({ onComplete, forceRun = false }) {
     }
 
     // Sequence Choreography (~4.8 seconds total)
-    // Stage 1: 0 - 800ms (Center cyan indicator & electronic pulse)
-    // Stage 2: 800ms - 2200ms (Radar rings expand, beam starts sweeping, particles)
-    // Stage 3: 2200ms - 4000ms (System initialization readouts, circular gauge 0-100%)
-    // Stage 4: 4000ms - 4800ms (Expansion flash & transition)
-
     const timer1 = setTimeout(() => {
       setStage(2);
       setStatusText("RADAR ARRAY INITIALIZING...");
@@ -45,7 +40,7 @@ export default function CinematicStartup({ onComplete, forceRun = false }) {
       });
     }, 45);
 
-    // Dynamic telemetry status messages
+    // Dynamic telemetry status messages in yellow/white theme
     const textTimers = [
       setTimeout(() => setStatusText("ATMOSPHERIC SCAN SYSTEM: ONLINE"), 2400),
       setTimeout(() => setStatusText("DOPPLER DATA INTERFACE: LOCKED"), 2900),
@@ -75,7 +70,7 @@ export default function CinematicStartup({ onComplete, forceRun = false }) {
     };
   }, [forceRun, onComplete]);
 
-  // Canvas visual effects for rings and energy particles
+  // Canvas visual effects for rings and energy particles (Yellow, Gold & White palette)
   useEffect(() => {
     if (stage < 2 || stage >= 5) return;
     const canvas = canvasRef.current;
@@ -89,7 +84,7 @@ export default function CinematicStartup({ onComplete, forceRun = false }) {
       vx: (Math.random() - 0.5) * 1.5,
       vy: (Math.random() - 0.5) * 1.5,
       radius: Math.random() * 2 + 1,
-      color: ["#00f0ff", "#00ff9d", "#eab308", "#8b5cf6", "#ec4899"][
+      color: ["#ffd600", "#ffe600", "#ffc400", "#fff2a6", "#ffffff"][
         Math.floor(Math.random() * 5)
       ],
       alpha: 0.2 + Math.random() * 0.7,
@@ -101,7 +96,7 @@ export default function CinematicStartup({ onComplete, forceRun = false }) {
       const cx = canvas.width / 2;
       const cy = canvas.height / 2;
 
-      // Draw floating luminous particles & energy trails
+      // Draw floating luminous golden particles & energy trails
       particles.forEach((p) => {
         p.x += p.vx;
         p.y += p.vy;
@@ -112,7 +107,7 @@ export default function CinematicStartup({ onComplete, forceRun = false }) {
         ctx.arc(cx + p.x, cy + p.y, p.radius, 0, Math.PI * 2);
         ctx.fill();
 
-        // Subtle energy line connections to near particles
+        // Subtle golden energy line connections
         ctx.strokeStyle = p.color;
         ctx.lineWidth = 0.5;
         ctx.globalAlpha = 0.15;
@@ -124,12 +119,12 @@ export default function CinematicStartup({ onComplete, forceRun = false }) {
 
       ctx.globalAlpha = 1.0;
 
-      // Sweeping radar beam in center
+      // Sweeping radar beam in center (Electric Yellow)
       const maxR = Math.min(cx, cy) * 0.75;
       const sweepGrad = ctx.createConicGradient(angle - Math.PI / 4, cx, cy);
-      sweepGrad.addColorStop(0, "rgba(0, 240, 255, 0)");
-      sweepGrad.addColorStop(0.85, "rgba(0, 240, 255, 0.05)");
-      sweepGrad.addColorStop(1, "rgba(0, 240, 255, 0.45)");
+      sweepGrad.addColorStop(0, "rgba(255, 214, 0, 0)");
+      sweepGrad.addColorStop(0.85, "rgba(255, 214, 0, 0.06)");
+      sweepGrad.addColorStop(1, "rgba(255, 230, 0, 0.55)");
 
       ctx.save();
       ctx.beginPath();
@@ -139,11 +134,11 @@ export default function CinematicStartup({ onComplete, forceRun = false }) {
       ctx.fillStyle = sweepGrad;
       ctx.fill();
 
-      // Sharp beam line
-      ctx.strokeStyle = "#00f0ff";
+      // Sharp golden-yellow beam line
+      ctx.strokeStyle = "#ffd600";
       ctx.lineWidth = 2;
-      ctx.shadowColor = "#00f0ff";
-      ctx.shadowBlur = 10;
+      ctx.shadowColor = "#ffd600";
+      ctx.shadowBlur = 12;
       ctx.beginPath();
       ctx.moveTo(cx, cy);
       ctx.lineTo(cx + Math.cos(angle) * maxR, cy + Math.sin(angle) * maxR);
@@ -174,7 +169,7 @@ export default function CinematicStartup({ onComplete, forceRun = false }) {
       style={{
         position: "fixed",
         inset: 0,
-        backgroundColor: "#020409",
+        backgroundColor: "#000000",
         zIndex: 100000,
         display: "flex",
         flexDirection: "column",
@@ -195,9 +190,9 @@ export default function CinematicStartup({ onComplete, forceRun = false }) {
           top: "24px",
           right: "24px",
           zIndex: 100002,
-          background: "rgba(10, 18, 38, 0.75)",
-          color: "rgba(0, 240, 255, 0.8)",
-          border: "1px solid rgba(0, 240, 255, 0.3)",
+          background: "#0a0a0a",
+          color: "#ffd600",
+          border: "1px solid rgba(255, 214, 0, 0.4)",
           fontSize: "0.75rem",
           cursor: "pointer",
         }}
@@ -230,17 +225,17 @@ export default function CinematicStartup({ onComplete, forceRun = false }) {
           justifyContent: "center",
         }}
       >
-        {/* Core pulsing cyan dot (Stage 1) */}
+        {/* Core pulsing electric yellow dot (Stage 1) */}
         <div
           style={{
             position: "absolute",
             width: stage >= 2 ? "12px" : "8px",
             height: stage >= 2 ? "12px" : "8px",
             borderRadius: "50%",
-            backgroundColor: "#00f0ff",
-            boxShadow: "0 0 25px #00f0ff, 0 0 50px rgba(0, 240, 255, 0.8)",
+            backgroundColor: "#ffd600",
+            boxShadow: "0 0 25px #ffd600, 0 0 50px rgba(255, 214, 0, 0.85)",
             transition: "all 0.5s ease",
-            animation: "pulse-cyan 1s infinite alternate",
+            animation: "pulse-yellow 1s infinite alternate",
             zIndex: 10,
           }}
         />
@@ -271,7 +266,7 @@ export default function CinematicStartup({ onComplete, forceRun = false }) {
               cy="180"
               r="165"
               fill="none"
-              stroke="rgba(0, 240, 255, 0.12)"
+              stroke="rgba(255, 214, 0, 0.15)"
               strokeWidth="3"
             />
             <circle
@@ -279,13 +274,13 @@ export default function CinematicStartup({ onComplete, forceRun = false }) {
               cy="180"
               r="165"
               fill="none"
-              stroke="#00f0ff"
+              stroke="#ffd600"
               strokeWidth="3"
               strokeDasharray={2 * Math.PI * 165}
               strokeDashoffset={2 * Math.PI * 165 * (1 - progress / 100)}
               style={{
                 transition: "stroke-dashoffset 0.05s linear",
-                filter: "drop-shadow(0 0 8px rgba(0, 240, 255, 0.8))",
+                filter: "drop-shadow(0 0 10px rgba(255, 214, 0, 0.85))",
               }}
             />
           </svg>
@@ -313,9 +308,9 @@ export default function CinematicStartup({ onComplete, forceRun = false }) {
             fontSize: "1.4rem",
             fontWeight: 700,
             letterSpacing: "0.22em",
-            color: "#f0f6fc",
+            color: "#ffffff",
             textTransform: "uppercase",
-            textShadow: "0 0 20px rgba(0, 240, 255, 0.6)",
+            textShadow: "0 0 20px rgba(255, 214, 0, 0.65)",
           }}
         >
           AEROSCOPE
@@ -326,7 +321,7 @@ export default function CinematicStartup({ onComplete, forceRun = false }) {
             fontFamily: "var(--font-mono, monospace)",
             fontSize: "0.78rem",
             letterSpacing: "0.15em",
-            color: "var(--aero-cyan, #00f0ff)",
+            color: "var(--aero-yellow, #ffd600)",
             textTransform: "uppercase",
           }}
         >
@@ -341,12 +336,12 @@ export default function CinematicStartup({ onComplete, forceRun = false }) {
             gap: "10px",
             marginTop: "8px",
             padding: "6px 18px",
-            background: "rgba(10, 18, 38, 0.7)",
-            border: "1px solid rgba(0, 240, 255, 0.25)",
+            background: "#0a0a0a",
+            border: "1px solid rgba(255, 214, 0, 0.35)",
             borderRadius: "4px",
             fontFamily: "var(--font-mono, monospace)",
             fontSize: "0.75rem",
-            color: "#00ff9d",
+            color: "#ffd600",
             letterSpacing: "0.08em",
           }}
         >
@@ -355,13 +350,13 @@ export default function CinematicStartup({ onComplete, forceRun = false }) {
               width: "6px",
               height: "6px",
               borderRadius: "50%",
-              backgroundColor: "#00ff9d",
-              boxShadow: "0 0 8px #00ff9d",
+              backgroundColor: "#ffd600",
+              boxShadow: "0 0 10px #ffd600",
             }}
           />
           {statusText}
           {stage >= 3 && (
-            <span style={{ color: "#00f0ff", fontWeight: 700 }}>
+            <span style={{ color: "#ffffff", fontWeight: 700 }}>
               [{progress}%]
             </span>
           )}
@@ -372,7 +367,7 @@ export default function CinematicStartup({ onComplete, forceRun = false }) {
           style={{
             fontFamily: "var(--font-mono, monospace)",
             fontSize: "0.68rem",
-            color: "#64748b",
+            color: "#d6d6d0",
             letterSpacing: "0.1em",
             marginTop: "10px",
           }}
@@ -385,7 +380,7 @@ export default function CinematicStartup({ onComplete, forceRun = false }) {
         .radar-ring {
           position: absolute;
           border-radius: 50%;
-          border: 1px solid rgba(0, 240, 255, 0.25);
+          border: 1px solid rgba(255, 214, 0, 0.28);
           animation: ringPulse 2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
         }
         .ring-1 { width: 100px; height: 100px; animation-delay: 0s; }
@@ -397,15 +392,15 @@ export default function CinematicStartup({ onComplete, forceRun = false }) {
           0% {
             transform: scale(0.6);
             opacity: 0;
-            border-color: rgba(0, 240, 255, 0.6);
+            border-color: rgba(255, 214, 0, 0.7);
           }
           50% {
-            opacity: 0.8;
+            opacity: 0.85;
           }
           100% {
             transform: scale(1.15);
             opacity: 0;
-            border-color: rgba(139, 92, 246, 0.2);
+            border-color: rgba(255, 196, 0, 0.25);
           }
         }
 
@@ -414,7 +409,7 @@ export default function CinematicStartup({ onComplete, forceRun = false }) {
           width: 20px;
           height: 20px;
           border-radius: 50%;
-          background: radial-gradient(circle, rgba(0, 240, 255, 0.9) 0%, rgba(37, 99, 235, 0.4) 40%, transparent 80%);
+          background: radial-gradient(circle, rgba(255, 230, 0, 0.95) 0%, rgba(255, 196, 0, 0.5) 40%, transparent 80%);
           animation: flashExpand 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
@@ -432,4 +427,3 @@ export default function CinematicStartup({ onComplete, forceRun = false }) {
     </div>
   );
 }
-

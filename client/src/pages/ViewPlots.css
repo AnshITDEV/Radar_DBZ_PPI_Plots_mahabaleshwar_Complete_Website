@@ -1,6 +1,6 @@
 /* ==========================================================================
    AEROSCOPE VIEW PLOTS STYLES
-   High-Tech Dynamic Radar Volume Visualizer Console
+   High-Tech Dynamic Radar Volume Visualizer Console — Yellow / Black / White
    ========================================================================== */
 
 .aero-view-plots-console {
@@ -21,7 +21,7 @@
   background: var(--aero-bg-glass);
   border: 1px solid var(--aero-border-subtle);
   border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
 }
 
 .view-plots-cockpit-grid {
@@ -56,7 +56,7 @@
 .cyber-select {
   width: 100%;
   padding: 10px 14px;
-  background: rgba(6, 12, 26, 0.85);
+  background: rgba(10, 10, 10, 0.85);
   border: 1px solid var(--aero-border-subtle);
   border-radius: 6px;
   color: var(--aero-text-primary);
@@ -68,12 +68,12 @@
 }
 
 .cyber-select:focus {
-  border-color: var(--aero-cyan);
-  box-shadow: 0 0 12px rgba(0, 240, 255, 0.3);
+  border-color: var(--aero-yellow);
+  box-shadow: 0 0 12px rgba(255, 214, 0, 0.3);
 }
 
 .cyber-select option {
-  background: #0a1124;
+  background: #111111;
   color: #ffffff;
 }
 
@@ -89,8 +89,8 @@
 
 .var-badge-pill {
   padding: 6px 12px;
-  background: rgba(6, 12, 26, 0.75);
-  border: 1px solid rgba(0, 240, 255, 0.2);
+  background: rgba(10, 10, 10, 0.75);
+  border: 1px solid rgba(255, 214, 0, 0.2);
   border-radius: 4px;
   color: var(--aero-text-secondary);
   font-family: var(--font-mono);
@@ -101,29 +101,29 @@
 }
 
 .var-badge-pill:hover {
-  background: rgba(0, 240, 255, 0.1);
-  color: #ffffff;
-  border-color: var(--aero-cyan);
+  background: rgba(255, 214, 0, 0.1);
+  color: #ffd600;
+  border-color: var(--aero-yellow);
 }
 
 .var-badge-pill.selected {
-  background: linear-gradient(135deg, rgba(0, 240, 255, 0.25) 0%, rgba(37, 99, 235, 0.3) 100%);
-  border-color: var(--aero-cyan);
+  background: linear-gradient(135deg, rgba(255, 214, 0, 0.3) 0%, rgba(217, 169, 0, 0.2) 100%);
+  border-color: var(--aero-yellow);
   color: #ffffff;
-  box-shadow: 0 0 12px rgba(0, 240, 255, 0.35);
+  box-shadow: 0 0 12px rgba(255, 214, 0, 0.35);
 }
 
 /* Right Plot Viewport */
 .view-plots-display-chamber {
   position: relative;
-  background: #02050e;
+  background: #050505;
   border: 1px solid var(--aero-border-subtle);
   border-radius: 8px;
   padding: 18px;
   display: flex;
   flex-direction: column;
   min-height: 580px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.85);
 }
 
 .chamber-image-container {
@@ -134,7 +134,7 @@
   position: relative;
   width: 100%;
   min-height: 480px;
-  background: radial-gradient(circle at center, rgba(8, 16, 36, 0.6) 0%, #010309 85%);
+  background: radial-gradient(circle at center, rgba(24, 24, 24, 0.6) 0%, #000000 85%);
   border-radius: 6px;
   overflow: hidden;
 }
@@ -145,7 +145,7 @@
   object-fit: contain;
   display: block;
   border-radius: 4px;
-  box-shadow: 0 0 35px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 240, 255, 0.15);
+  box-shadow: 0 0 35px rgba(0, 0, 0, 0.9), 0 0 20px rgba(255, 214, 0, 0.12);
   cursor: pointer;
   animation: plotReveal 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }

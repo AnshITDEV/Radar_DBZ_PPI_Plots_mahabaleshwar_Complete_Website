@@ -117,31 +117,31 @@ export default function Dashboard() {
     document.body.removeChild(a);
   };
 
-  // Variable scientific metadata
+  // Variable scientific metadata (Yellow, Gold & White Theme)
   const variableDetails = {
     DBZ: {
       name: "Reflectivity Factor (dBZ)",
       desc: "Hydrometeor density & rainfall rate estimation",
       unit: "-10 to 75 dBZ",
-      color: "#00ff9d",
+      color: "#ffd600",
     },
     VEL: {
       name: "Doppler Radial Velocity (m/s)",
       desc: "Wind velocity towards/away from radar core",
       unit: "±32 m/s",
-      color: "#00f0ff",
+      color: "#ffe600",
     },
     ZDR: {
       name: "Differential Reflectivity (dB)",
       desc: "Hydrometeor oblateness & precipitation phase",
       unit: "-2 to +6 dB",
-      color: "#a78bfa",
+      color: "#ffc400",
     },
     KDP: {
       name: "Specific Differential Phase (°/km)",
       desc: "Rainfall rate independent of beam attenuation",
       unit: "0 to 10 °/km",
-      color: "#fbbf24",
+      color: "#fff2a6",
     },
   };
 
@@ -175,7 +175,7 @@ export default function Dashboard() {
             <span className="pill-label">CHANNEL</span>
             <span
               className="pill-value"
-              style={{ color: variableDetails[variable]?.color || "#00f0ff" }}
+              style={{ color: variableDetails[variable]?.color || "#ffd600" }}
             >
               {variable} // {variableDetails[variable]?.name}
             </span>
@@ -211,7 +211,7 @@ export default function Dashboard() {
                 alignItems: "center",
                 justifyContent: "space-between",
                 marginBottom: "14px",
-                borderBottom: "1px solid rgba(0, 240, 255, 0.15)",
+                borderBottom: "1px solid rgba(255, 214, 0, 0.2)",
                 paddingBottom: "8px",
               }}
             >
@@ -220,19 +220,19 @@ export default function Dashboard() {
                 style={{
                   fontSize: "0.95rem",
                   fontWeight: 700,
-                  color: "#f0f6fc",
+                  color: "#ffffff",
                   display: "flex",
                   alignItems: "center",
                   gap: "8px",
                 }}
               >
-                <FaCrosshairs style={{ color: "var(--aero-cyan, #00f0ff)" }} />
+                <FaCrosshairs style={{ color: "var(--aero-yellow, #ffd600)" }} />
                 SCAN CONTROLS
               </span>
               <span
                 style={{
                   fontSize: "0.7rem",
-                  color: "#64748b",
+                  color: "#d6d6d0",
                   fontFamily: "var(--font-mono, monospace)",
                 }}
               >
@@ -246,7 +246,7 @@ export default function Dashboard() {
                 className="aero-label"
                 style={{ marginBottom: "6px", display: "flex", alignItems: "center", gap: "6px" }}
               >
-                <FaCalendarAlt style={{ color: "var(--aero-cyan, #00f0ff)" }} />
+                <FaCalendarAlt style={{ color: "var(--aero-yellow, #ffd600)" }} />
                 <span>Observation Date</span>
               </label>
               <select
@@ -349,17 +349,18 @@ export default function Dashboard() {
                   gap: "8px",
                 }}
               >
-                <FaFileCode style={{ color: "var(--aero-cyan, #00f0ff)" }} />
+                <FaFileCode style={{ color: "var(--aero-yellow, #ffd600)" }} />
                 RADAR SCANS
               </span>
               <span
                 style={{
                   fontSize: "0.72rem",
-                  color: "var(--aero-cyan, #00f0ff)",
+                  color: "var(--aero-yellow, #ffd600)",
                   fontFamily: "var(--font-mono, monospace)",
                   padding: "2px 6px",
-                  background: "rgba(0, 240, 255, 0.1)",
+                  background: "rgba(255, 214, 0, 0.12)",
                   borderRadius: "3px",
+                  fontWeight: 700,
                 }}
               >
                 {radarFiles.length} FILES
@@ -380,7 +381,7 @@ export default function Dashboard() {
                   position: "absolute",
                   right: "10px",
                   top: "10px",
-                  color: "#64748b",
+                  color: "#d6d6d0",
                   fontSize: "0.75rem",
                 }}
               />
@@ -408,7 +409,7 @@ export default function Dashboard() {
                         {file}
                       </span>
                     </div>
-                    <span style={{ fontSize: "0.65rem", color: "#64748b", marginLeft: "4px" }}>
+                    <span style={{ fontSize: "0.65rem", color: "#d6d6d0", marginLeft: "4px" }}>
                       #{idx + 1}
                     </span>
                   </div>
@@ -418,7 +419,7 @@ export default function Dashboard() {
                   style={{
                     padding: "24px 12px",
                     textAlign: "center",
-                    color: "#64748b",
+                    color: "#d6d6d0",
                     fontFamily: "var(--font-mono, monospace)",
                     fontSize: "0.78rem",
                   }}
@@ -452,7 +453,7 @@ export default function Dashboard() {
                 RADAR SCIENTIFIC PLOT
               </span>
               {selectedFile && (
-                <AeroBadge variant="cyan" pulse={false} style={{ fontSize: "0.68rem" }}>
+                <AeroBadge variant="yellow" pulse={false} style={{ fontSize: "0.68rem" }}>
                   {plotType} • {variable}
                 </AeroBadge>
               )}
@@ -496,8 +497,9 @@ export default function Dashboard() {
                       style={{
                         fontFamily: "var(--font-mono, monospace)",
                         fontSize: "0.82rem",
-                        color: "var(--aero-cyan, #00f0ff)",
+                        color: "var(--aero-yellow, #ffd600)",
                         letterSpacing: "0.08em",
+                        fontWeight: 700,
                       }}
                     >
                       ACQUIRING RADAR ECHOES...
@@ -529,7 +531,7 @@ export default function Dashboard() {
                       gap: "12px",
                       padding: "40px 20px",
                       textAlign: "center",
-                      color: "#ef4444",
+                      color: "#ffd600",
                       fontFamily: "var(--font-mono, monospace)",
                     }}
                   >
@@ -537,7 +539,7 @@ export default function Dashboard() {
                     <div style={{ fontWeight: 600, fontSize: "1rem" }}>
                       Plot image not found on radar server
                     </div>
-                    <div style={{ fontSize: "0.78rem", color: "#94a3b8", maxWidth: "420px" }}>
+                    <div style={{ fontSize: "0.78rem", color: "#d6d6d0", maxWidth: "420px" }}>
                       Requested: {selectedFile.replace(/\.nc$/, "")}_{plotType}_{variable}.png
                     </div>
                   </div>
@@ -550,17 +552,17 @@ export default function Dashboard() {
                   flexDirection: "column",
                   alignItems: "center",
                   gap: "14px",
-                  color: "#64748b",
+                  color: "#d6d6d0",
                   fontFamily: "var(--font-mono, monospace)",
                   textAlign: "center",
                   padding: "40px 20px",
                 }}
               >
-                <FaSatelliteDish style={{ fontSize: "3rem", color: "rgba(0, 240, 255, 0.25)" }} />
-                <div style={{ fontSize: "0.95rem", color: "var(--aero-text-secondary, #94a3b8)" }}>
+                <FaSatelliteDish style={{ fontSize: "3rem", color: "rgba(255, 214, 0, 0.35)" }} />
+                <div style={{ fontSize: "0.95rem", color: "#ffffff" }}>
                   Select an observation date and NetCDF scan file to display radar reflectivity
                 </div>
-                <div style={{ fontSize: "0.72rem", color: "#64748b" }}>
+                <div style={{ fontSize: "0.72rem", color: "#d6d6d0" }}>
                   MAHABALESHWAR CLOUD OBSERVATORY (17.9237°N, 73.6586°E)
                 </div>
               </div>
@@ -572,7 +574,7 @@ export default function Dashboard() {
             style={{
               marginTop: "12px",
               paddingTop: "10px",
-              borderTop: "1px solid rgba(0, 240, 255, 0.1)",
+              borderTop: "1px solid rgba(255, 214, 0, 0.15)",
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
@@ -580,11 +582,11 @@ export default function Dashboard() {
               gap: "10px",
               fontFamily: "var(--font-mono, monospace)",
               fontSize: "0.72rem",
-              color: "#64748b",
+              color: "#d6d6d0",
             }}
           >
             <div>
-              ACTIVE FILE: <span style={{ color: "#ffffff" }}>{selectedFile || "None"}</span>
+              ACTIVE FILE: <span style={{ color: "#ffd600", fontWeight: 700 }}>{selectedFile || "None"}</span>
             </div>
             <div>
               {variableDetails[variable]?.name} • {variableDetails[variable]?.desc}

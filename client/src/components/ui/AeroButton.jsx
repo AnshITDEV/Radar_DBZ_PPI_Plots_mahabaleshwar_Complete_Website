@@ -32,8 +32,8 @@ export default function AeroButton({
           left: 0,
           width: "6px",
           height: "6px",
-          borderTop: "2px solid rgba(255, 255, 255, 0.7)",
-          borderLeft: "2px solid rgba(255, 255, 255, 0.7)",
+          borderTop: "2px solid rgba(255, 255, 255, 0.9)",
+          borderLeft: "2px solid rgba(255, 255, 255, 0.9)",
           pointerEvents: "none",
         }}
       />
@@ -62,4 +62,3 @@ export default function AeroButton({
     </button>
   );
 }
-

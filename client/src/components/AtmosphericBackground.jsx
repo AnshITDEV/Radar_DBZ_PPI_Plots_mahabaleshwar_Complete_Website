@@ -14,7 +14,7 @@ export default function AtmosphericBackground({ triggerKey }) {
     sweep.classList.add("sweep-active");
   }, [triggerKey]);
 
-  // Subtle drifting atmospheric particles and cloud mist
+  // Subtle drifting golden atmospheric particles and warm mist
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -51,7 +51,7 @@ export default function AtmosphericBackground({ triggerKey }) {
         if (p.x < 0) p.x = canvas.width;
         if (p.x > canvas.width) p.x = 0;
 
-        ctx.fillStyle = `rgba(0, 240, 255, ${p.alpha})`;
+        ctx.fillStyle = `rgba(255, 214, 0, ${p.alpha})`;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
         ctx.fill();
@@ -78,7 +78,7 @@ export default function AtmosphericBackground({ triggerKey }) {
         overflow: "hidden",
       }}
     >
-      {/* Moving Atmospheric Cloud Shimmers */}
+      {/* Moving Atmospheric Cloud Shimmers (Warm Golden Yellow & Obsidian Depth) */}
       <div className="atmospheric-cloud-layer cloud-layer-1" />
       <div className="atmospheric-cloud-layer cloud-layer-2" />
 
@@ -90,11 +90,11 @@ export default function AtmosphericBackground({ triggerKey }) {
           inset: 0,
           width: "100%",
           height: "100%",
-          opacity: 0.7,
+          opacity: 0.75,
         }}
       />
 
-      {/* Horizontal Radar Sweep Beam that triggers on tab change */}
+      {/* Horizontal Radar Sweep Beam (Electric Yellow) that triggers on tab change */}
       <div ref={sweepRef} className="radar-sweep-beam" />
 
       <style>{`
@@ -104,9 +104,9 @@ export default function AtmosphericBackground({ triggerKey }) {
           width: 200%;
           height: 200%;
           pointer-events: none;
-          opacity: 0.04;
-          background: radial-gradient(ellipse at 30% 40%, rgba(0, 240, 255, 0.4) 0%, transparent 60%),
-                      radial-gradient(ellipse at 70% 60%, rgba(139, 92, 246, 0.3) 0%, transparent 55%);
+          opacity: 0.035;
+          background: radial-gradient(ellipse at 30% 40%, rgba(255, 214, 0, 0.3) 0%, transparent 60%),
+                      radial-gradient(ellipse at 70% 60%, rgba(255, 196, 0, 0.2) 0%, transparent 55%);
         }
 
         .cloud-layer-1 {
@@ -115,7 +115,7 @@ export default function AtmosphericBackground({ triggerKey }) {
 
         .cloud-layer-2 {
           animation: cloudDrift2 80s ease-in-out infinite alternate;
-          opacity: 0.03;
+          opacity: 0.025;
         }
 
         @keyframes cloudDrift1 {
@@ -137,9 +137,9 @@ export default function AtmosphericBackground({ triggerKey }) {
           background: linear-gradient(
             90deg,
             transparent 0%,
-            rgba(0, 240, 255, 0.02) 40%,
-            rgba(0, 240, 255, 0.12) 90%,
-            rgba(0, 240, 255, 0.35) 99%,
+            rgba(255, 214, 0, 0.02) 40%,
+            rgba(255, 214, 0, 0.14) 90%,
+            rgba(255, 230, 0, 0.4) 99%,
             transparent 100%
           );
           transform: skewX(-20deg);
@@ -154,10 +154,10 @@ export default function AtmosphericBackground({ triggerKey }) {
         @keyframes sweepScreen {
           0% {
             left: -80%;
-            opacity: 0.9;
+            opacity: 0.95;
           }
           70% {
-            opacity: 0.6;
+            opacity: 0.65;
           }
           100% {
             left: 140%;
@@ -168,4 +168,3 @@ export default function AtmosphericBackground({ triggerKey }) {
     </div>
   );
 }
-

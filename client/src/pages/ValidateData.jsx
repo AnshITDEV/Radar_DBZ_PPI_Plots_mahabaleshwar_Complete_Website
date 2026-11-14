@@ -37,7 +37,7 @@ export default function ValidateData({ uploadedFiles, fileStore }) {
       {/* Top Header Ribbon */}
       <div className="validate-header-ribbon">
         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-          <FaCheckCircle style={{ color: "var(--aero-cyan, #00f0ff)", fontSize: "1.3rem" }} />
+          <FaCheckCircle style={{ color: "var(--aero-yellow, #ffd600)", fontSize: "1.3rem" }} />
           <div>
             <h2
               className="display-font"
@@ -65,7 +65,7 @@ export default function ValidateData({ uploadedFiles, fileStore }) {
         </div>
 
         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-          <AeroBadge variant={isReadyForPairing ? "online" : "amber"} pulse={true}>
+          <AeroBadge variant={isReadyForPairing ? "yellow" : "amber"} pulse={true}>
             {isReadyForPairing ? "DATASETS PAIRED" : "AWAITING CO-LOCATION"}
           </AeroBadge>
         </div>
@@ -86,16 +86,16 @@ export default function ValidateData({ uploadedFiles, fileStore }) {
               justifyContent: "space-between",
               alignItems: "center",
               paddingBottom: "8px",
-              borderBottom: "1px solid rgba(0, 240, 255, 0.15)",
+              borderBottom: "1px solid rgba(255, 214, 0, 0.15)",
             }}
           >
             <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <FaSatelliteDish style={{ color: "var(--aero-cyan, #00f0ff)" }} />
+              <FaSatelliteDish style={{ color: "var(--aero-yellow, #ffd600)" }} />
               <span className="display-font" style={{ fontWeight: 700, color: "#ffffff", fontSize: "0.95rem" }}>
                 INGESTED RADAR VOLUMES
               </span>
             </div>
-            <AeroBadge variant={hasRadarData ? "online" : "cyan"} pulse={false} style={{ fontSize: "0.68rem" }}>
+            <AeroBadge variant={hasRadarData ? "yellow" : "amber"} pulse={false} style={{ fontSize: "0.68rem" }}>
               {radarFiles.length} Scans Available
             </AeroBadge>
           </div>
@@ -109,8 +109,8 @@ export default function ValidateData({ uploadedFiles, fileStore }) {
                     display: "flex",
                     justifyContent: "space-between",
                     padding: "6px 10px",
-                    background: "rgba(6, 12, 26, 0.6)",
-                    border: "1px solid rgba(0, 240, 255, 0.1)",
+                    background: "rgba(10, 10, 10, 0.6)",
+                    border: "1px solid rgba(255, 214, 0, 0.15)",
                     borderRadius: "4px",
                     fontFamily: "var(--font-mono)",
                     fontSize: "0.74rem",
@@ -119,7 +119,7 @@ export default function ValidateData({ uploadedFiles, fileStore }) {
                   <span style={{ color: "#ffffff", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", maxWidth: "220px" }}>
                     {file.name}
                   </span>
-                  <span style={{ color: "var(--aero-cyan, #00f0ff)" }}>
+                  <span style={{ color: "var(--aero-yellow, #ffd600)" }}>
                     {formatFileSize(file.size)}
                   </span>
                 </div>
@@ -153,16 +153,16 @@ export default function ValidateData({ uploadedFiles, fileStore }) {
               justifyContent: "space-between",
               alignItems: "center",
               paddingBottom: "8px",
-              borderBottom: "1px solid rgba(139, 92, 246, 0.2)",
+              borderBottom: "1px solid rgba(255, 196, 0, 0.2)",
             }}
           >
             <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <FaCloudRain style={{ color: "var(--aero-violet, #8b5cf6)" }} />
+              <FaCloudRain style={{ color: "#ffc400" }} />
               <span className="display-font" style={{ fontWeight: 700, color: "#ffffff", fontSize: "0.95rem" }}>
                 RAIN GAUGE AWS LOGGERS
               </span>
             </div>
-            <AeroBadge variant={hasGaugeData ? "online" : "violet"} pulse={false} style={{ fontSize: "0.68rem" }}>
+            <AeroBadge variant={hasGaugeData ? "yellow" : "amber"} pulse={false} style={{ fontSize: "0.68rem" }}>
               {rainGaugeFiles.length} Datasets Available
             </AeroBadge>
           </div>
@@ -176,8 +176,8 @@ export default function ValidateData({ uploadedFiles, fileStore }) {
                     display: "flex",
                     justifyContent: "space-between",
                     padding: "6px 10px",
-                    background: "rgba(6, 12, 26, 0.6)",
-                    border: "1px solid rgba(139, 92, 246, 0.15)",
+                    background: "rgba(10, 10, 10, 0.6)",
+                    border: "1px solid rgba(255, 196, 0, 0.18)",
                     borderRadius: "4px",
                     fontFamily: "var(--font-mono)",
                     fontSize: "0.74rem",
@@ -186,7 +186,7 @@ export default function ValidateData({ uploadedFiles, fileStore }) {
                   <span style={{ color: "#ffffff", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", maxWidth: "220px" }}>
                     {file.name}
                   </span>
-                  <span style={{ color: "var(--aero-violet, #a78bfa)" }}>
+                  <span style={{ color: "#ffc400" }}>
                     {formatFileSize(file.size)}
                   </span>
                 </div>
@@ -221,11 +221,11 @@ export default function ValidateData({ uploadedFiles, fileStore }) {
             justifyContent: "space-between",
             alignItems: "center",
             paddingBottom: "12px",
-            borderBottom: "1px solid rgba(0, 240, 255, 0.12)",
+            borderBottom: "1px solid rgba(255, 214, 0, 0.15)",
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-            <FaBrain style={{ color: "var(--aero-cyan, #00f0ff)" }} />
+            <FaBrain style={{ color: "var(--aero-yellow, #ffd600)" }} />
             <span
               className="display-font"
               style={{
@@ -239,7 +239,7 @@ export default function ValidateData({ uploadedFiles, fileStore }) {
             </span>
           </div>
 
-          <AeroBadge variant="cyan" pulse={false} style={{ fontSize: "0.68rem" }}>
+          <AeroBadge variant="yellow" pulse={false} style={{ fontSize: "0.68rem" }}>
             ALGORITHM WORKFLOW
           </AeroBadge>
         </div>
@@ -259,7 +259,7 @@ export default function ValidateData({ uploadedFiles, fileStore }) {
             <span className="step-card-number">PHASE 02 // INVERSION</span>
             <span className="step-card-title">Z-R & Polarimetric QPE</span>
             <p className="step-card-desc">
-              Applies Marshall-Palmer ($Z=200R^{1.6}$) and $K_{DP}$-based QPE formulas to convert dBZ reflectivity to rainfall intensity.
+              Applies Marshall-Palmer (Z = 200 · R^1.6) and K_DP-based QPE formulas to convert dBZ reflectivity to rainfall intensity.
             </p>
           </div>
 
@@ -268,7 +268,7 @@ export default function ValidateData({ uploadedFiles, fileStore }) {
             <span className="step-card-number">PHASE 03 // ALIGNMENT</span>
             <span className="step-card-title">Temporal Windowing</span>
             <p className="step-card-desc">
-              Synchronizes rain gauge tipping-bucket accumulation with instantaneous radar volume scan timestamps within a $\pm 15$ min window.
+              Synchronizes rain gauge tipping-bucket accumulation with instantaneous radar volume scan timestamps within a ±15 min window.
             </p>
           </div>
 
@@ -296,12 +296,12 @@ export default function ValidateData({ uploadedFiles, fileStore }) {
             justifyContent: "space-between",
             alignItems: "center",
             paddingBottom: "12px",
-            borderBottom: "1px solid rgba(0, 240, 255, 0.12)",
+            borderBottom: "1px solid rgba(255, 214, 0, 0.15)",
             marginBottom: "16px",
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-            <FaChartLine style={{ color: "#00ff9d" }} />
+            <FaChartLine style={{ color: "#ffd600" }} />
             <span
               className="display-font"
               style={{
@@ -324,7 +324,7 @@ export default function ValidateData({ uploadedFiles, fileStore }) {
           <div className="metric-spec-box">
             <span className="metric-spec-name">Root Mean Square Error (RMSE)</span>
             <span className="metric-spec-formula">
-              RMSE = \sqrt( \frac{1}{N} \sum (R_{radar} - R_{gauge})^2 )
+              RMSE = √[ (1/N) · Σ (R_radar - R_gauge)² ]
             </span>
             <span className="metric-spec-desc">
               Penalizes large outlier discrepancies in convective storm cores across high elevations.
@@ -334,17 +334,17 @@ export default function ValidateData({ uploadedFiles, fileStore }) {
           <div className="metric-spec-box">
             <span className="metric-spec-name">Multiplicative Bias Ratio (B)</span>
             <span className="metric-spec-formula">
-              B = \frac{\sum R_{radar}}{\sum R_{gauge}}
+              B = (Σ R_radar) / (Σ R_gauge)
             </span>
             <span className="metric-spec-desc">
-              Measures systematic overestimation ($B > 1$) or beam attenuation underestimation ($B < 1$).
+              Measures systematic overestimation (B &gt; 1) or beam attenuation underestimation (B &lt; 1).
             </span>
           </div>
 
           <div className="metric-spec-box">
             <span className="metric-spec-name">Pearson Correlation (r)</span>
             <span className="metric-spec-formula">
-              r = \frac{Cov(R_{radar}, R_{gauge})}{\sigma_{radar} \cdot \sigma_{gauge}}
+              r = Cov(R_radar, R_gauge) / (σ_radar · σ_gauge)
             </span>
             <span className="metric-spec-desc">
               Quantifies linear tracking fidelity between radar reflectivity echoes and gauge tipping buckets.
@@ -354,7 +354,7 @@ export default function ValidateData({ uploadedFiles, fileStore }) {
           <div className="metric-spec-box">
             <span className="metric-spec-name">Mean Absolute Error (MAE)</span>
             <span className="metric-spec-formula">
-              MAE = \frac{1}{N} \sum |R_{radar} - R_{gauge}|
+              MAE = (1/N) · Σ |R_radar - R_gauge|
             </span>
             <span className="metric-spec-desc">
               Direct linear deviation metric expressed in mm/hr ground precipitation units.
@@ -364,17 +364,17 @@ export default function ValidateData({ uploadedFiles, fileStore }) {
           <div className="metric-spec-box">
             <span className="metric-spec-name">Critical Success Index (CSI)</span>
             <span className="metric-spec-formula">
-              CSI = \frac{Hits}{Hits + Misses + FalseAlarms}
+              CSI = Hits / (Hits + Misses + FalseAlarms)
             </span>
             <span className="metric-spec-desc">
-              Binary rain/no-rain detection skill score for orographic drizzle thresholds ($\ge 0.5$ mm/hr).
+              Binary rain/no-rain detection skill score for orographic drizzle thresholds (≥ 0.5 mm/hr).
             </span>
           </div>
 
           <div className="metric-spec-box">
             <span className="metric-spec-name">Fractional Standard Error (FSE)</span>
             <span className="metric-spec-formula">
-              FSE = \frac{RMSE}{\bar{R}_{gauge}} \times 100\%
+              FSE = (RMSE / R̄_gauge) × 100%
             </span>
             <span className="metric-spec-desc">
               Normalized relative error metric indicating radar calibration stability across seasons.
@@ -387,8 +387,8 @@ export default function ValidateData({ uploadedFiles, fileStore }) {
           style={{
             marginTop: "16px",
             padding: "12px 16px",
-            background: "rgba(6, 12, 26, 0.7)",
-            border: "1px solid rgba(245, 158, 11, 0.3)",
+            background: "rgba(10, 10, 10, 0.7)",
+            border: "1px solid rgba(255, 214, 0, 0.3)",
             borderRadius: "6px",
             fontFamily: "var(--font-mono)",
             fontSize: "0.74rem",
@@ -399,7 +399,7 @@ export default function ValidateData({ uploadedFiles, fileStore }) {
             lineHeight: 1.5,
           }}
         >
-          <FaHourglassHalf style={{ color: "#fbbf24", marginTop: "2px", flexShrink: 0 }} />
+          <FaHourglassHalf style={{ color: "#ffd600", marginTop: "2px", flexShrink: 0 }} />
           <span>
             <strong>Scientific Implementation Notice:</strong> The validation pipeline specifications and mathematical models above are fully registered.
             The backend evaluation endpoints (`/api/validation/...`) are slated for integration in the upcoming Python processing release.

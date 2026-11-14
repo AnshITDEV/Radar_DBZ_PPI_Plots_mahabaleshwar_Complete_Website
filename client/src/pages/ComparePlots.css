@@ -1,6 +1,6 @@
 /* ==========================================================================
    AEROSCOPE COMPARE PLOTS STYLES
-   Multi-Channel & Multi-Volume Dual Radar Comparison Console
+   Multi-Channel & Multi-Volume Dual Radar Comparison Console — Yellow / Black / White
    ========================================================================== */
 
 .aero-compare-console {
@@ -22,7 +22,7 @@
   background: var(--aero-bg-glass);
   border: 1px solid var(--aero-border-subtle);
   border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
 }
 
 /* Three Comparison Mode Cards Grid */
@@ -34,7 +34,7 @@
 
 .mode-select-card {
   position: relative;
-  background: rgba(6, 12, 26, 0.7);
+  background: rgba(10, 10, 10, 0.7);
   border: 1px solid var(--aero-border-subtle);
   border-radius: 8px;
   padding: 16px;
@@ -47,15 +47,15 @@
 }
 
 .mode-select-card:hover {
-  background: rgba(0, 240, 255, 0.08);
-  border-color: rgba(0, 240, 255, 0.4);
+  background: rgba(255, 214, 0, 0.08);
+  border-color: rgba(255, 214, 0, 0.4);
   transform: translateY(-2px);
 }
 
 .mode-select-card.active {
-  background: linear-gradient(135deg, rgba(0, 240, 255, 0.18) 0%, rgba(139, 92, 246, 0.12) 100%);
-  border-color: var(--aero-cyan);
-  box-shadow: 0 0 20px rgba(0, 240, 255, 0.25), inset 0 0 10px rgba(0, 240, 255, 0.08);
+  background: linear-gradient(135deg, rgba(255, 214, 0, 0.18) 0%, rgba(217, 169, 0, 0.12) 100%);
+  border-color: var(--aero-yellow);
+  box-shadow: 0 0 20px rgba(255, 214, 0, 0.25), inset 0 0 10px rgba(255, 214, 0, 0.08);
 }
 
 .mode-card-header {
@@ -130,7 +130,7 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.85);
 }
 
 .dual-results-grid {
@@ -154,16 +154,16 @@
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  background: rgba(6, 12, 26, 0.95);
-  border: 1px solid var(--aero-cyan);
-  box-shadow: 0 0 16px rgba(0, 240, 255, 0.4);
+  background: rgba(10, 10, 10, 0.95);
+  border: 1px solid var(--aero-yellow);
+  box-shadow: 0 0 16px rgba(255, 214, 0, 0.45);
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: var(--font-display);
   font-size: 0.82rem;
   font-weight: 700;
-  color: var(--aero-cyan);
+  color: var(--aero-yellow);
   letter-spacing: 0.08em;
   z-index: 2;
 }
@@ -176,18 +176,18 @@
   background: linear-gradient(
     180deg,
     transparent 0%,
-    rgba(0, 240, 255, 0.3) 30%,
-    rgba(0, 240, 255, 0.8) 50%,
-    rgba(0, 240, 255, 0.3) 70%,
+    rgba(255, 214, 0, 0.35) 30%,
+    rgba(255, 214, 0, 0.9) 50%,
+    rgba(255, 214, 0, 0.35) 70%,
     transparent 100%
   );
-  box-shadow: 0 0 8px rgba(0, 240, 255, 0.6);
+  box-shadow: 0 0 10px rgba(255, 214, 0, 0.7);
 }
 
 /* Individual Comparison Result Card */
 .comparison-plot-card {
-  background: #02050e;
-  border: 1px solid rgba(0, 240, 255, 0.2);
+  background: #050505;
+  border: 1px solid rgba(255, 214, 0, 0.2);
   border-radius: 6px;
   padding: 14px;
   display: flex;
@@ -202,7 +202,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(circle at center, rgba(8, 16, 36, 0.5) 0%, #010309 85%);
+  background: radial-gradient(circle at center, rgba(24, 24, 24, 0.5) 0%, #000000 85%);
   border-radius: 4px;
   overflow: hidden;
 }

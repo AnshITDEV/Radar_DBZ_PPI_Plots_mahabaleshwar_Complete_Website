@@ -24,7 +24,7 @@ export default function AeroInput({
         <label className="aero-label">
           <span>{label}</span>
           {required && (
-            <span style={{ color: "var(--aero-cyan, #00f0ff)", fontSize: "0.68rem" }}>
+            <span style={{ color: "var(--aero-yellow, #ffd600)", fontSize: "0.68rem" }}>
               *REQ
             </span>
           )}
